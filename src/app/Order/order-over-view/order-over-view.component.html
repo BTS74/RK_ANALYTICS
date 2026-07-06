@@ -1,0 +1,223 @@
+<div class="container-fluid p-4" style="background-color: #F1F3F6;">
+
+    <div class="row">
+        <div class="col">
+
+            <div class="row mt-3">
+                <div class="col">
+                    <p class="mb-0 montserrat breadCrumbTopic">Order Overview</p>
+                    <p class="mb-0 montserrat breadCrumbSubTopic">Manage Orders</p>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="row mt-4">
+                <div class="col">
+
+                    <button class="btn addBtn  me-2" [ngClass]="{'active':screenWizardCapturedPayment}"
+                        (click)="getOrdersByModeOfDeliveyAndPaymentCaptured('All')">
+                        <span> With Payments </span>
+                    </button>
+                    <button class="btn addBtn  me-2" [ngClass]="{'active':!screenWizardCapturedPayment}"
+                        (click)="getOrdersByTypeOfProductsAndPaymentNotCaptured('All')">
+                        <span> Without Payments</span>
+                    </button>
+
+                </div>
+                <div class="col">
+
+                    <div *ngIf="screenWizardCapturedPayment" class="float-end">
+                        <button class="btn addBtn  me-2" [ngClass]="{'active':show[0]}"
+                            (click)="getOrdersByModeOfDeliveyAndPaymentCaptured('All')">
+                            <span> ALL </span>
+                        </button>
+                        <button class="btn addBtn  me-2" [ngClass]="{'active':show[1]}"
+                            (click)="getOrdersByModeOfDeliveyAndPaymentCaptured('Courier')">
+                            <span> COURIER</span>
+                        </button>
+                        <button class="btn addBtn me-2" [ngClass]="{'active':show[2]}"
+                            (click)="getOrdersByModeOfDeliveyAndPaymentCaptured('Parcel')">
+                            <span>PARCEL</span>
+                        </button>
+
+                        <button class="btn addBtn" [ngClass]="{'active':show[4]}"
+                            (click)="getOrdersByModeOfDeliveyAndPaymentCaptured('Plants')">
+                            <span> PLANTS</span>
+                        </button>
+                    </div>
+                    <div *ngIf="!screenWizardCapturedPayment" class="float-end">
+                        <!-- <button class="btn addBtn  me-2"
+                            [ngClass]="{'active':show[0]}"
+                            (click)="getOrdersByTypeOfProductsAndPaymentNotCaptured('All')">
+                            <span> ALL </span>
+                        </button>-->
+                        <button class="btn addBtn me-2" [ngClass]="{'active':show[3]}"
+                            (click)="getOrdersByTypeOfProductsAndPaymentNotCaptured('DoorDelivery')">
+                            <span>DOOR DELIVERY</span>
+                        </button>
+                        <button class="btn addBtn me-2" [ngClass]="{'active':show[5]}"
+                            (click)="getOrdersByTypeOfProductsAndPaymentNotCaptured('ABS Stand')">
+                            <span>STANDS</span>
+                        </button>
+                        <button class="btn addBtn text-nowrap" [ngClass]="{'active':show[6]}"
+                            (click)="getOrdersByTypeOfProductsAndPaymentNotCaptured('New Garden Setup')">
+                            <span>NEW GARDEN SETUP</span>
+                        </button>
+                    </div>
+
+                    <div class="float-end d-none">
+
+
+
+                        <!-- <button class="btn addBtn me-3"
+                                (click)="getOrdersByModeOfDelivey('order-preview-unconfirm')">
+                                <span>Unconfirmed Orders</span>
+                            </button> -->
+
+                        <!-- <button class="btn addBtn me-3" (click)="getOrdersByModeOfDelivey('order-manager')">
+                                <span>Order Manager</span>
+                            </button>
+
+                            <button class="btn addBtn" (click)="getOrdersByModeOfDelivey('order-update-courier')">
+                                <span>Update Courier</span>
+                            </button> -->
+
+
+
+
+
+                        <button class="btn addBtn text-capitalize" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <span>ORDER UPDATES</span>
+
+                        </button>
+                        <ul class="dropdown-menu p-3">
+                            <li>
+                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('order-manager')"><i
+                                        class="pi pi-chart-line  me-2"></i>Order Manager</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('order-update-courier')"><i
+                                        class="pi pi-envelope me-2"></i>Update Courier</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('pending')"><i
+                                        class="pi pi-exclamation-triangle me-2"></i>Pending Order</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('tracking')"><i
+                                        class="pi pi-credit-card me-2"></i>Tracking Order Details</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('plants-summary')"><i
+                                        class="pi pi-chart-bar me-2"></i>Plants Summary </a>
+                            </li>
+                            <!--<li>
+                                    <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('back')"><i
+                                            class="pi pi-arrow-left me-2"></i>Back to Order</a>
+                                </li> -->
+                        </ul>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <form autocomplete="off" [formGroup]="form1">
+                        <div class="row">
+
+
+                            <!-- When payment is captured -->
+                            <div class="col-lg-2 col-6">
+                                <label class="productLable montserrat">
+                                    <span *ngIf="!screenWizardCapturedPayment">Invoice </span>
+                                    <span *ngIf="screenWizardCapturedPayment">Order</span> Date</label>
+                                <input type="date" class="form-control date mt-2" placeholder="Choose Date"
+                                    formControlName="startDate" [(ngModel)]="filtre.startDate"
+                                    [ngClass]="{ 'is-invalid': submitted && filterCheck['startDate'].errors }" />
+                                <div *ngIf="submitted && filterCheck['startDate'].errors" class="invalid-feedback">
+                                    <div *ngIf="filterCheck['startDate'].errors['required']">
+                                        Order Date is required</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-12 align-self-end">
+                                <button type="button" class="form-control show_Results"
+                                    (click)="getFilterValue('apply')"><span class="montserrat">Show
+                                        Results</span></button>
+                            </div>
+
+                            <div class="col align-self-end">
+                                <div class="float-end search_bar">
+                                    <app-search-box [placeHolder]="'Search using Phone No / order Id'"
+                                        (onSearchValue)="search($event)"></app-search-box>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="!searchValue && screenWizardCapturedPayment">
+
+
+                <div class="row mt-4">
+                    <div class="col-lg-4 col-6">
+                        <div class="card _card py-4 px-xl-3 px-lg-3 px-3"
+                            [ngStyle]="{'background-color': 'rgb(255, 154, 162)'}">
+
+                            <p class="charge_type montserrat mb-0">Total Amount</p>
+                            <div class="">
+                                <img src="assets/images/common/rupee-icon.webp" width="18px" alt="">
+                                <span class="amount montserrat"> {{salesData.totalAmount}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-4">
+                    <div class="col-lg-4 col-6 mb-4" *ngFor="let data of salesData.analytics">
+                        <div class="card _card py-4 px-xl-3 px-lg-3 px-3"
+                            [ngStyle]="{'background-color': data.backGroundColor}">
+                            <p class="charge_type montserrat mb-0">{{data.chargeType}}</p>
+                            <div class="">
+                                <img src="assets/images/common/rupee-icon.webp" width="18px" alt=""
+                                    *ngIf="!data.chargeType.includes('Count')">
+                                <span class="amount montserrat"> {{data.amount}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col" style="white-space: nowrap;">
+                    <div class="table-container" *ngIf="allOrders.length>=1 else noDataTemplate">
+                        <app-order-over-view-table [events]="refreshTable.asObservable()" [orderList]="allOrders"
+                            [pageDetails]="pageDetails" (updateCAll)="refreshPageForUpdates($event)"
+                            (updatePageEmitter)="nextPage($event)" [modeOdDelivery]="modeOdDelivery"
+                            [tHeader]="tHeaderList" [courierServiceList]="courierServiceList">
+                        </app-order-over-view-table>
+                    </div>
+                    <ng-template #noDataTemplate>
+                        <div class="row ">
+                            <div class="col-md-4 col-6 mx-auto ">
+                                <img src="assets/images/common/Group 182@2x.webp " alt=" " class="img-fluid ">
+                            </div>
+                        </div>
+                        <p class="text-center noDataText mt-5">No Data Available</p>
+                    </ng-template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

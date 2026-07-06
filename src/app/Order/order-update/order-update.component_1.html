@@ -1,0 +1,417 @@
+<app-header>
+</app-header>
+<div>
+    <app-sidebar>
+    </app-sidebar>
+</div>
+
+<div class="container-fluid content" style="background-color: #F1F3F6;">
+    <div class="row py-1 ">
+        <div class="col-lg-11 col px-xl-0 px-lg-0 px-md-0 px-2 ms-5">
+            <div class="container-fluid">
+                <div class="row mt-3 py-2 ">
+                    <div class="col">
+
+
+
+                        <div class="row mb-3">
+                            <div class="col-lg-7 col-12">
+                                <p class="cart_count mb-0">
+                                    <span style="cursor: pointer;" *ngIf="originalOrderData[0]"> Order Count
+                                        ({{getOriginalCount()}})</span>
+
+                                    <!-- <span [ngClass]="!showCartType[1] ? 'inactive' :''"
+                                            (click)="showCart(CartType.gardenSetup)" style="cursor: pointer;"
+                                            *ngIf="!originalOrderData[0].cartModel">Garden
+                                            Setup ({{getCartCount('gardenSetUp')}})</span> -->
+                                    <!-- 
+                                        <span class="ms-2">Modified Products ({{getCartCount('cart')}})</span>
+
+                                        <span class="ms-2">Total Products ({{getCartCount('cart') + getOriginalCount()}}
+                                            ) </span> -->
+
+                                    <!-- <span class="mx-3" style="border:1px solid #70707080"></span>
+                                      -->
+                                </p>
+                            </div>
+                            <div class="col">
+                                <button class="add_btn btn float-end px-3" (click)=" originalOrderData[0].paymentStatusText != 'captured' ? sidebarVisible1 = true : null" [ngClass]="{'scale-out': originalOrderData[0].paymentStatusText == 'captured'
+                            }">Add Products</button>
+                            </div>
+                        </div>
+
+
+                        <div>
+
+                            <div class="row " *ngFor="let productInfos of originalOrderData;let i=index">
+                                <div class="col-6" *ngIf="productInfos?.cartModel">
+                                    <p class="cart_count mb-0">Original</p>
+                                </div>
+                                <div class="col-6"
+                                    *ngIf="productInfos?.cartModel && originalOrderData[0].paymentStatusText != 'captured'">
+                                    <p class="cart_count mb-0">Modified</p>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <!-- original order list -->
+                                <div class="col">
+                                    <div class="row" *ngFor="let productInfos of originalOrderData;let i=index">
+                                        <div class="col" *ngIf="productInfos?.cartModel">
+                                            <div class="row position-relative mb-4"
+                                                *ngFor="let productInfo of productInfos?.cartModel?.products;let i=index">
+                                                <div class="col align-self-center">
+                                                    <div
+                                                        style="border-bottom:0.75px solid #EBEBEB;background-color: #fff;">
+                                                        <div class="row">
+                                                            <!-- <div class="col mx-auto px-3" style="border:2px solid rgb(5, 254, 117)" >
+                                                    <div class="row"> -->
+                                                            <div class="col-lg col-md-6 col-12"
+                                                                (click)="routeToProduct(productInfo.productModel.productId)">
+                                                                <img [src]="imageSrc+ productInfo.productModel.productImages[0]"
+                                                                    class="img-fluid" alt="">
+
+                                                            </div>
+                                                            <div class="col align-self-center">
+                                                                <div class="row d-md-block d-none">
+                                                                    <div class="col-md-12 col-12">
+                                                                        <p class="mb-0 product_Name text-Capitalize">
+                                                                            {{productInfo.productModel.productNameInEnglish}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- </div>
+                                                </div> -->
+                                                            <!-- <div class="col align-self-center">
+                                                    <div class="row" style="white-space: noWrap;align-items: baseline;"> -->
+
+                                                            <!-- <div class="col ">
+                                                            <div class="row my-xl-4 my-lg-0 my-md-0 my-0"
+                                                                style="align-items: baseline;"> -->
+
+
+                                                            <div class="col-2 align-self-center">
+                                                                <!-- <div class="row mb-2">
+                                                                        <div class="col"> -->
+                                                                <p class="mb-0">
+                                                                    <span class="price">₹{{productInfo.price
+                                                                        |
+                                                                        number :'1.2-2'}}</span>
+                                                                    <!-- <span class="discountprice mx-2"><del>₹{{productInfo.mrp
+                                                                                        | number :
+                                                                                        '1.2-2'}}</del></span>
+                                                                                <span *ngIf="productInfo.offer>0"
+                                                                                    class="discountprice"
+                                                                                    style=" color: #02010A;">{{productInfo.offer
+                                                                                    | number : '1.0'}}% off</span> -->
+                                                                </p>
+                                                                <!-- </div>
+                                                                    </div> -->
+                                                            </div>
+
+                                                            <div class="col align-self-center">
+
+                                                                <div class="input-group">
+
+                                                                    <input type="text" id="quantity" name="quantity"
+                                                                        class="form-control text-center" readonly
+                                                                        [value]="getProdCountForOriginal(productInfo)"
+                                                                        min="1" max="100">
+
+                                                                </div>
+
+                                                                <div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col align-self-center d-md-block d-none ">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <p class="mb-0">
+                                                                            <span class="price"
+                                                                                style="color: #008000;">₹{{productInfo.price
+                                                                                |
+                                                                                number : '1.2-2'}}</span>
+                                                                        </p>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <!-- </div> -->
+                                                            <!-- </div> -->
+
+                                                            <!-- </div>
+                                                </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- <div class="d-md-none d-block col-12">
+                                    <div class="row" *ngIf="productInfos?.cartModel">
+                                        <div class="col">
+
+                                            <div class="row mt-xl-5 mt-lg-4 mt-md-3 mt-3">
+                                                <div class="col mx-auto">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p class="priceDetails mb-4">PRICE DETAILS</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row productName">
+                                                        <div class="col">
+                                                            <p>MRP ({{productInfos?.cartModel?.totalNoOfQuantity}}
+                                                                item)</p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <p class="mb-0 text-end discount">
+                                                                ₹{{productInfos?.cartModel?.totalMrp
+                                                                | number: '1.2-2'}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row productName">
+                                                        <div class="col">
+                                                            <p>Product Discount</p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <p class="mb-0 text-end discount"
+                                                                *ngIf="productInfos.cartModel.totalYouSave>0">
+                                                                -₹{{productInfos.cartModel.totalYouSave| number:
+                                                                '1.2-2'}}</p>
+                                                            <p class="mb-0 text-end discount"
+                                                                *ngIf="productInfos?.cartModel?.totalYouSave==0">--
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row productName">
+                                                        <div class="col">
+                                                            <div class="container px-0"
+                                                                style="border-top: 1px dashed #70707080;border-bottom: 1px dashed #70707080;">
+                                                                <div class="row py-3">
+                                                                    <div class="col">
+                                                                        <p class="mb-0">Total Amount</p>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <p class="mb-0 text-end discount">
+                                                                            ₹{{productInfos?.totalAmount | number:
+                                                                            '1.2-2'}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row my-3">
+                                                        <div class="col">
+                                                            <div class=" discount"
+                                                                *ngIf="productInfos.cartModel.totalYouSave > 0">
+                                                                You will save
+                                                                ₹{{productInfos?.cartModel?.totalYouSave | number:
+                                                                '1.2-2'}} on this order</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div> -->
+
+
+                                    </div>
+                                </div>
+                                <!-- original order list -->
+                                <!-- Modified order list -->
+                                <div class="col">
+                                    <div *ngIf="originalOrderData[0].paymentStatusText != 'captured'">
+                                        <div class="row" *ngFor="let productInfos of cart;let i=index">
+                                            <div class="col" *ngIf="productInfos?.cartModel">
+
+                                                <div class="row position-relative mb-4"
+                                                    *ngFor="let productInfo of productInfos?.cartModel?.products;let i=index">
+                                                    <div class="col align-self-center">
+                                                        <div
+                                                            style="border-bottom:0.75px solid #EBEBEB;background-color: #fff;">
+                                                            <div class="row">
+                                                                <div class="col-lg col-md-6 col-12"
+                                                                    (click)="routeToProduct(productInfo.productModel.productId)">
+                                                                    <img [src]="imageSrc+ productInfo.productModel.productImages[0]"
+                                                                        class="img-fluid" alt="">
+                                                                </div>
+                                                                <div class="col align-self-center">
+                                                                    <div class="row d-md-block d-none">
+                                                                        <div class="col-md-12 col-12">
+                                                                            <p
+                                                                                class="mb-0 product_Name text-Capitalize">
+                                                                                {{productInfo.productModel.productNameInEnglish}}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-2 align-self-center">
+                                                                    <p class="mb-0">
+                                                                        <span class="price">₹{{productInfo.price|number
+                                                                            :'1.2-2'}}</span>
+                                                                    </p>
+                                                                </div>
+
+                                                                <div class="col align-self-center">
+                                                                    <div class="input-group">
+                                                                        <button class="input-group-text" [disabled]="productInfo.productModel.productCategory
+                                                                =='Give Away'"
+                                                                            (click)="addRemoveProducts(productInfo,'remove')">
+                                                                            <i class="fa-solid fa-minus"></i></button>
+                                                                        <input type="text" id="quantity" name="quantity"
+                                                                            class="form-control quantity text-center inputBox"
+                                                                            [value]="getProdCountForOriginal(productInfo)"
+                                                                            min="1" max="100">
+                                                                        <button class="input-group-text" [disabled]="productInfo.productModel.productCategory
+                                                                =='Give Away'"
+                                                                            (click)="addRemoveProducts(productInfo,'add')"><i
+                                                                                class="fa-solid fa-plus"></i></button>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col align-self-center d-md-block d-none ">
+                                                                    <div class="row">
+                                                                        <div class="col">
+                                                                            <p class="mb-0">
+                                                                                <span class="price"
+                                                                                    style="color: #008000;">₹{{productInfo.price
+                                                                                    |
+                                                                                    number : '1.2-2'}}</span>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="col d-lg-block d-none"
+                                                                            style="cursor: pointer;">
+                                                                            <p class="mb-0"
+                                                                                (click)="addRemoveProducts(productInfo,cartOperation.DELETE)">
+                                                                                <img src="assets/images/common/Icon ionic-ios-close-circle-outline@2x.webp"
+                                                                                    class="delete_icon img-fluid">
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                          
+                                                            <div class="row text-center">
+                                                                <span class="price"
+                                                                    style="color: #dc3545;" *ngIf="productInfo.productModel.productDetails[0].availability == 'CURRENTLY_UNAVAILABLE'">
+                                                                    Currently Unavailable</span>                                                                  
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- Modified order list -->
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6" *ngIf="originalOrderData[0]?.totalAmount">
+                                    <p class="mb-0 float-end">
+                                        <span class="price">Total Amount : </span>
+                                        <span class="price">₹{{originalOrderData[0].totalAmount|number :'1.2-2'}}</span>
+                                    </p>
+                                </div>
+                                <div class="col text-end" *ngIf="cart[0] && originalOrderData[0].paymentStatusText != 'captured'">
+                                    <p class="mb-0">
+                                        <span class="price">Total Amount : </span>
+                                        <span class="price">₹{{cart[0].totalAmount|number :'1.2-2'}}</span>
+                                    </p>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="row d-md-block d-none my-3" *ngIf="cart.length == 0">
+                                <div class="col">
+                                    <div class="row ">
+                                        <div class="col-lg-4 col-md-4 col-4 ">
+
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+
+                                                <div class="col ">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-5 col">
+
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-4 col-8">
+                                                            <p class="float-xl-end me-xl-5 sub_total">Subtotal</p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-3 col">
+                                                            <p class="price" style="color: #008000;">
+                                                                ₹{{originalOrderData[0].totalAmount |
+                                                                number: '1.2-2'}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <app-check-out [userInfo]="userModel" [OrderData]="originalOrderData"
+                            (updateParcelServiceProvider)="updateProvider($event)"></app-check-out>
+
+                        <div class="row mb-5 d-md-block d-none">
+                            <div class="col-lg-6  offset-lg-6">
+                                <div class="row">
+                                    <div class="col-6 offset-6">
+                                        <button class="btn w-100 placeOrderBtn" (click)="updateOrder()">Update
+                                            Order</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Side bar for search -->
+
+<p-sidebar [(visible)]="sidebarVisible1" position="right">
+    <h3>Search</h3>
+    <div class="row">
+        <app-search-box [placeHolder]="'Search Products'" (onSearchValue)="search($event)">
+        </app-search-box>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="row" *ngFor="let data of products">
+                <app-single-product [productsList]="data" (AddProductsToCart)="refreshProductList($event)"
+                    [orderId]="orderId" [newlyAdded]="newlyAdded">
+                </app-single-product>
+            </div>
+        </div>
+
+    </div>
+
+</p-sidebar>

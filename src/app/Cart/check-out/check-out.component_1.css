@@ -1,0 +1,297 @@
+.content {
+    padding-left: 4.5rem;
+}
+
+::ng-deep .p-button.p-button-text {
+    border-color: #008000 !important;
+}
+
+
+::ng-deep .p-confirm-dialog-reject {
+    display: none;
+}
+
+::ng-deep .p-confirm-dialog-message {
+    font-family: Roboto-Medium;
+    font-size: 16px;
+    color: #02010A;
+}
+
+::ng-deep .p-dialog-title {
+    font-family: Roboto-Medium;
+    font-size: 24px;
+    color: #02010A;
+}
+
+::ng-deep .p-button-label {
+    color: #008000;
+}
+
+::ng-deep .p-button-icon {
+    color: #008000;
+}
+
+::ng-deep .p-confirm-dialog-accept {
+    border-radius: 0;
+}
+
+::ng-deep .p-confirm-dialog-accept .p-button-icon {
+    color: #FFFFFF;
+}
+
+::ng-deep .p-confirm-dialog-accept .p-button-label {
+    color: #FFFFFF;
+}
+
+::ng-deep .p-orderlist-controls {
+    display: none !important;
+}
+
+::ng-deep .p-orderlist .p-orderlist-list:not(.cdk-drop-list-dragging) .p-orderlist-item:not(.p-highlight):hover {
+    background: #fff !important;
+}
+
+::ng-deep .p-orderlist .p-orderlist-list {
+    border: none !important;
+    border-bottom: none !important;
+}
+
+::ng-deep .p-orderlist .p-orderlist-header {
+    font-family: Roboto-Medium !important;
+    font-size: 16px !important;
+    color: #02010A !important;
+    border: none !important;
+    padding: 1.25rem;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+
+::ng-deep .p-orderlist .p-orderlist-list::-webkit-scrollbar {
+    width: 6px;
+} 
+
+::ng-deep .p-orderlist .p-orderlist-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+::ng-deep .p-orderlist .p-orderlist-list::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 2px;
+    border: 1px solid #f1f1f1;
+}
+
+::ng-deep .p-orderlist .p-orderlist-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+::ng-deep .p-orderlist .p-orderlist-list {
+    scrollbar-width: none;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+
+
+.input_box,
+select {
+    border: 1px solid #D2D2D2;
+    border-radius: 0px;
+    height: 46px;
+    font-size: 14px;
+    font-family: Roboto-Regular;
+}
+
+.drop_down {
+    font-family: Roboto-Bold;
+}
+
+textarea {
+    border: 1px solid #D2D2D2;
+    border-radius: 0px;
+    font-size: 14px;
+    font-family: Roboto-Regular;
+}
+
+input:focus,
+select:focus,
+button:focus,
+textarea:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+::placeholder {
+    font-family: Roboto-Regular;
+    font-size: 12px;
+    color: #02010A;
+}
+
+.add_on_info {
+    font-family: Roboto-Regular;
+    font-size: 12px;
+    color: #02010A;
+    /* position: absolute; */
+}
+
+.productName {
+    font-family: Roboto-Regular;
+    font-size: 16px;
+    color: #02010A;
+}
+
+.productLable {
+    font-family: Roboto-SemiBold;
+    font-size: 16px;
+    color: #02010A;
+}
+
+label,
+.check_box_text {
+    color: #02010A;
+    font-family: Roboto-Regular;
+    font-size: 14px;
+}
+
+.heading {
+    font-family: Roboto-SemiBold;
+    font-size: 30px;
+    color: #02010A;
+}
+
+.subHeading {
+    font-family: Roboto-SemiBold;
+    font-size: 17px;
+    color: #02010A;
+}
+
+.subTopic {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    color: #02010A;
+}
+
+.checkOut {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    height: 44px;
+    border-radius: 0;
+    background-color: rgb(0, 128, 0);
+}
+
+.saveChanges {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    height: 44px;
+    border-radius: 0;
+    background-color: #008000;
+}
+
+.checkOut:hover {
+    background-color: #FFFFFF;
+    color: #008000;
+    border: 1px solid #008000;
+}
+
+.totalAmt {
+    font-family: Roboto-Bold;
+    font-size: 15px;
+    color: #02010A;
+}
+
+.text {
+    font-family: Roboto-Bold;
+    font-size: 15px;
+    color: #02010A;
+}
+
+.totalAmtValues {
+    font-family: Roboto-Bold;
+    font-size: 18px;
+    color: #008000;
+}
+
+.discount {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    color: #008000;
+}
+
+.placeOrder_btn {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    background-color: #008000;
+    color: #fff;
+    border-radius: 0;
+    height: 46px;
+}
+
+
+@media (min-width:720px) {
+    .borderRight {
+        border-right: 1px solid #D2D2D2;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 200px) {
+    ::ng-deep .p-orderlist .p-orderlist-list {
+        display: flex;
+        flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
+        overflow-x: auto;  /* Enable horizontal scrolling */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+    ::ng-deep .p-orderlist .p-orderlist-list .p-orderlist-item {
+        min-width: 30rem;
+    }
+
+    .container_box{
+        overflow-x: auto;
+    }
+}
+
+
+/* checkbox */
+
+.form-group input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+}
+
+.form-group label {
+    position: relative;
+    cursor: pointer;
+}
+
+.form-group label:before {
+    content: '';
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 2px solid #0079bf;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.form-group input:checked+label:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 9px;
+    width: 6px;
+    height: 14px;
+    border: solid #0079bf;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}

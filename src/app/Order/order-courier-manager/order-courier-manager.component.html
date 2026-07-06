@@ -1,0 +1,94 @@
+<app-header>
+</app-header>
+<div>
+    <app-sidebar>
+    </app-sidebar>
+</div>
+<div class="container-fluid content" style="background-color: #F1F3F6;">
+    <div class="row">
+        <div class="col-11 px-xl-0 px-lg-0 px-md-0 px-2 ms-5">
+            <div class="container-fluid">
+                <div class="row mt-3 py-2">
+                    <div class="col-xl-10 col-lg-8">
+                        <p class="mb-0 breadCrumbTopic">Order Courier Update</p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <p class="mb-0 textInBoxes" style="color: #1B1B1D;">Manage Couriers</p>
+                    </div>
+                    <div class="col-lg col-12">
+                        <div class="row">
+                            <div class="col">
+                                <app-search-box [placeHolder]="'Search using Phone No / order Id'"
+                                    (onSearchValue)="search($event)"></app-search-box>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="container-fluid mt-4" style="background-color: #29f15826;">
+                            <form class="py-3" autocomplete="off" [formGroup]="form1">
+                                <p class="mb-0 filterTopic">Invoice Dates :</p>
+                                <div class="row">
+                                    <div class="col-xl-2 col-lg-3 col-4">
+                                        <input type="date" class="form-control date w-100 my-3"
+                                            placeholder="Choose Date" formControlName="deliveryStartDate"
+                                            [(ngModel)]="filtre.deliveryStartDate"
+                                            [ngClass]="{ 'is-invalid': submitted[1]  && filterDateCheck['deliveryStartDate'].errors }">
+
+                                        <div *ngIf="submitted[0] && filterDateCheck['deliveryStartDate'].errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="filterDateCheck['deliveryStartDate'].errors['required']">Date is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-3 col-4">
+                                        <input type="date" class="form-control date w-100 my-3"
+                                            placeholder="Choose Date" formControlName="deliveryEndDate"
+                                            [(ngModel)]="filtre.deliveryEndDate"
+                                            [ngClass]="{ 'is-invalid': submitted[1]  && filterDateCheck['deliveryEndDate'].errors }">
+
+                                        <div *ngIf="submitted[0] && filterDateCheck['deliveryEndDate'].errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="filterDateCheck['deliveryEndDate'].errors['required']">Date is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-6 col-8">
+                                        <button type="button" class="form-control my-3 show_Results"
+                                            (click)="getOverAllStats()"><span class="px-3">Show
+                                                Results</span></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-4" >
+                    <div class="col" style="white-space: nowrap;">
+                        <app-order-over-view-table [events]="refreshTable.asObservable()" [orderList]="orderList"
+                            [pageDetails]="config.totalItems" (updateCAll)="refreshPageForUpdates($event)"
+                            (updatePageEmitter)="nextPage($event)" [modeOdDelivery]="modeOdDelivery"
+                            (updateCourierDetails)="updateCourieAction($event)" (updateCourierAction)="update()" [courierServiceList]="courierServiceList" [tHeader]="tHeaderList">
+                        </app-order-over-view-table>
+                    </div>
+                </div> 
+
+               
+
+                <app-order-manager [printList]="printOrderList" [PrintPageEvent]="previewOrderList.asObservable()">
+                </app-order-manager>
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,68 @@
+<app-header>
+</app-header>
+<div>
+    <app-sidebar>
+    </app-sidebar>
+</div>
+<div class="container-fluid content" style="background-color: #F1F3F6;">
+    <div class="row py-1 ">
+        <div class="col-11 px-xl-0 px-lg-0 px-md-0 px-2 ms-5">
+            <div class="container-fluid">
+                <div class="row mt-3 py-2 ">
+                    <div class="col-lg-10 col-8">
+                        <app-heading [heading]="'Courier'"></app-heading>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="form-control btn_navigate" (click)="navigateRoute('/add-courier')">Add Courier</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col mx-auto">
+                        <form class=" mt-3 mb-4 needs-validation" autocomplete="off" [formGroup]="courierForm">
+                            <div class="row">
+
+                                <div class="col-md-6 col-12 mb-3">
+                                    <label for="validationCustom02" class="form-label">Name</label>
+                                    <input type="text" formControlName="courierProvider" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted  && courierCheck['courierProvider'].errors }"
+                                        placeholder="Enter Courier Name" [(ngModel)]="courierModel.courierProvider">
+                                    <div *ngIf="submitted && courierCheck['courierProvider'].errors" class="invalid-feedback">
+                                        <div *ngIf="courierCheck['courierProvider'].errors['required']">
+                                            Courier Name is required</div>
+                                    </div>
+                                </div>                            
+
+                                <div class="col-md-6 col-12 mb-3">
+                                    <label for="validationTrackingLink" class="form-label">Tracking Link</label>
+                                    <input type="text" formControlName="trackingLink" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted  && courierCheck['trackingLink'].errors }"
+                                        placeholder="Enter Tracking Link" [(ngModel)]="courierModel.trackingLink">
+                                        <div *ngIf="submitted && courierCheck['trackingLink'].errors" class="invalid-feedback">
+                                            <div *ngIf="courierCheck['trackingLink'].errors['required']">
+                                                Tracking Link is required</div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <button class="btn w-100 float-end checkOut"
+                                                (click)="proceed()"  [innerHTML]="!editWizard ? 'Add' : 'Edit & Save'" ></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <app-all-courier [events]="refreshEvent.asObservable()" (editProviderCAll)="editProviders($event)">
+                </app-all-courier>
+
+            </div>
+        </div>
+    </div>
+</div>

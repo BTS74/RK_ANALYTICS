@@ -1,0 +1,17 @@
+<div class="container-fluid sticky " *ngIf="showHeader">
+    <div class="row py-1 ">
+        <div class="col">
+            <div class="dropdown text-end">
+                <a href="#" class="link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="assets/images/header/icon secured.png" alt="mdo" width="32" height="32"
+                        class="rounded-circle">
+                        <span class="ms-2 adminName">Admin</span>
+                </a>
+                <ul class="dropdown-menu">                
+                    <li><a class="dropdown-item" (click)="routeTo('sign-out')">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

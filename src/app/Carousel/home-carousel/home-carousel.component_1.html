@@ -1,0 +1,251 @@
+<app-header>
+</app-header>
+<div>
+    <app-sidebar>
+    </app-sidebar>
+</div>
+<div class="container-fluid content" style="background-color: #F1F3F6;">
+    <div class="row py-1 ">
+        <div class="col-11 px-xl-0 px-lg-0 px-md-0 px-2 ms-5">
+            <div class="container-fluid">
+                <div class="row mt-3 py-2 ">
+                    <div class="col-xl-10 col-lg-8">
+                        <app-heading [heading]="'Home Carousel'"></app-heading>
+                        <p class="mb-0">
+                            <span>
+                                <img src="assets/images/common/Icon ionic-md-home@2x.webp" width="11.2px"
+                                    class="me-2 mb-1">
+                            </span>
+                            <span class="breadCrumbSubTopic">Home / Add Carousel Image </span>
+                        </p>
+                    </div>
+                    <div class="col-xl col-lg">
+                        <button class="btn w-100 addToCart mt-3" (click)="routePage('carousel/update')"
+                            *ngIf="CarouselUploadingType != 'update'">
+                            Update Carousel
+                        </button>
+                        <button class="btn w-100 addToCart mt-3" (click)="routePage('carousel/upload')"
+                            *ngIf="CarouselUploadingType == 'update'">
+                            Upload Carousel
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row mt-2" style="background-color: #fff;">
+                    <div class="col-lg col-12 ">
+                        <div class="container-fluid mt-2 pb-2">
+                            <form autocomplete="off">
+                                <div class="row mt-2 py-4">
+                                    <div class="col-xl-12 col-md-12 mx-auto col-12 ">
+                                        <div class="container-fluid">
+                                            <div class="row mt-4">
+                                                <div class="col-lg-11 mx-auto  col-12">
+                                                    <p class="headingText">Upload File Size - 1440x566</p>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="col-lg-11 mx-auto  col-12 p-5" style="border: 2px dashed #28A745;
+                                                border-radius: 15px;">
+
+                                                    <div class="row">
+                                                        <div class="text-center col">
+                                                            <div class="text-center py-5">
+                                                                <div (click)="myFileInput.click()">
+                                                                    <img src="assets/images/common/Icon material-image.webp"
+                                                                        width="50px" alt="">
+                                                                    <p>Click to add product image </p>
+                                                                    <input type="file" type="file" class="form-control"
+                                                                        (change)="fileChangeEvent($event)" #myFileInput
+                                                                        hidden>
+
+                                                                </div>
+                                                                <div>
+                                                                    <p>or </p>
+                                                                </div>
+                                                                <div>
+                                                                    <button (click)="myFileInput.click()" type="button"
+                                                                        class="btn btn-primary addToCart  ">Browse
+                                                                        Image</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="col-lg-11 mx-auto  col-12 ">
+
+                                                    <div class="row">
+
+                                                        <div class="col-3"
+                                                            *ngIf="singleCarouselImage.homeCarouselImageUrl">
+
+                                                            <div class="position-relative" style="border: 0.5px solid #707070BF;
+                                                        border-radius: 3px;">
+                                                                <img *ngIf="imgPreviewLocal(singleCarouselImage.homeCarouselImageUrl)"
+                                                                    [src]="singleCarouselImage.homeCarouselImageUrl"
+                                                                    alt="" class="img-fluid">
+                                                                <img *ngIf="!imgPreviewLocal(singleCarouselImage.homeCarouselImageUrl)"
+                                                                    src="https://resource.rkpattarai.com/assets/images/uploads/{{singleCarouselImage.homeCarouselImageUrl}}"
+                                                                    alt="" class="img-fluid">
+                                                                <img class="search-icon position-absolute top-0 start-100 translate-middle"
+                                                                    src="assets/images/common/Layer 2@2x.webp"
+                                                                    width="16.87" alt="" style="cursor: pointer;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg col-12 ">
+                        <div class="container-fluid mt-2 pb-2">
+                            <form autocomplete="off">
+                                <div class="row mt-2 py-4">
+                                    <div class="col-xl-12 col-md-12 mx-auto col-12 ">
+                                        <div class="container-fluid">
+                                            <div class="row mt-4">
+                                                <div class="col-lg-11 mx-auto  col-12">
+                                                    <p class="headingText">Upload File Size - 425x566</p>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="col-lg-11 mx-auto  col-12 p-5" style="border: 2px dashed #28A745;
+                                                border-radius: 15px;">
+
+                                                    <div class="row">
+                                                        <div class="text-center col">
+                                                            <div class="text-center py-5">
+                                                                <div (click)="myFileInputMobile.click()">
+                                                                    <img src="assets/images/common/Icon material-image.webp"
+                                                                        width="50px" alt="">
+                                                                    <p>Click to add product image </p>
+                                                                    <input type="file" type="file" class="form-control"
+                                                                        (change)="fileChangeEvent($event, true)"
+                                                                        #myFileInputMobile hidden>
+
+                                                                </div>
+                                                                <div>
+                                                                    <p>or </p>
+                                                                </div>
+                                                                <div>
+                                                                    <button (click)="myFileInputMobile.click()"
+                                                                        type="button"
+                                                                        class="btn btn-primary addToCart  ">Browse
+                                                                        Image</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="col-lg-11 mx-auto  col-12 ">
+
+                                                    <div class="row">
+
+                                                        <div class="col-3">
+
+                                                            <div class="position-relative" style="border: 0.5px solid #707070BF;
+                                                        border-radius: 3px;"
+                                                                *ngIf="singleCarouselImage.homeCarouselImageUrlForMobile">
+                                                                <img *ngIf="imgPreviewLocal(singleCarouselImage.homeCarouselImageUrlForMobile)"
+                                                                    [src]="singleCarouselImage.homeCarouselImageUrlForMobile"
+                                                                    alt="" class="img-fluid">
+
+                                                                <img *ngIf="!imgPreviewLocal(singleCarouselImage.homeCarouselImageUrlForMobile)"
+                                                                    src="https://resource.rkpattarai.com/assets/images/uploads/{{singleCarouselImage.homeCarouselImageUrlForMobile}}"
+                                                                    alt="" class="img-fluid">
+
+                                                                <img class="search-icon position-absolute top-0 start-100 translate-middle"
+                                                                    src="assets/images/common/Layer 2@2x.webp"
+                                                                    width="16.87" alt="" style="cursor: pointer;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row py-2" style="background-color: #fff;">
+                    <div class="col-6 offset-6">
+                        <button class="btn w-100 saveBtn" (click)="addImages()">Add</button>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-lg-11 mx-auto  col-12 ">
+
+                        <div class="row">
+
+                            <div class="col-3" *ngFor="let images of carouselImages; let i =index">
+
+
+                                <div class="position-relative" style="border: 0.5px solid #707070BF;
+                            border-radius: 3px;">
+
+                                    <div class="row" *ngIf="images.homeCarouselImageUrl">
+                                        <img *ngIf="imgPreviewLocal(images.homeCarouselImageUrl)"
+                                            [src]="images.homeCarouselImageUrl" alt="" class="img-fluid">
+
+                                        <img *ngIf="!imgPreviewLocal(images.homeCarouselImageUrl)"
+                                            src="https://resource.rkpattarai.com/assets/images/uploads/{{images.homeCarouselImageUrl}}"
+                                            alt="" class="img-fluid">
+                                    </div>
+                                    <div class="row pt-2" *ngIf="images.homeCarouselImageUrlForMobile">
+                                        <img *ngIf="imgPreviewLocal(images.homeCarouselImageUrlForMobile)"
+                                            [src]="images.homeCarouselImageUrlForMobile" alt="" class="img-fluid">
+
+                                        <img *ngIf="!imgPreviewLocal(images.homeCarouselImageUrlForMobile)"
+                                            src="https://resource.rkpattarai.com/assets/images/uploads/{{images.homeCarouselImageUrlForMobile}}"
+                                            alt="" class="img-fluid">
+                                    </div>
+                                    <img class="search-icon position-absolute top-0 start-100 translate-middle"
+                                        src="assets/images/common/Layer 2@2x.webp" width="16.87" alt=""
+                                        style="cursor: pointer;" (click)="removeImage(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col offset-6">
+                        <div class="row mt-3">
+                            <div class="col ">
+                                <button class="btn cancel w-100 ">Cancel</button>
+                            </div>
+                            <div class="col">
+                                <button class="btn w-100 saveBtn" (click)="save()">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

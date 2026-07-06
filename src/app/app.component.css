@@ -1,0 +1,66 @@
+
+
+
+
+html,
+body,
+app-root {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+
+/* Sidebar fixed width, full height */
+app-sidebar {
+  width: 240px;
+  background-color: #FFF;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+/* Right section holds header + main content */
+.right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin-left: 240px;
+  width: calc(100% - 240px);
+}
+
+/* Header fixed height */
+app-header {
+  height: 60px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Main content fills remaining height */
+.main-content {
+  /* flex: 1;
+  overflow-y: auto; */
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+
+.app-layout {
+  /* display: flex;
+  height: 100vh;
+  width: 100vw; */
+}
+/* 
+@media (min-width:720px) {
+  .app-layout {
+    display: flex;
+  }
+
+} */

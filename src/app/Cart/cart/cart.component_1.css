@@ -1,0 +1,132 @@
+
+.content {
+    padding-left: 4.5rem;
+}
+.add_btn {
+    background-color: #28A745;
+    color: #FFFFFF;
+    font-family: Roboto-Medium;
+    font-size: 16px;
+    border-radius: 0;
+}
+
+input:focus {
+    outline: none !important;
+    box-shadow: none;
+    -webkit-appearance: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.cart_count {
+    font-family: Roboto-Medium;
+    font-size: 30px;
+    color: #02010A;
+}
+
+.input-group-text {
+    border-radius: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.quantity {
+    border-left: none;
+    border-right: none;
+}
+
+.heading {
+    font-family: Roboto-Regular;
+    font-size: 17px;
+    color: #02010A;
+}
+
+.product_Name {
+    color: #8E8E8E;
+    font-family: Roboto-Regular;
+    font-size: 14px;
+}
+
+.price {
+    font-family: Roboto-SemiBold;
+    font-size: 17px;
+    color: #02010A;
+}
+
+.sub_total {
+    font-family: Roboto-Regular;
+    font-size: 17px;
+    color: #02010A;
+}
+
+.discountprice {
+    color: #8E8E8E;
+    font-family: Roboto-Regular;
+    font-size: 10px;
+}
+
+.placeOrderBtn {
+    background-color: #008000;
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    border-radius: 0px;
+    height: 45px;
+}
+
+.continue_shopping_Btn {
+    background-color: #FFF;
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    color: #02010A;
+    border-radius: 0px;
+    height: 45px;
+    border: 1px solid #02010A;
+}
+
+.greyText {
+    color: #808080;
+    font-family: Roboto-Regular;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.inactive{
+    color: #989898;
+}
+
+.arrow {
+    width: 13.38px;
+}
+
+.delete_icon {
+    width: 16.46px;
+}
+
+.priceDetails {
+    font-family: Roboto-Bold;
+    font-size: 18px;
+    color: #02010A;
+}
+
+.productName {
+    font-family: Roboto-SemiBold;
+    font-size: 14px;
+    color: #02010A;
+}
+
+.discount {
+    color: #008000;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+}
+
+@media (max-width: 425px) and (min-width: 200px) {
+    .cart_count {
+        font-size: 16px;
+    }
+    .price {
+        font-size: 12px;
+        white-space: inherit!important;
+    }
+}

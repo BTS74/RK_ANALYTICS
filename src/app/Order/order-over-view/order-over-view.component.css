@@ -1,0 +1,141 @@
+select:focus,
+input:focus,
+button:focus {
+    box-shadow: none;
+}
+
+select,
+input,
+button {
+    cursor: pointer;
+}
+
+.filterBtn {
+    background-color: #fff;
+    height: 44px;
+    border: none;
+}
+.btn-door-delivery {
+    height: 58px;
+    background-color: #28A745;
+    color: #FFFFFF;
+    font-family: Roboto-Regular;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 0;
+}
+
+.btn-door-delivery:focus {
+    box-shadow: none;
+    outline: none;
+}
+.search_bar{
+    max-width: 600px;
+    width: 100%;
+}
+.breadCrumbTopic {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.breadCrumbSubTopic {
+    font-size: 12px;
+    font-weight: 400;
+    color: #7784A1;
+}
+
+.addBtn {
+    height: 43px;
+    color: #1B1B1D;
+    font-family: Roboto-Medium;
+    font-size: 16px;
+    font-weight: 400;
+    width: 180px;
+    background-color: #E4E4E5;
+    border: none;
+}
+
+.addBtn.active {
+    background-color: #28A7454D;
+}
+
+.textInBoxes {
+    font-family: Roboto-Medium;
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+}
+
+u {
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    font-weight: 400;
+    color: #1B1B1D;
+    cursor: pointer;
+}
+
+.numberInBoxes {
+    font-family: Roboto-Medium;
+    font-size: 38px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.orderBox {
+    background-color: #FF686BCC;
+    border-radius: 5px;
+}
+
+.dispatched {
+    background-color: #8AC926CC;
+    border-radius: 5px;
+}
+
+.incomeBox {
+    background-color: #0063D1CC;
+    border-radius: 5px;
+}
+
+.show_Results {
+    height: 36px;
+    background-color: #008000;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+/* Ensure container takes full available space */
+.container-fluid {
+    /* height: 100%;
+    display: flex;
+    flex-direction: column; */
+}
+
+
+select,
+.date {
+    height: 36px;
+    border-radius: 5px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.filtertext,
+.empty {
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+@media (max-width: 1024px) and (min-width:768px) {
+   
+    .textInBoxes {
+        font-size: 16px;
+    }
+    .numberInBoxes {
+        font-size: 32px;
+    }
+}

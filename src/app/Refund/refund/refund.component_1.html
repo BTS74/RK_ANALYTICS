@@ -1,0 +1,53 @@
+<app-header>
+</app-header>
+<div>
+    <app-sidebar>
+    </app-sidebar>
+</div>
+<div class="container-fluid content" style="background-color: #F1F3F6;">
+    <div class="row py-1 ">
+        <div class="col-11 px-xl-0 px-lg-0 px-md-0 px-2 ms-5">
+            <div class="container-fluid">
+                <div class="row mt-3 py-2 ">
+                    <div class="col-xl-10 col-lg-8">
+                        <p class="mb-0 breadCrumbTopic">{{forWhichPage}} Overview</p>
+                        <p class="mb-0">
+                            <span>
+                                <img src="assets/images/common/Icon ionic-md-home@2x.webp" width="11.2px"
+                                    class="me-2 mb-1">
+                            </span>
+                            <span class="breadCrumbSubTopic">{{forWhichPage}} </span>
+                        </p>
+                    </div>
+                </div>
+
+                
+                <div class="row mt-4">
+                    <div class="col">
+                        <p class="mb-0 textInBoxes" style="color: #1B1B1D;">Manage {{forWhichPage}}</p>
+                    </div>
+                    <div class="col-lg col-12">
+                        <div class="row">
+                            <div class="col">
+                                <app-search-box [placeHolder]="'Search using Phone no / Order Id / Refund Id'"
+                                    (onSearchValue)="search($event)" [searchValue]="searchResult"></app-search-box>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mt-4" >
+                    <div class="col" style="white-space: nowrap;">
+                        <app-order-over-view-table [events]="refreshTable.asObservable()" [orderList]="allOrders"
+                            [pageDetails]="pageDetails" (updateCAll)="refreshPageForUpdates($event)"
+                            (updatePageEmitter)="nextPage($event)" 
+                            [tHeader]="tHeaderList">
+                        </app-order-over-view-table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

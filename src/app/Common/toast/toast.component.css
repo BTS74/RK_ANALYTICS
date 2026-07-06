@@ -1,0 +1,148 @@
+@font-face {
+    font-family: Roboto-Regular;
+    src: url('../../../assets/fonts/Roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: Roboto-Light;
+    src: url('../../../assets/fonts/Roboto/Roboto-Light.ttf');
+}
+
+@font-face {
+    font-family: Roboto-Medium;
+    src: url('../../../assets/fonts/Roboto/Roboto-Medium.ttf');
+}
+
+@font-face {
+    font-family: Roboto-Bold;
+    src: url('../../../assets/fonts/Roboto/Roboto-Bold.ttf');
+}
+
+::ng-deep .toast-container .ngx-toastr {
+    position: relative;
+    overflow: hidden;
+    margin: 15% 0 6px;
+    /* padding: 15px 15px 15px 25px !important; */
+    width: 450px;
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    box-shadow: 0 0 12px #999999;
+    color: #1B1922!important;
+}
+
+
+/* ::ng-deep.toast-container .ngx-toastr:hover {
+    box-shadow: 0 0 12px #000000;
+    opacity: 1;
+    cursor: pointer;
+} */
+
+ ::ng-deep.toast-container .toast {
+    margin: 2px !important;
+    box-shadow: none !important;
+    border-radius: 20px !important;
+    background-color: #fff !important;
+}
+
+ ::ng-deep.toast-success {
+    /* background-image: none !important; */
+}
+
+ ::ng-deep.toast-success {
+    background-color: #0063D1CC!important;
+    color: #fff!important;
+    z-index: 1000;
+}
+
+ ::ng-deep.toast-title {
+    color: #fff !important;
+    font-size: 14px !important;
+    letter-spacing: -0.21px;
+    font-family: Roboto-Regular!important;
+    font-weight: 500;
+    opacity: 1;
+}
+
+ ::ng-deep.toast-message {
+    color: #fff !important;
+    font-size: 14px !important;
+    letter-spacing: -0.21px;
+    font-family: Roboto-Regular!important;
+    font-weight: 500;
+    opacity: 1;
+}
+
+ ::ng-deep.toast-progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    background-color: #2DB858!important;
+    opacity: 1;
+}
+
+ ::ng-deep.toast-error {
+    background-color: #fff!important;
+}
+
+ ::ng-deep .toast-warning {
+    background-color: #FF686BCC!important;
+    z-index: 1000!important;
+}
+
+::ng-deep.toast-warning {
+    /* background-image: none !important; */
+}
+
+ ::ng-deep.toast-info {
+    background-color: #fff!important;
+}
+
+ ::ng-deep .toast-warning .toast-progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    background-color: #CC5151!important;
+    opacity: 1;
+}
+
+ ::ng-deep.toast-info .toast-progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    background-color: #2087EC!important;
+    opacity: 1;
+}
+
+@media all and (max-width: 240px) {
+     ::ng-deep.toast-container .ngx-toastr.div {
+        padding: 8px 8px 8px 8px;
+        width: 13em;
+    }
+     ::ng-deep.toast-container .toast-close-button {
+        right: -0.2em;
+        top: -0.2em;
+    }
+}
+
+@media all and (min-width: 241px) and (max-width: 480px) {
+     ::ng-deep.toast-container .ngx-toastr.div {
+        padding: 8px 8px 8px 8px;
+        width: 10em;
+    }
+     ::ng-deep.toast-container .toast-close-button {
+        right: -0.2em;
+        top: -0.2em;
+    }
+}
+
+@media all and (min-width: 481px) and (max-width: 768px) {
+     ::ng-deep.toast-container .ngx-toastr.div {
+        padding: 15px 15px 15px 15px;
+        width: 25em;
+    }
+}

@@ -1,0 +1,88 @@
+.breadCrumbTopic {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.breadCrumbSubTopic {
+    font-size: 12px;
+    font-weight: 400;
+    color: #7784A1;
+}
+
+
+.charge_type { 
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.amount { 
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.show_Results {
+    height: 36px;
+    background-color: #008000;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.date {
+    height: 36px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+._card {
+    cursor: pointer;
+    padding: 20px;
+    border: none
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+}
+.text .title {
+    margin: 0;
+    font-size: 16px;
+    color: #202224;
+    font-weight: 300;
+}
+
+.addBtn {
+    height: 43px;
+    color: #1B1B1D;
+    font-family: Roboto-Medium;
+    font-size: 16px;
+    font-weight: 400;
+    width: 180px;
+    background-color: #E4E4E5;
+    border: none;
+}
+
+.addBtn.active {
+    background-color: #28A7454D;
+}
+
+.text .count {
+    margin: 5px 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: #202224;
+}
+.icon img {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 12px;
+}

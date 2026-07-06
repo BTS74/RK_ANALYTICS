@@ -1,0 +1,263 @@
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url('/assets/images/login/leaf.webp');
+  /* your image */
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+.login-container {
+  width: 380px;
+  padding: 40px 30px;
+  margin: 0 auto;
+  margin-top: 8vh;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #2e3f2f;
+  /* dark green */
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.login-btn:hover {
+  background: #1f2b20;
+}
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  /* horizontal */
+  align-items: center;
+  /* vertical */
+
+  z-index: 1;
+}
+
+
+/* Layout container */
+.login-container {
+  /* display: flex;
+  height: 100vh;
+  font-family: 'Arial', sans-serif; */
+}
+
+/* Left banner */
+.login-banner {
+  flex: 0.5;
+  background: linear-gradient(to top right, #d9525e, #4876d6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.logo-section {
+  text-align: center;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.tagline {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+/* Right login form */
+.login-form {
+  flex: 1;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+
+  /* Vertical center */
+  align-items: center;
+}
+
+.login-form form {
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form h2 {
+  margin-bottom: 30px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+input {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+label {
+  font-size: 14px;
+  color: #202224;
+  text-align: left;
+}
+
+
+.login-button {
+  background: #2F3A2F;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  /* margin-bottom: 20px; */
+}
+
+.login-button:hover {
+  opacity: 0.9;
+}
+
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    /* Stack vertically */
+  }
+
+  .login-banner,
+  .login-form {
+    flex: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .login-banner {
+    padding: 30px 20px;
+  }
+
+  .login-form {
+    padding: 30px 20px;
+  }
+}
+
+
+
+.mobile-link {
+  margin-top: 30px;
+  font-size: 12px;
+  text-align: right;
+}
+
+.mobile-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+input:focus,
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.login {
+  background-color: #158342;
+  height: 56px;
+  font-family: Roboto-Medium;
+  font-size: 14px;
+  color: #FFFFFF;
+  font-weight: 500;
+  border: 0.5px solid #70707080;
+  border-radius: 5px;
+}
+
+.logoName {
+  font-family: Roboto-Medium;
+  font-size: 32px;
+  color: #1B1B1D;
+  font-weight: 500;
+}
+
+.title {
+  font-family: Roboto-Medium;
+  font-size: 24px;
+  color: #1B1B1D;
+  font-weight: 500;
+}
+
+input {
+  border: 0.5px solid #707070BF;
+  height: 56px;
+  color: #1B1B1D80;
+}
+
+::placeholder {
+  color: #1B1B1D80;
+  opacity: 1;
+  font-family: Roboto-Medium;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+:-ms-input-placeholder {
+  color: #1B1B1D80;
+  font-family: Roboto-Medium;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+::-ms-input-placeholder {
+  color: #1B1B1D80;
+  font-family: Roboto-Medium;
+  font-size: 14px;
+  font-weight: 500;
+}

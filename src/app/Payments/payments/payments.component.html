@@ -1,0 +1,104 @@
+<div class="container-fluid p-4" style="background-color: #F1F3F6;">
+    <div class="row">
+        <div class="col">
+
+            <div class="">
+                <p class="mb-0 montserrat breadCrumbTopic">Charges Summary</p>
+                <p class="mb-0 montserrat breadCrumbSubTopic">Report to view the delivery charges</p>
+            </div>
+
+
+            <div class="mt-3">
+                <form autocomplete="off" [formGroup]="form1">
+                    <div class="row">
+
+                        <div class="col-lg-2 col-6">
+                            <label for="forFromDate" class="productLable montserrat">From</label>
+                            <input type="date" id="forFromDate" class="form-control date w-100 mt-2"
+                                placeholder="Choose Date" formControlName="startDate"
+                                [(ngModel)]="analyticsFilter.startDate"
+                                [ngClass]="{ 'is-invalid': submitted && checkPlantsFilter['startDate'].errors }">
+
+                            <div *ngIf="submitted && checkPlantsFilter['startDate'].errors" class="invalid-feedback">
+                                <div *ngIf="checkPlantsFilter['startDate'].errors['required']">
+                                    From Date is required</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            <label for="forToDate" class="productLable">To</label>
+                            <input type="date" id="forToDate" class="form-control date w-100 mt-2"
+                                placeholder="Choose Date" formControlName="endDate"
+                                [(ngModel)]="analyticsFilter.endDate"
+                                [ngClass]="{ 'is-invalid': submitted && checkPlantsFilter['endDate'].errors }">
+
+                            <div *ngIf="submitted && checkPlantsFilter['endDate'].errors" class="invalid-feedback">
+                                <div *ngIf="checkPlantsFilter['endDate'].errors['required']">
+                                    To Date is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-12 align-self-end">
+                            <button type="button" class="form-control show_Results" (click)="getPlantsSummary()"><span
+                                    class="montserrat">Show
+                                    Results</span></button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid p-4" style="background-color: #F1F3F6;">
+
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card _card">
+                <div class="card-content">
+                    <div class="text">
+                        <p class="title nunito-sans">Total Orders</p>
+                        <p class="count nunito-sans">{{salesData.totalOrders}}</p>
+
+                    </div>
+                    <div class="icon _8280FF d-lg-block d-none">
+                        <img src="assets/images/common/total_orders.webp" alt="User Icon" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card _card">
+                <div class="card-content">
+                    <div class="text">
+                        <p class="title nunito-sans">Total Charges</p>
+                        <p class="count nunito-sans">{{salesData.totalCharges}}</p>
+
+                    </div>
+                    <div class="icon _8280FF d-lg-block d-none">
+                        <img src="assets/images/common/courier.webp" alt="User Icon" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-6 mb-4" *ngFor="let data of salesData.analytics">
+      
+             <div class="card _card py-4 px-xl-3 px-lg-3 px-3" [ngStyle]="{'background-color': data.backGroundColor}"
+                *ngIf="data && (data.chargeType || data.amount || data.backGroundColor)">
+                <p class="charge_type montserrat mb-0">{{data.chargeType}}</p>
+                <div class="">
+                    <img src="assets/images/common/rupee-icon.webp" width="18px" alt=""
+                        *ngIf="data.chargeType && !data.chargeType.includes('Count')">
+                    <span class="amount montserrat"> {{data.amount}} </span>
+                </div>
+            </div> 
+              <div class="card _card py-4 px-xl-3 px-lg-3 px-3" [ngStyle]="{'background-color': 'transparent'}"
+                *ngIf="!data">
+    </div> 
+
+        </div>
+    </div>
+</div>

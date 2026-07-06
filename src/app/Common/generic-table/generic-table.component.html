@@ -1,0 +1,51 @@
+<div class="row ">
+    <div class="col">
+        <div class="container-fluid px-0 mt-3 table_border table-overflow-scroll">
+
+            <table class="table">
+                <thead>
+                    <tr class="tableHeading py-2" *ngIf="tableHeader">
+                        <th>S.No</th>
+                        <th *ngFor="let data of tableHeader">{{data}}</th>
+                        <th *ngIf="actionsRequired"> Action </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="align-middle " [ngStyle]="getRowColor ? { 'background-color': getRowColor(data) } : {}"
+                        *ngFor="let data of productsList  | paginate: config; let i=index">
+                        <td>{{i+1}}</td>
+                        <td *ngFor="let tableHeaderdata of tableBodyHeader" (click)="routeToUpdateProduct(data)">
+                            <ng-container [ngSwitch]="tableHeaderdata">
+                                <span *ngSwitchCase="'createdOn'">
+                                    {{ data[tableHeaderdata] | date:'dd-MM-YYYY' }}
+                                </span>
+                                <span *ngSwitchCase="'editedOn'">
+                                    {{ data[tableHeaderdata] | date:'dd-MM-YYYY' }}
+                                </span>
+                                <span *ngSwitchCase="'isPlantsDeliverable'">
+                                    {{ data[tableHeaderdata] ? 'Yes' : 'No' }}
+                                </span> <span *ngSwitchCase="'price'">
+                                    {{ data[tableHeaderdata] | currency:'INR':'symbol':'1.0-0' }} </span>
+                                <ng-template ngSwitchDefault>
+                                    <span>{{ data[tableHeaderdata] }}</span>
+                                </ng-template>
+                            </ng-container>
+                        </td>
+
+                        <td *ngIf="actionsRequired">
+                            <span>
+                                <img src="assets/images/common/edit.webp" width="9.33px"
+                                    (click)="action(GenericActionEnum.EDIT,data)" class="cursor">
+                            </span>
+                            <span> <img src="assets/images/common/Icon material-delete@2x.webp" width="9.33px"
+                                    class="ms-4 cursor" (click)="action(GenericActionEnum.DELETE,data)">
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls *ngIf="showPagination" class="float-end" (pageChange)="pageChangeEvent($event)"
+                [responsive]="true" [directionLinks]="true"></pagination-controls>
+        </div>
+    </div>
+</div>

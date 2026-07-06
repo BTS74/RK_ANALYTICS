@@ -1,0 +1,113 @@
+<div class="container-fluid p-4" style="background-color: #F1F3F6;">
+    <div class="row">
+        <div class="col">
+
+            <div class="">
+                <p class="mb-0 montserrat breadCrumbTopic">Charges Summary</p>
+                <p class="mb-0 montserrat breadCrumbSubTopic">View charge summary</p>
+            </div>
+
+
+            <div class="row mt-4">
+                <div class="col">
+
+
+
+                    <button class="btn addBtn me-2" [ngClass]="{'active':show[0]}"
+                        (click)="getOrdersByPaymentMode('UPI')">
+                        <span>UPI</span>
+                    </button>
+                    <button class="btn addBtn text-nowrap me-2" [ngClass]="{'active':show[1]}"
+                        (click)="getOrdersByPaymentMode('NET_BANKING')">
+                        <span>NET BANKING</span>
+                    </button>
+                    <button class="btn addBtn me-2" [ngClass]="{'active':show[2]}"
+                        (click)="getOrdersByPaymentMode('CASH')">
+                        <span>CASH</span>
+                    </button>
+
+                </div>
+            </div>
+
+
+            <div class="mt-3">
+                <form autocomplete="off" [formGroup]="form1">
+                    <div class="row">
+
+                        <div class="col-lg-2 col-6">
+                            <label for="forFromDate" class="productLable montserrat">From</label>
+                            <input type="date" id="forFromDate" class="form-control date w-100 mt-2"
+                                placeholder="Choose Date" formControlName="paymentStartDate"
+                                [ngClass]="{ 'is-invalid': submitted && checkPlantsFilter['paymentStartDate'].errors }">
+
+                            <div *ngIf="submitted && checkPlantsFilter['paymentStartDate'].errors"
+                                class="invalid-feedback">
+                                <div *ngIf="checkPlantsFilter['paymentStartDate'].errors['required']">
+                                    From Date is required</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            <label for="forToDate" class="productLable">To</label>
+                            <input type="date" id="forToDate" class="form-control date w-100 mt-2"
+                                placeholder="Choose Date" formControlName="paymentEndDate"
+                                [ngClass]="{ 'is-invalid': submitted && checkPlantsFilter['paymentEndDate'].errors }">
+
+                            <div *ngIf="submitted && checkPlantsFilter['paymentEndDate'].errors"
+                                class="invalid-feedback">
+                                <div *ngIf="checkPlantsFilter['paymentEndDate'].errors['required']">
+                                    To Date is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-12 align-self-end">
+                            <button type="button" class="form-control show_Results" (click)="getSummary()"><span
+                                    class="montserrat">Show
+                                    Results</span></button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-4">
+        <div class="col-xl-2 col-lg-4 col-6" *ngFor="let salesData of salesSummary; let i = index">
+            <div class="card _card py-4 px-xl-3 px-lg-3 px-3" [ngStyle]="{'background-color': colors[i]}">
+
+                <p class="charge_type montserrat mb-0 text-center"> {{salesData.paymentMode}}</p>
+                <hr>
+
+                <p class="d-flex justify-content-between mb-0">
+                    <span class="count nunito-sans">Total Amount :</span>
+                    <span>{{ salesData.totalAmount }}</span>
+                </p>
+
+                <p class="d-flex justify-content-between mb-0">
+                    <span class="count nunito-sans">Transaction Count :</span>
+                    <span>{{ salesData.transactionCount }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col" style="white-space: nowrap;">
+            <div class="table-container" *ngIf="allOrders.length>=1 else noDataTemplate">
+                <app-order-over-view-table [orderList]="allOrders" [events]="refreshTable.asObservable()"
+                    [pageDetails]="page" [tHeader]="tHeaderList" (updatePageEmitter)="nextPage($event)">
+                </app-order-over-view-table>
+            </div>
+            <ng-template #noDataTemplate>
+                <div class="row ">
+                    <div class="col-md-4 col-6 mx-auto ">
+                        <img src="assets/images/common/Group 182@2x.webp " alt=" " class="img-fluid ">
+                    </div>
+                </div>
+                <p class="text-center noDataText mt-5">No Data Available</p>
+            </ng-template>
+
+        </div>
+    </div>
+</div>

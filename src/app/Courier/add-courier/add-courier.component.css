@@ -1,0 +1,36 @@
+.content {
+    padding-left: 4.5rem;
+}
+
+.breadCrumbSubTopic {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.checkOut {
+    background-color: #28A745;
+    height: 37px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #FFFFFF;
+    font-weight: 500;
+    border: 0.5px solid #70707080;
+    border-radius: 0;
+}
+
+input {
+    border-radius: 0;
+}
+
+.btn_navigate {
+
+    height: 43px;
+    color: #1B1B1D;
+    font-family: Roboto-Medium;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 0;
+    background-color: #E4E4E5;
+
+}

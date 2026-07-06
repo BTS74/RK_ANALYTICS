@@ -1,0 +1,5 @@
+<div class="row" >
+    <div class="col" *ngIf="modifiedCategoriesData">
+        <app-generic-table [productsList]="modifiedCategoriesData" [tableHeader]="tableHeader" [tableBodyHeader]="tableBodyHeader" [pageDetails]="pageDetails" (actionEmitter)="action($event)"></app-generic-table>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#parcelServiceList"
+id="parcelHubList">
+</button>
+
+<div class="modal fade" id="parcelServiceList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" *ngIf="parcelServiceProvider">{{parcelServiceProvider}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3" *ngIf="uniqueDistricts.length">
+                    <div class="col">
+  
+                        <select name="district" id="district" class="form-select drop_down"
+                            (change)="onChangeDistrictEmitter.emit($event)" style="text-transform: capitalize;">
+
+                            <option [value]="data" *ngFor="let data of uniqueDistricts"
+                                style="text-transform: capitalize;">{{data}}</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-12 mb-2" *ngFor="let data of hubDetails">
+                        <div class="card px-4 py-2" style="border-radius: 0;">
+                            <div class="form-group position-absolute top-0 end-0 pt-2 pe-4">
+                                <input type="checkbox" id="{{data.hubLocation}}" [checked]="data.isSelected"
+                                    (change)="onHubSelectedCheckBox.emit(data)">
+                                <label for="{{data.hubLocation}}"></label>
+                            </div>
+                            <p class="subHeading mb-1">
+                                <a [href]='data.hubGoogleLocation' target='_blank'><i
+                                        class="fa-solid fa-location-dot"></i></a><span
+                                    class="ms-2">{{data.hubLocation}}</span>
+                            </p>
+                            <p class="subTopic" style="font-family: Montserrat-SemiBold">
+                                <span *ngIf="data.hubGoogleLocation">
+                                    <a [href]='data.hubGoogleLocation' target='_blank'>{{data.hubAddress}}</a>
+                                </span>
+                                <span *ngIf="!data.hubGoogleLocation">
+                                    {{data.hubAddress}}
+                                </span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn saveChanges" (click)="onHubselectedConfirmation.emit()">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>

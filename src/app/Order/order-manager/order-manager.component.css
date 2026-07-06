@@ -1,0 +1,175 @@
+
+tr {
+    border: 0.5px solid #707070BF;
+}
+
+th {
+    font-family: Roboto-Medium;
+    font-size: 18px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+.subTotal {
+    font-family: Roboto-Medium;
+    font-size: 16px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+.grandTotal {
+    font-family: Roboto-Medium;
+    font-size: 20px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+td {
+    font-family: Roboto-Medium;
+    font-size: 16px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    opacity: 1;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: #CAD1DE;
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.addressHeading {
+    font-family: Roboto-Bold;
+    font-size: 22px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+.generalpolicy {
+    font-family: Roboto-Bold;
+    font-size: 18px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+.topic,
+.resultValues {
+    font-family: Roboto-Regular;
+    font-size: 16px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+table {
+    border: 0.5px solid #707070BF;
+}
+
+#rowColor:nth-child(odd) {
+    /* background-color: #F5F7F9; */
+}
+
+#rowColor:nth-child(even),
+.tableHeading {
+    background-color: #fff;
+}
+
+.table> :not(:first-child) {
+    border-top: 0;
+}
+
+.table>:not(caption)>*>* {
+    padding: 2px 1rem;
+}
+
+.logo {
+    width: 181px
+}
+
+.btn {
+    height: 56px;
+    background-color: #28A745;
+    color: #FFFFFF;
+    font-family: Roboto-Regular;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 0;
+}
+
+.btn-print {
+    height: 56px;
+    background-color: #0063D1CC;
+    color: #FFFFFF;
+    font-family: Roboto-Regular;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 0;
+}
+
+.content {
+    padding-left: 4.5rem;
+}
+
+@media (max-width: 1440px) and (min-width:1025px) {
+    .content {
+        padding-left: 4.5rem;
+    }
+    th {
+        font-size: 20px;
+    }
+    .subTotal {
+        font-size: 12px;
+    }
+    .grandTotal {
+        font-size: 16px;
+    }
+    td,
+    .addressHeading {
+        font-size: 18px;
+    }
+    .generalpolicy {
+        font-size: 14px;
+    }
+    .topic,
+    .resultValues {
+        font-size: 16px;
+    }
+    .logo {
+        width: 120px
+    }
+}
+
+@media (max-width: 1024px) and (min-width:768px) {
+    .content {
+        padding-left: 2.5rem;
+    }
+    th {
+        font-size: 14px;
+    }
+    .subTotal {
+        font-size: 10px;
+    }
+    .grandTotal {
+        font-size: 14px;
+    }
+    td,
+    .addressHeading {
+        font-size: 12px;
+    }
+    .generalpolicy {
+        font-size: 12px;
+    }
+    .topic,
+    .resultValues {
+        font-size: 14px;
+    }
+    .logo {
+        width: 120px
+    }
+}

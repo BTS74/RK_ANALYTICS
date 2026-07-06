@@ -1,0 +1,8 @@
+<form class="search-container position-relative" [formGroup]="form">
+    <input type="text" id="search-bar" [placeholder]=placeHolder (keyup)="checkEmptySearch()" (keyup.enter)="search()"
+        formControlName="search" [(ngModel)]="searchValue" (click)="onInputClick()">
+    <span (click)="search()" style="cursor: pointer;"><img
+            class="search-icon position-absolute top-50 end-0 translate-middle-y me-xl-3 me-lg-4 me-md-3 me-3"
+            src="assets/images/header/Iconly-Light-Search@2x.webp" width="15.81px" alt="">
+    </span>
+</form>

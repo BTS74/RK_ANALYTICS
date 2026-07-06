@@ -1,0 +1,769 @@
+<div class="row">
+    <div class="col">
+        <div class="container-fluid px-0 mt-3 table-overflow-scroll">
+
+            <table class="table">
+                <thead>
+                    <tr class="tableHeading py-2">
+                        <th class="">S.No</th>
+                        <th *ngIf="toHideTbaleContent('Actions')">Actions</th>
+                        <th *ngIf="toHideTbaleContent('Invoice Id')">Invoice Id</th>
+                          <th *ngIf="toHideTbaleContent('Invoice Date')">Invoice Date</th>
+                        <th *ngIf="toHideTbaleContent('Order ID')" class="">Order ID</th>
+                        <th *ngIf="toHideTbaleContent('Name')" class="">Name</th>
+                        <th *ngIf="toHideTbaleContent('Phone No')" class="">Phone No</th>
+                        <th *ngIf="toHideTbaleContent('(A)Phone No')" class="">(A)Phone No</th>
+                        <th *ngIf="toHideTbaleContent('Order Received on')" colspan="1">Order Received on</th>
+                        <th *ngIf="toHideTbaleContent('Total Amount')">Total Amount</th>
+                        <th *ngIf="toHideTbaleContent('Charges')">Charges</th>
+                        <th *ngIf="toHideTbaleContent('Payment Status')">Payment Status</th>
+                        <th *ngIf="toHideTbaleContent('Total Weight')">Total Weight</th>
+                        <th *ngIf="toHideTbaleContent('Edited On')">Edited On</th>
+                        <th *ngIf="toHideTbaleContent('Order Status')">Order Status / Update</th>
+                        <th *ngIf="toHideTbaleContent('Bill Print Status')">Bill Print Status</th>
+                        <th *ngIf="toHideTbaleContent('Dispatched date')">Dispatched date</th>
+                        <th *ngIf="toHideTbaleContent('Call Connected')">Call Connected</th>
+                        <th *ngIf="toHideTbaleContent('Comments')">Comments</th>
+                        <th *ngIf="toHideTbaleContent('Completed')">Completed</th>
+                        <th *ngIf="toHideTbaleContent('Refund')">Refund</th>
+                        <th *ngIf="toHideTbaleContent('Urgent')">Urgent</th>
+                        <th *ngIf="toHideTbaleContent('Tracking')">Tracking</th>
+                        <th *ngIf="toHideTbaleContent('Delivery Type')">Delivery Type</th>
+                        <th *ngIf="toHideTbaleContent('Transportation Cost')">Transportation Cost</th>
+                        <th *ngIf="toHideTbaleContent('Packing Cost')">Packing Cost</th>
+                        <th *ngIf="toHideTbaleContent('Lifting Cost')">Lifting Cost </th>
+                        <th *ngIf="toHideTbaleContent('Labour Cost')">Labour Cost </th>
+                        <th *ngIf="toHideTbaleContent('Parcel Service')">Parcel Service</th>
+                        <th *ngIf="toHideTbaleContent('Parcel Tracking Id')">Parcel Tracking Id</th>
+                        <th *ngIf="toHideTbaleContent('Parcel Details')">Parcel Details</th>
+                        <th *ngIf="toHideTbaleContent('Courier Service')">Courier Service</th>
+                        <th *ngIf="toHideTbaleContent('Tracking No')">Tracking No</th>
+                        <th *ngIf="toHideTbaleContent('Courier Action')">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-capitalize">
+                    <tr class="align-middle" id="rowColor"
+                        [ngStyle]="{ 'background-color': data.isOrderCompleted ? '#CCE6CC' : '' }"
+                        *ngFor="let data of orderList | paginate: config ;let i = index">
+                        <td class="text-center">
+                            <span class="badge rounded-pill py-2 txt_color"
+                                [ngClass]="data.user.gstIn!=null ? 'text-bg-warning' : ''">
+                                {{i+1}}
+                            </span>
+                        </td>
+
+                        <td class="px-4" *ngIf="toHideTbaleContent('Actions')">
+
+                            <button class="btn text-capitalize" aria-expanded="false">
+                                <img src="assets/images/common/printer.webp" alt="" width="16" (click)="printBill(data)"
+                                    style="cursor: pointer;"> </button>
+
+                            <button class="btn text-capitalize" aria-expanded="false"> <img
+                                    src="assets/images/common/edit.webp" alt="" width="16" (click)="editBill(data)"
+                                    style="cursor: pointer;"> </button>
+
+
+                            <button class="btn text-capitalize" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <!-- <i class="pi pi-ellipsis-v"></i>  -->
+                                <i class="fas fa-ellipsis-v align-middle"></i>
+                            </button>
+                            <ul class="dropdown-menu p-3" *ngIf="data?.paymentStatus[data?.paymentStatus.length-1]">
+                                <li
+                                    [ngClass]="data?.paymentStatus[data?.paymentStatus.length-1].status=='captured' || 
+                                data?.paymentStatus[data?.paymentStatus.length-1].status=='COMPLETED' ? 'disabled' : ''">
+                                    <a class="dropdown-item" (click)="onItemClick(data,'Regenerate Link')"><i
+                                            class="pi pi-refresh me-2"></i>Generate Link</a>
+                                </li>
+                                <!-- <li
+                                    [ngClass]="data?.paymentStatus[data?.paymentStatus.length-1].status=='captured' || 
+                                data?.paymentStatus[data?.paymentStatus.length-1].status=='COMPLETED' ? 'disabled' : ''">
+                                    <a class="dropdown-item" (click)="onItemClick(data,'Enter Details')"><i
+                                            class="pi pi-file me-2"></i>Enter Details Manually</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" (click)="onItemClick(data,'View Details')"><i
+                                            class="pi pi-folder-open me-2"></i>View Details</a>
+                                </li> -->
+                                <li>
+                                    <a class="dropdown-item" (click)="onItemClick(data,'Enter DDANDNGS Details')"><i
+                                            class="pi pi-file me-2"></i>View Amount Details </a>
+                                </li>
+                            </ul>
+
+                        </td>
+                        <td style="color: #28A745" class="text-start" *ngIf="toHideTbaleContent('Invoice Id')">
+                            <u>{{data.invoiceId}} </u>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Invoice Date')">
+                            <p class="mb-0">{{data.invoiceDate |date:'dd/MM/yy hh:mm a'}}</p>
+                        </td>
+                        <td style="color: #28A745;cursor: pointer;" class="text-start"
+                            *ngIf="toHideTbaleContent('Order ID')" (click)="previewOrderListOut(data)">
+                            <u>#{{data.orderId}} </u>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Name')">
+                            <p class="mb-0">{{data.user.name}}</p>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Phone No')">
+                            <p class="mb-0">{{data.user.phone}}</p>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('(A)Phone No')">
+                            <p class="mb-0" *ngIf="data.user.alternativePhone">{{data.user.alternativePhone}}</p>
+                            <p class="mb-0" *ngIf="!data.user.alternativePhone">-</p>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Order Received on')">
+                            <p class="mb-0">{{data.orderDate |date:'dd/MM/yy hh:mm a'}}</p>
+
+                        </td>
+                        <!-- <td class=" text-start">{{data.cartModel.totalNoOfProducts}}</td> -->
+                        <!-- <td class=" text-start">{{data.cartModel.totalNoOfQuantity}}</td> -->
+
+                        <td class=" text-start" *ngIf="toHideTbaleContent('Total Amount')">{{data.totalAmount | number :
+                            '1.2-2'}}</td>
+                        <td *ngIf="toHideTbaleContent('Charges')">
+                            <p class="mb-0">
+                                <span [innerHtml]="showDeliveryCharge(data)"></span>
+                            </p>
+
+                            <!-- <div>
+
+                                <form class="form-inline" autocomplete="off" [formGroup]="form2">
+                                    <div class="row form-group ">
+                                        <div class="col-6">
+                                            <input type="text" [id]="data.orderId+'totalPackingCharge'"
+                                                [value]="data.cartModel.totalPackingCharge" readonly>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="submit" style="float: right;
+                                        background: #008000;
+                                        color: #fff;
+                                        border: none;
+                                        margin: 2px;"
+                                                (click)="updateTransportation(data.orderId,'totalPackingCharge')">Ok</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> -->
+                        </td>
+
+                        <td class="" *ngIf="toHideTbaleContent('Payment Status')">
+                            <p class="mb-0" *ngIf="data?.paymentStatus[data?.paymentStatus.length-1]"
+                                [ngClass]="{'orderSuccess':data?.paymentStatus[data?.paymentStatus.length-1].status=='captured' ||
+                                data?.paymentStatus[data?.paymentStatus.length-1].status=='COMPLETED','orderCancelled':data?.paymentStatus[data?.paymentStatus.length-1].status=='failure' || data?.paymentStatus[data?.paymentStatus.length-1].status=='timeOut'  || data?.paymentStatus[data?.paymentStatus.length-1].status=='cancelled',
+                            'orderDispatched':data?.paymentStatus[data?.paymentStatus.length-1].status=='processing',
+                            'refundInitiatedManually':data?.paymentStatus[data?.paymentStatus.length-1].status=='refundInitiatedManually'}">
+                                <span class="ms-2"
+                                    *ngIf="data?.paymentStatus[data?.paymentStatus.length-1].status=='captured'">Success</span>
+                                <span class="ms-2"
+                                    *ngIf="data?.paymentStatus[data?.paymentStatus.length-1].status=='failure'">Failed</span>
+                                <span class="ms-2"
+                                    *ngIf="data?.paymentStatus[data?.paymentStatus.length-1].status=='cancelled'">Cancelled</span>
+                                <span class="ms-2"
+                                    *ngIf="data?.paymentStatus[data?.paymentStatus.length-1].status=='initiated'">Initiated</span>
+                                <span class="ms-2"
+                                    *ngIf="data?.paymentStatus[data?.paymentStatus.length-1].status=='processing'">Processing</span>
+                                <span class="ms-2"
+                                    *ngIf="data?.paymentStatus[data?.paymentStatus.length-1].status=='timeOut'">Time
+                                    Out</span>
+                                <span class="ms-2"
+                                    *ngIf="data?.paymentStatus[data?.paymentStatus.length-1].status=='COMPLETED'">COMPLETED</span>
+                                <span class="ms-2"
+                                    *ngIf="data?.paymentStatus[data?.paymentStatus.length-1].status=='refundInitiatedManually'">Refund
+                                    Initiated Manually</span>
+
+                            </p>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Total Weight')">
+                            <span>{{data?.cartModel?.totalKgs ? data.cartModel.totalKgs : '-'}}</span>
+                        </td>
+
+                        <td *ngIf="toHideTbaleContent('Edited On')">
+                            <span *ngIf="data?.orderEditList">{{data.orderEditList[0].orderEditedDate |date:'d/MM/yyyy
+                                hh:mm a'}}</span>
+                        </td>
+
+                        <td *ngIf="toHideTbaleContent('Order Status')">
+                            <select data-width="100%" class="form-select dropDownValue"
+                                aria-label="Default select example" [ngClass]="{'newOrder':data.orderStatus[data.orderStatus.length-1].status=='newOrder',
+                                'dispatched':data.status=='dispatched'}" (change)="optionsChange($event.target,data)"
+                                *ngIf="data.orderStatus[data.orderStatus.length-1].status=='newOrder'">
+                                <option [value]="'newOrder'">New Order</option>
+                                <option [value]="'dispatched'"
+                                    *ngIf="data.orderStatus[data.orderStatus.length-1].status=='newOrder'">Dispatched
+                                </option>
+                                <option [value]="'cancelled'">Cancel
+                                </option>
+                                <option [value]="'onHold'">On Hold</option>
+                            </select>
+
+
+
+
+                            <select *ngIf="data.orderStatus[data.orderStatus.length-1].status=='dispatched'"
+                                class="form-select dropDownValue dispatched" aria-label="Default"
+                                (change)="optionsChange($event.target,data)">
+                                <option>Dispatched</option>
+                                <option [value]="'onHold'">On Hold</option>
+                                <option [value]="'cancelled'">Cancel</option>
+                            </select>
+
+                            <select *ngIf="data.orderStatus[data.orderStatus.length-1].status=='cancelled' 
+                            || data.orderStatus[data.orderStatus.length-1].status=='cancelledManually'"
+                                class="form-select dropDownValue cancelled" aria-label="Default "
+                                (change)="optionsChange($event.target,data)">
+                                <option>Cancelled</option>
+                                <option [value]="i">Dispatched</option>
+                                <option [value]="'onHold'">On Hold</option>
+                            </select>
+                            <!-- 
+                            <select *ngIf="data.orderStatus[data.orderStatus.length-1].status=='cancelledManually'"
+                                class="form-select dropDownValue cancelled" [disabled]="true" aria-label="Default ">
+                                <option>Cancelled Manually</option>
+                            </select> -->
+
+                            <select *ngIf="data.orderStatus[data.orderStatus.length-1].status=='onHold'"
+                                class="form-select dropDownValue onHold" aria-label="Default "
+                                (change)="optionsChange($event.target,data)">
+                                <option>On Hold</option>
+                                <option [value]="'dispatched'"
+                                    *ngIf="data.orderStatus[data.orderStatus.length-1].status=='onHold'">Dispatched
+                                </option>
+                                <option [value]="'cancelled'">Cancel</option>
+                                <option [value]="'clear'">Clear</option>
+                            </select>
+
+                            <select *ngIf="data.orderStatus[data.orderStatus.length-1].status=='inProgress'"
+                                class="form-select dropDownValue onHold" aria-label="Default "
+                                (change)="optionsChangeFromPEnding($event.target,data)">
+                                <option>In-progress</option>
+                                <option [value]="'dispatched'"
+                                    *ngIf="data.orderStatus[data.orderStatus.length-1].status=='inProgress'">Dispatched
+                                </option>
+                                <option [value]="'onHold'">On Hold</option>
+                                <option [value]="'cancelled'">Cancel</option>
+                            </select>
+
+
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Bill Print Status')">
+                            <select data-width="100%" class="form-select dropDownValue"
+                                aria-label="Default select example" (change)="billPrintedChange($event.target,data)"
+                                *ngIf="data.billPrinted==false" [ngClass]="{'newOrder':data.billPrinted==false}">
+                                <option [value]="i">Not Printed</option>
+                                <option [value]="i">Bill Printed
+                                </option>
+                            </select>
+
+
+
+
+                            <select *ngIf="data.billPrinted==true" class="form-select dropDownValue dispatched"
+                                [disabled]="true" aria-label="Default ">
+
+                                <option>Bill Printed</option>
+                            </select>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Dispatched date')">
+                            <p class="mb-0">
+                                <span *ngIf="data.deliveryDate">{{data.deliveryDate |date:'d/MM/yyyy hh:mm a'}}</span>
+                                <span *ngIf="!data.deliveryDate">-</span>
+                            </p>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Call Connected')">
+                            <p class="mb-0 text-center">
+                                <span>
+                                    <input type="checkbox" (change)="callConnectedAndCompletion(data,'isCallConnected')"
+                                        [checked]="data.isCallConnected == true"
+                                        [disabled]="data.isCallConnected == true" />
+                                </span>
+
+                            </p>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Comments')">
+                            <span (click)="updateCommentsByConfirmDialog(data)"><a class="comment_class">Update</a> / <a
+                                    class="comment_class">View </a></span>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Completed')">
+                            <p class="mb-0 text-center">
+                                <span>
+                                    <input type="checkbox"
+                                        (change)="callConnectedAndCompletion(data,'isOrderCompleted')"
+                                        [checked]="data.isOrderCompleted == true" />
+                                </span>
+
+                            </p>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Refund')">
+                            <p class="mb-0 text-center">
+                                <span>
+                                    <input type="checkbox" (change)="callConnectedAndCompletion(data,'isRefund')"
+                                        [checked]="data.isRefund == true" />
+                                </span>
+
+                            </p>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Urgent')">
+                            <p class="mb-0 text-center">
+                                <span>
+                                    <input type="checkbox" (change)="callConnectedAndCompletion(data,'isUrgent')"
+                                        [checked]="data.isUrgent == true" />
+                                </span>
+
+                            </p>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Tracking')">
+                            <p class="mb-0 text-center">
+                                <span>
+                                    <input type="checkbox"
+                                        (change)="callConnectedAndCompletion(data,'isOrderTrackingCompleted')"
+                                        [checked]="data.isOrderTrackingCompleted == true" />
+                                </span>
+
+                            </p>
+                        </td>
+
+
+                        <!-- <td>
+                            <input type="checkbox"
+                                        (change)="callConnectedAndCompletion(data,'isPending')"
+                                        [checked]="data.isPending == true" /> </td> -->
+
+                        <!-- <input type="checkbox" (change)="confirmOnHold(data)" [id]="data.orderId"
+                                [checked]="data.orderStatus[data.orderStatus.length-1].status=='onHold'"
+                                [disabled]="data.orderStatus[data.orderStatus.length-1].status=='cancelled'" /> -->
+
+
+
+                        <td *ngIf="toHideTbaleContent('Delivery Type')">
+                            <p class="mb-0" *ngIf="data.modeOfDelivery">
+                                <span [innerHtml]="modeOfDel(data.modeOfDelivery)"></span>
+                                <span *ngIf="!data.modeOfDelivery">-</span>
+                            </p>
+                        </td>
+
+                        <td *ngIf="toHideTbaleContent('Transportation Cost')">
+                            <!-- <div class="input-group" *ngIf="data.modeOfDelivery=='DoorDelivery'">
+                                <span class="input-group-text">{{data.totalTransportationCost}}</span>
+                                <input type="text" [id]="data.orderId+'totalTransportationCost'" class="form-control">
+                                <span class="input-group-text" style="float: right;
+                                    background: #008000;
+                                    color: #fff;
+                                " (click)="updateTransportation(data.orderId,'totalTransportationCost')">Ok</span>
+                            </div> -->
+
+                            <div *ngIf="data.modeOfDelivery!='Courier'">
+
+                                <form class="form-inline" autocomplete="off" [formGroup]="form2">
+                                    <div class="row form-group ">
+                                        <div class="col-6">
+                                            <input type="text" [id]="data.orderId+'totalTransportationCost'"
+                                                [value]="data.totalTransportationCost">
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="submit" style="float: right;
+                                        background: #008000;
+                                        color: #fff;
+                                        border: none;
+                                        margin: 2px;"
+                                                (click)="updateTransportation(data.orderId,'totalTransportationCost')">Ok</button>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div *ngIf="data.modeOfDelivery=='Courier'">
+                                -
+                            </div>
+                        </td>
+
+                        <td *ngIf="toHideTbaleContent('Packing Cost')">
+                            <form class="form-inline" autocomplete="off" [formGroup]="form2">
+                                <div class="row form-group ">
+                                    <div class="col-6">
+                                        <input type="text" [id]="data.orderId+'totalPackingCharge'"
+                                            [value]="data?.cartModel?.totalPackingCharge ?? 0">
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" style="float: right;
+                                        background: #008000;
+                                        color: #fff;
+                                        border: none;
+                                        margin: 2px;"
+                                            (click)="updateTransportation(data.orderId,'totalPackingCharge')">Ok</button>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Lifting Cost')">
+
+
+                            <!--<div *ngIf="data.modeOfDelivery=='DoorDelivery'">
+                              <p class="mb-0" *ngIf="data.totalLiftingCost>0">
+                                    {{data.totalLiftingCost}}
+                                </p> -->
+
+                            <form class="form-inline" autocomplete="off" [formGroup]="form2">
+                                <div class="row form-group ">
+                                    <div class="col-6">
+                                        <input type="text" [id]="data.orderId+'totalLiftingCost'"
+                                            [value]="data.totalLiftingCost">
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" style="float: right;
+                                        background: #008000;
+                                        color: #fff;
+                                        border: none;
+                                        margin: 2px;"
+                                            (click)="updateTransportation(data.orderId,'totalLiftingCost')">Ok</button>
+                                    </div>
+
+                                </div>
+
+                            </form>
+                            <!-- </div>
+                            <div *ngIf="data.modeOfDelivery!='DoorDelivery'">
+                                -
+                            </div> -->
+                        </td>
+
+                        <td *ngIf="toHideTbaleContent('Labour Cost')">
+                            <form class="form-inline" autocomplete="off" [formGroup]="form2">
+                                <div class="row form-group ">
+                                    <div class="col-6">
+                                        <input type="text" [id]="data.orderId+'totalLabourCost'"
+                                            [value]="data.totalLabourCost">
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" style="float: right;
+                                        background: #008000;
+                                        color: #fff;
+                                        border: none;
+                                        margin: 2px;"
+                                            (click)="updateTransportation(data.orderId,'totalLabourCost')">Ok</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Parcel Service')">
+                            <p class="mb-0">
+                                <span *ngIf="!data.isChennaiLocation">{{data.parcelServiceProviderName}}</span>
+                                <span *ngIf="data.isChennaiLocation">No</span>
+                            </p>
+                        </td>
+
+                        <td *ngIf="toHideTbaleContent('Parcel Tracking Id')">
+                            <p class="mb-0" *ngIf="!data.isChennaiLocation">
+                                <span>{{data.parcelTrackingId}}</span>
+                            </p>
+                            <p class="mb-0" *ngIf="data.isChennaiLocation">-</p>
+                        </td>
+
+                        <td *ngIf="toHideTbaleContent('Parcel Details')">
+                            <p class="mb-0" *ngIf="!data.isChennaiLocation">
+                                <span *ngIf="data.parcelServiceHubName">{{data.parcelServiceHubName}}</span><br>
+                                <span *ngIf="data.parcelServiceHubAddress">{{data.parcelServiceHubAddress}}</span> <br>
+
+                            </p>
+                            <p class="mb-0" *ngIf="data.isChennaiLocation">-</p>
+                        </td>
+
+                        <!-- <td>
+                            <p class="mb-0" *ngIf="data.courierDetails && data.modeOfDelivery=='Courier'">
+                                <span>{{data.courierDetails.courierProvider}}</span><br>
+                                <span>{{data.courierDetails.courierTrackingNo}}</span> <br>
+                            </p>
+                            <p class="mb-0" *ngIf="!data.courierDetails">-</p>
+                        </td> -->
+
+                        <td *ngIf="toHideTbaleContent('Courier Service')">
+                            <div *ngIf="data.modeOfDelivery == 'Courier'">
+                                <select *ngIf="data?.courierDetails?.courierProvider" class="form-select"
+                                    aria-label="Default ">
+                                    <option>{{data.courierDetails.courierProvider}}</option>
+                                </select>
+
+                                <select id="options" name="options" *ngIf="!data.courierDetails?.courierProvider"
+                                    (change)="optionsChangeForCourier($event.target,data)" class="form-select">
+                                    <option *ngFor="let option of courierServiceList" [ngValue]="option">
+                                        {{option.courierProvider}}
+                                    </option>
+                                    <option [ngValue]="undefined" hidden> -- Select -- </option>
+                                </select>
+                            </div>
+                            <div *ngIf="data.modeOfDelivery != 'Courier'"> - </div>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Tracking No')">
+                            <div class="input-group" *ngIf="data.modeOfDelivery == 'Courier'">
+                                <input type="text" class="form-control input_lr_no" placeholder="LR No"
+                                    aria-label="LR No" aria-describedby="lr-addon2" [id]="data.orderId"
+                                    (change)="onInputChangeForCourier($event, data)" [value]="data?.courierDetails?.
+                                    courierTrackingNo">
+                            </div>
+                            <div *ngIf="data.modeOfDelivery != 'Courier'"> - </div>
+                        </td>
+                        <td *ngIf="toHideTbaleContent('Courier Action')">
+                            <button type="button" class="form-control btn_update"
+                                *ngIf="data.modeOfDelivery == 'Courier'"
+                                (click)="updateCourierAction.emit(data)">Update</button>
+                            <div *ngIf="data.modeOfDelivery != 'Courier'"> - </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col">
+        <pagination-controls class="float-end" (pageChange)="pageChangeEvent($event)" [responsive]="true"
+            [directionLinks]="true"></pagination-controls>
+    </div>
+</div>
+
+<app-order-manager [printList]="printOrderList" [PrintPageEvent]="previewOrderList.asObservable()"
+    (updateCAll)="refreshTable()"></app-order-manager>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+    id="staticBackdropTrigger">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Update Order Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="updateCAll.emit()"></button>
+            </div>
+            <div class="modal-body">
+                <form autocomplete="off" [formGroup]="form">
+                    <div class="row mt-2 py-4">
+                        <div class="col-xl-10 col-md-12 mx-auto col-12 ">
+                            <div class="container-fluid">
+                                <div class="row mt-4">
+                                    <div class="col-lg col-12 ">
+                                        <div class="row mb-4">
+                                            <label for="staticEmail" class="productLable col-md-4 col">Payment
+                                                Status</label>
+                                            <div class="col-md col ">
+                                                <input type="text" formControlName="paymentStatus" class="form-control"
+                                                    [(ngModel)]="updateOrderStatus.paymentStatus" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4" *ngIf="orderStatusCheck['comments']">
+                                            <label for="staticEmail" class="productLable col-md-4 col ">Comments</label>
+                                            <div class="col-md col ">
+                                                <input type="text" formControlName="comments" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted[0]  && orderStatusCheck['comments'].errors }"
+                                                    placeholder="Enter Comment"
+                                                    [(ngModel)]="updateOrderStatus.comments">
+                                                <div *ngIf="submitted[0] && orderStatusCheck['comments'].errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="orderStatusCheck['comments'].errors['required']">
+                                                        Comment is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-4" *ngIf="orderStatusCheck['parcelTrackingId']">
+                                            <label for="staticEmail" class="productLable col-md-4 col ">Tracking
+                                                Id</label>
+                                            <div class="col-md col ">
+                                                <input type="text" formControlName="parcelTrackingId"
+                                                    class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted[0]  && orderStatusCheck['parcelTrackingId'].errors }"
+                                                    placeholder="Enter Parcel Tracking Id"
+                                                    [(ngModel)]="updateOrderStatus.parcelTrackingId">
+                                                <div *ngIf="submitted[0] && orderStatusCheck['parcelTrackingId'].errors"
+                                                    class="invalid-feedback">
+                                                    <div
+                                                        *ngIf="orderStatusCheck['parcelTrackingId'].errors['required']">
+                                                        Parcel Tracking Id is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn saveChanges" (click)="makeProccessingPayAsDispatch()"
+                    *ngIf="updateOrderStatus.modeOfDelivery=='Parcel'"> Parcel Status
+                    Status</button>
+                <button type="button" class="btn saveChanges"
+                    (click)="markdoorDeliveryOrderAsCancelled(updateOrderStatus,updateOrderStatus.orderId)"
+                    *ngIf="updateOrderStatus.modeOfDelivery=='DoorDelivery'">
+                    <!-- <span *ngIf="updateOrderStatus.modeOfDelivery=='Parcel'"> Parcel Status</span> -->
+                    <span *ngIf="updateOrderStatus.modeOfDelivery=='DoorDelivery'"> Door Delivery Status</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#commentsStaticBackdrop"
+    id="commentStaticBackdropTrigger">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="commentsStaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Comment </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form autocomplete="off" [formGroup]="form3">
+                    <div class="row mt-2 py-4">
+                        <div class="col-xl-10 col-md-12 mx-auto col-12 ">
+                            <div class="container-fluid">
+                                <div class="row mt-4">
+                                    <div class="col-lg col-12 ">
+                                        <div class="row mb-4">
+                                            <label for="staticEmail" class="productLable col-md-4 col">Comment</label>
+                                            <div class="col-md col ">
+
+                                                <textarea type="text" formControlName="comments" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted[2]  && commentCheck['comments'].errors }"
+                                                    placeholder="Enter Comment"
+                                                    [(ngModel)]="updateComment.comments"></textarea>
+                                                <div *ngIf="submitted[1] && commentCheck['comments'].errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="commentCheck['comments'].errors['required']">
+                                                        Comment is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p-timeline [value]="updateOrderStatus.comments"
+                                                    class="w-full md:w-20rem">
+                                                    <ng-template pTemplate="content" let-event>
+                                                        {{ event?.comments }} <br> {{ event?.commentsCreatedDate
+                                                        |date:'d MMM yyyy HH:mm'}}
+                                                    </ng-template>
+                                                </p-timeline>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn saveChanges" (click)="makeComments(updateOrderStatus.orderId)">Update
+                    Comment</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card flex justify-content-center">
+    <p-dialog [header]="visible[0] ? 'Update Payment information.' : 'Payment information.'" [modal]="true"
+        [(visible)]="visible[0] || visible[1]" [style]="{ width: '25rem' }">
+        <span class="p_box-text-secondary block mb-5">{{PaymentRegenerate.orderId}}</span>
+
+        <form class="my-3" autocomplete="off" [formGroup]="form4">
+            <div class="row">
+
+                <div class="col">
+                    <label for="validationCustom01" class="form-label">Transaction Id</label>
+                    <input type="text" formControlName="transactionId" class="form-control" [readonly]="visible[1]"
+                        [ngClass]="{ 'is-invalid': submitted[3]  && payemntFormCheck['transactionId'].errors }"
+                        placeholder="Enter Transaction Id" [(ngModel)]="payment!.transactionId">
+                    <div *ngIf="submitted[3] && payemntFormCheck['transactionId'].errors" class="invalid-feedback">
+                        <div *ngIf="payemntFormCheck['transactionId'].errors['required']">Transaction Id is
+                            required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label for="validationCustom01" class="form-label">Payment Gateway</label>
+                    <input type="text" formControlName="paymentGateway" class="form-control" [readonly]="visible[1]"
+                        [ngClass]="{ 'is-invalid': submitted[3]  && payemntFormCheck['paymentGateway'].errors }"
+                        placeholder="Enter Payment Gateway" [(ngModel)]="payment!.paymentGateway">
+                    <div *ngIf="submitted[3] && payemntFormCheck['paymentGateway'].errors" class="invalid-feedback">
+                        <div *ngIf="payemntFormCheck['paymentGateway'].errors['required']">Payment Gateway is
+                            required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label for="validationCustom01" class="form-label">Transaction Date and Time</label>
+                    <input type="datetime-local" formControlName="paymentOn" class="form-control"
+                        [readonly]="visible[1]"
+                        [ngClass]="{ 'is-invalid': submitted[3]  && payemntFormCheck['paymentOn'].errors }"
+                        placeholder="Enter Payment Gateway" [(ngModel)]="payment!.paymentOn">
+                    <div *ngIf="submitted[3] && payemntFormCheck['paymentOn'].errors" class="invalid-feedback">
+                        <div *ngIf="payemntFormCheck['paymentOn'].errors['required']">Transaction Date and Time is
+                            required</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+        <div class="float-end">
+            <button type="button" class="btn cancel_btn" (click)="resetForm()">Cancel</button>
+            <button type="button" class="btn saveChanges ms-2 w-50" (click)="validPaymentForm()"
+                *ngIf="visible[0]">Save</button>
+
+        </div>
+    </p-dialog>
+
+
+    <p-dialog [header]="'Payment Information'" [modal]="true" [(visible)]="isPaymentDialogVisible"
+        [style]="{ width: '30rem' }">
+
+        <div class="row pt-4" *ngIf="ListDDANDNGSS.length">
+            <div class="col">
+                <p> Payment History</p>
+                <p-timeline [value]="ListDDANDNGSS" class="w-full md:w-20rem">
+
+                    <ng-template pTemplate="content" let-event>
+                        Amount : {{ event?.amount }} <br>
+                        Payment Stage : {{ event?.paymentStage }} <br>
+                        Payment Mode : {{ event?.paymentMode }} <br>
+                        Transaction Id : {{ event?.referenceId }} <br>
+                        Payment Date : {{ event?.paymentDate |date:'d MMM yyyy HH:mm'}}
+                    </ng-template>
+                </p-timeline>
+            </div>
+        </div>
+    </p-dialog>
+</div>

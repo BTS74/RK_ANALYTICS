@@ -1,0 +1,75 @@
+.loader-container {
+    position: absolute;  /* 
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, .3);
+    height: 100%;
+    width: 100%; */
+    /* display: flex;
+    position: fixed; */
+
+    background-color: rgba(0,0,0,0.9);
+    z-index: 105;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #28A745;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    animation: spinloader 2s linear infinite;
+}
+
+.loader img {
+    animation: spinlogo 2s linear infinite;
+}
+
+
+@keyframes spinloader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinlogo {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.loading-spinner {    
+    background-color: rgba(0, 0, 0, 1);
+    position: fixed; /* Changed from absolute to fixed */
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%; /* Changed from 100vh to 100% */
+    display: flex; /* Changed from grid to flex for better centering */
+    align-items: center;
+    justify-content: center;
+    z-index: 105;
+}
+
+.loading-spinner img{
+    align-self: end;
+}
+
+.loading-message{
+    text-align: center;
+    align-self: start;
+}

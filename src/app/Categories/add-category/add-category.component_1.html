@@ -1,0 +1,668 @@
+<app-header>
+</app-header>
+<div>
+    <app-sidebar>
+    </app-sidebar>
+</div>
+<div class="container-fluid content" style="background-color: #F1F3F6;">
+    <div class="row py-1 ">
+        <div class="col-11 px-xl-0 px-lg-0 px-md-0 px-2 ms-5">
+            <div class="container-fluid">
+                <div class="row mt-3 py-2 ">
+                    <div class="col-xl-6 col-lg-4 col-4">
+                        <p class="mb-0 breadCrumbTopic">Categories</p>
+                        <p class="mb-0">
+                            <span>
+                                <img src="assets/images/common/Icon ionic-md-home@2x.webp" width="11.2px"
+                                    class="me-2 mb-1">
+                            </span>
+                            <span class="breadCrumbSubTopic">Categories </span>
+                        </p>
+
+                    </div>
+                    <div class="col">
+                        <div class="row mt-3 float-end">
+                            <div class="col">
+                                <button class="btn me-2" *ngIf="showForm[2]" (click)="routeTo('/add-category')">
+                                    Add category
+                                </button>
+                                <button class="btn me-2" *ngIf="showForm[0]" (click)="routeTo('/update-category')">
+                                    Update category
+                                </button>
+
+                                <button class="btn me-2" (click)="routeTo('/add-subcategory')">
+                                    Add subcategory
+                                </button>
+                                <button class="btn" (click)="routeTo('/add-subdivision')">
+                                    Add sub divison
+                                </button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="showForm[0] || showForm[2]">
+                    <div class="col">
+                        <div class="container-fluid mt-2 pb-4" style="background-color: #fff;">
+                            <form autocomplete="off" [formGroup]="form1">
+                                <div class="row mt-2 pt-4">
+                                    <div class="col-xl-10 col-md-12 mx-auto col-12 ">
+                                        <div class="container-fluid">
+                                            <div class="row mt-4">
+
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail"
+                                                            class="productLable col-md-4 col ">Product Category</label>
+                                                        <div class="col-md col ">
+                                                            <input type="text" formControlName="productCategory"
+                                                                class="form-control"
+                                                                [ngClass]="{ 'is-invalid': submitted[0]  && quantityCheck['productCategory'].errors }"
+                                                                placeholder="Enter New Category"
+                                                                [(ngModel)]="category.productCategory"
+                                                                *ngIf="showForm[0]" />
+
+
+
+                                                            <select name="" id="" class="form-select"
+                                                                *ngIf="showForm[2]" formControlName="productCategory"
+                                                                [ngClass]="{ 'is-invalid': submitted[0]  && quantityCheck['productCategory'].errors }"
+                                                                [(ngModel)]="category.productCategory"
+                                                                (change)="selectedCategory(category.productCategory)">
+                                                                <option class="dropdown-item" disabled selected
+                                                                    value="undefined">Select Category</option>
+                                                                <option [ngValue]="data.productCategory"
+                                                                    *ngFor="let data of AllCategories">
+                                                                    {{data.productCategory}}</option>
+                                                            </select>
+
+                                                            <div *ngIf="submitted[0] && quantityCheck['productCategory'].errors"
+                                                                class="invalid-feedback">
+                                                                <div
+                                                                    *ngIf="quantityCheck['productCategory'].errors['required']">
+                                                                    Product Category is required</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col col-12 mb-3">
+
+                                                    <div class="row" style="align-items: center;">
+
+                                                        <label for="staticEmail" class="productLable col-md-4 col ">
+                                                            Deliveriables
+                                                        </label>
+                                                        <div class="col mt-1 ">
+                                                            <select name="" id="" class="form-select"
+                                                                formControlName="onlyForChennaiCustomer"
+                                                                [ngClass]="{ 'is-invalid': submitted[0]  && quantityCheck['onlyForChennaiCustomer'].errors }"
+                                                                [(ngModel)]="category.onlyForChennaiCustomer"
+                                                                (change)="isChennaiDelivery($event.target)">
+
+                                                                <option class="dropdown-item" disabled selected
+                                                                    value="undefined">Select Category</option>
+                                                                <option [value]="true">Only Chennai</option>
+                                                                <option [value]="false">All</option>
+
+                                                            </select>
+                                                        </div>
+                                                        <!-- <div class="col-3 mt-1 ">
+                                                            <div class="row" style="align-items: center;">
+                                                                <div class="col-1 mt-1 ">
+                                                                    <input type="radio" id="parcelService" name="parcelService"
+                                                                    [value]="category.onlyForChennaiCustomer" (change)="isChennaiDelivery(false)" [(ngModel)]="category.onlyForChennaiCustomer">
+                                                                </div>
+                                                                <label for="staticEmail" class="productLable col-md col ">No                                                
+                                                                </label>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                    <div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail" class="productLable col-md-4 col ">
+                                                            Category Banner</label>
+                                                        <div class="col-md col text-center"
+                                                            *ngIf="!category.productCategoryBanner">
+                                                            <div class="card py-5 my-2">
+                                                                <div (click)="myFileInput.click()">
+                                                                    <img src="assets/images/common/Icon material-image.webp"
+                                                                        width="50px" alt="">
+                                                                    <p>Click to add Category Banner </p>
+                                                                    <input type="file" type="file" class="form-control"
+                                                                        (change)="fileChangeEvent($event,'Banner')"
+                                                                        #myFileInput hidden>
+                                                                </div>
+                                                                <div>
+                                                                    <p>or </p>
+                                                                </div>
+                                                                <div>
+                                                                    <button (click)="myFileInput.click()" type="button"
+                                                                        class="btn btn-primary addToCart w-50">Browse
+                                                                        Image</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col text-center"
+                                                            *ngIf="category.productCategoryBanner">
+                                                            <div class="py-5 my-2">
+                                                                <div class="position-relative" style="border: 0.5px solid #707070BF;
+                                                        border-radius: 3px;">
+                                                                    <img *ngIf="imgPreviewLocal(category.productCategoryBanner)"
+                                                                        [src]="category.productCategoryBanner" alt=""
+                                                                        class="img-fluid">
+
+
+                                                                    <img *ngIf="!imgPreviewLocal(category.productCategoryBanner )"
+                                                                        src="https://resource.rkpattarai.com/assets/images/uploads/{{category.productCategoryBanner}}"
+                                                                        alt="" class="img-fluid">
+
+                                                                    <img class="search-icon position-absolute top-0 start-100 translate-middle"
+                                                                        src="assets/images/common/Layer 2@2x.webp"
+                                                                        (click)="removeImage('Banner')" width="16.87"
+                                                                        alt="" style="cursor: pointer;">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail" class="productLable col-md-4 col ">
+                                                            Category Image</label>
+                                                        <div class="col-md col text-center "
+                                                            *ngIf="!category.productCategoryImage">
+                                                            <div class="card py-5 my-2">
+                                                                <div (click)="myFileInput.click()">
+                                                                    <img src="assets/images/common/Icon material-image.webp"
+                                                                        width="50px" alt="">
+                                                                    <p>Click to add Category Image </p>
+                                                                    <input type="file" type="file" class="form-control"
+                                                                        (change)="fileChangeEvent($event,'Image')"
+                                                                        #myFileInput hidden>
+                                                                </div>
+                                                                <div>
+                                                                    <p>or </p>
+                                                                </div>
+                                                                <div>
+                                                                    <button (click)="myFileInput.click()" type="button"
+                                                                        class="btn btn-primary addToCart w-50">Browse
+                                                                        Image</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col text-center"
+                                                            *ngIf="category.productCategoryImage">
+                                                            <div class="py-5 my-2">
+                                                                <div class="position-relative" style="border: 0.5px solid #707070BF;
+                                                        border-radius: 3px;">
+                                                                    <img *ngIf="imgPreviewLocal(category.productCategoryImage)"
+                                                                        [src]="category.productCategoryImage" alt=""
+                                                                        class="img-fluid">
+
+                                                                    <img *ngIf="!imgPreviewLocal(category.productCategoryImage )"
+                                                                        src="https://resource.rkpattarai.com/assets/images/uploads/{{category.productCategoryImage}}"
+                                                                        alt="" class="img-fluid">
+
+                                                                    <img class="search-icon position-absolute top-0 start-100 translate-middle"
+                                                                        src="assets/images/common/Layer 2@2x.webp"
+                                                                        (click)="removeImage('Image')" width="16.87"
+                                                                        alt="" style="cursor: pointer;">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- add category -->
+
+                <div class="row" *ngIf="showForm[1]">
+                    <div class="col">
+                        <div class="container-fluid mt-2 pb-4" style="background-color: #fff;">
+                            <form autocomplete="off" [formGroup]="form2">
+                                <div class="row mt-2 pt-4">
+                                    <div class="col-xl-10 col-md-12 mx-auto col-12 ">
+                                        <div class="container-fluid">
+                                            <div class="row mt-4">
+
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail"
+                                                            class="productLable col-md-4 col ">Product Category</label>
+                                                        <div class="col-md col ">
+                                                            <select name="" id="" class="form-select"
+                                                                formControlName="productCategory"
+                                                                [ngClass]="{ 'is-invalid': submitted[1]  && subcategoryCheck['productCategory'].errors }"
+                                                                placeholder="Enter Quantity"
+                                                                [(ngModel)]="subCategory.productCategory">
+                                                                <option [ngValue]="data.productCategory"
+                                                                    *ngFor="let data of AllCategories">
+                                                                    {{data.productCategory}}</option>
+                                                                <option [ngValue]="undefined" hidden> -- Select --
+                                                                </option>
+                                                            </select>
+                                                            <div *ngIf="submitted[1] && subcategoryCheck['productCategory'].errors"
+                                                                class="invalid-feedback">
+                                                                <div
+                                                                    *ngIf="subcategoryCheck['productCategory'].errors['required']">
+                                                                    Product Category is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail"
+                                                            class="productLable col-md-4 col ">Product Sub
+                                                            Category</label>
+                                                        <div class="col-md col ">
+                                                            <input type="text" formControlName="productSubCategoryName"
+                                                                class="form-control"
+                                                                [ngClass]="{ 'is-invalid': submitted[1]  && subcategoryCheck['productSubCategoryName'].errors }"
+                                                                placeholder="Enter New Sub Category"
+                                                                [(ngModel)]="subCategory.productSubCategoryName" />
+                                                            <div *ngIf="submitted[1] && subcategoryCheck['productSubCategoryName'].errors"
+                                                                class="invalid-feedback">
+                                                                <div
+                                                                    *ngIf="subcategoryCheck['productSubCategoryName'].errors['required']">
+                                                                    Product Sub Category is required</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail"
+                                                            class="productLable col-md-4 col ">Product Sub
+                                                            Category Image </label>
+                                                        <div class="col">
+                                                            <div class="row">
+                                                                <div class="col-md col text-center "
+                                                                    *ngIf="!subCategory.productSubCategoryImageForMobile">
+                                                                    <div class="card py-5 my-2">
+                                                                        <div
+                                                                            (click)="myFileInputSubCategoryImage.click()">
+                                                                            <img src="assets/images/common/Icon material-image.webp"
+                                                                                width="50px" alt="">
+                                                                            <p>Click to add Category Image </p>
+                                                                            <input type="file" type="file"
+                                                                                class="form-control"
+                                                                                (change)="fileChangeEvent($event,'mobileImage')"
+                                                                                #myFileInputSubCategoryImage hidden>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col text-center"
+                                                                    *ngIf="subCategory.productSubCategoryImageForMobile">
+                                                                    <div class="py-5 my-2">
+                                                                        <div class="position-relative" style="border: 0.5px solid #707070BF;
+                                                                border-radius: 3px;">
+                                                                            <img *ngIf="imgPreviewLocal(subCategory.productSubCategoryImageForMobile)"
+                                                                                [src]="subCategory.productSubCategoryImageForMobile"
+                                                                                alt="" class="img-fluid">
+
+                                                                            <img *ngIf="!imgPreviewLocal(subCategory.productSubCategoryImageForMobile )"
+                                                                                src="https://resource.rkpattarai.com/assets/images/uploads/{{subCategory.productSubCategoryImageForMobile}}"
+                                                                                alt="" class="img-fluid">
+
+                                                                            <img class="search-icon position-absolute top-0 start-100 translate-middle"
+                                                                                src="assets/images/common/Layer 2@2x.webp"
+                                                                                (click)="removeImage('mobileImage')"
+                                                                                width="16.87" alt=""
+                                                                                style="cursor: pointer;">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="offset-md-4 col-2">
+                                                    <button class="btn pe-0 addBtn productLable active  w-100"
+                                                        style="color: #fff;background-color: #28A745;font-size: 14px;"
+                                                        (click)="addSubCategories(subCategory)">Add</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail" class="productLable col-md-4 col"
+                                                            *ngIf="subCatList.length">Added Subcategories</label>
+                                                        <div class="col">
+                                                            <div class="row">
+
+                                                            </div>
+                                                            <div class="row mt-3">
+                                                                <div class="col-3"
+                                                                    *ngFor="let data of subCatList;let i =index">
+
+                                                                    <form class="search-container position-relative">
+                                                                        <input readonly type="text" id="search-bar"
+                                                                            value="{{data.productSubCategoryName}}">
+
+                                                                        <img *ngIf="imgPreviewLocal(data.productSubCategoryImageForMobile)"
+                                                                            [src]="data.productSubCategoryImageForMobile"
+                                                                            alt="" class="img-fluid">
+
+                                                                        <img *ngIf="!imgPreviewLocal(data.productSubCategoryImageForMobile )"
+                                                                            src="https://resource.rkpattarai.com/assets/images/uploads/{{data.productSubCategoryImageForMobile}}"
+                                                                            alt="" class="img-fluid">
+
+
+                                                                        <img class="search-icon position-absolute top-50 end-0 translate-middle-y me-2"
+                                                                            src="assets/images/common/Layer 2@2x.webp"
+                                                                            (click)="removePriceAndQuantity(i)"
+                                                                            width="16px" alt="">
+
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- add sub divisions -->
+
+                <div class="row" *ngIf="showForm[3]">
+                    <div class="col">
+                        <div class="container-fluid mt-2 pb-4" style="background-color: #fff;">
+                            <form autocomplete="off" [formGroup]="form3">
+                                <div class="row mt-2 pt-4">
+                                    <div class="col-xl-10 col-md-12 mx-auto col-12 ">
+                                        <div class="container-fluid">
+                                            <div class="row mt-4">
+
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail"
+                                                            class="productLable col-md-4 col ">Product Category</label>
+                                                        <div class="col-md col ">
+                                                            <select name="" id="" class="form-select"
+                                                                formControlName="productCategory"
+                                                                [ngClass]="{ 'is-invalid': submitted[3]  && subDivisionCheck['productCategory'].errors }"
+                                                                (change)="chooseCategory(subCategory.productCategory)"
+                                                                [(ngModel)]="subCategory.productCategory">
+                                                                <option [ngValue]="data.productCategory"
+                                                                    *ngFor="let data of AllCategories">
+                                                                    {{data.productCategory}}</option>
+                                                                <option [ngValue]="undefined" hidden> -- Select --
+                                                                </option>
+                                                            </select>
+                                                            <div *ngIf="submitted[3] && subDivisionCheck['productCategory'].errors"
+                                                                class="invalid-feedback">
+                                                                <div
+                                                                    *ngIf="subDivisionCheck['productCategory'].errors['required']">
+                                                                    Product Category is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail"
+                                                            class="productLable col-md-4 col ">Product Sub
+                                                            Category</label>
+                                                            <div class="col-md col ">
+                                                                <select name="" id="" class="form-select"
+                                                                    formControlName="productSubCategoryName"
+                                                                    [ngClass]="{ 'is-invalid': submitted[3]  && subDivisionCheck['productSubCategoryName'].errors }"
+                                                         
+                                                                    [(ngModel)]="subCategory.productSubCategoryName">
+                                                                    <option [ngValue]="data.productSubCategoryName"
+                                                                    *ngFor="let data of subcategories">
+                                                                    {{data.productSubCategoryName}}</option>
+                                                                <option [ngValue]="undefined" hidden> -- Select --
+                                                                </option>
+                                                                </select>
+                                                                <div *ngIf="submitted[3] && subDivisionCheck['productCategory'].errors"
+                                                                    class="invalid-feedback">
+                                                                    <div
+                                                                        *ngIf="subDivisionCheck['productCategory'].errors['required']">
+                                                                        Product Category is required</div>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail"
+                                                            class="productLable col-md-4 col ">Product Sub
+                                                            Division</label>
+                                                        <div class="col-md col ">
+                                                            <input type="text" formControlName="productSubDivisionName"
+                                                                class="form-control"
+                                                                [ngClass]="{ 'is-invalid': submitted[3]  && subDivisionCheck['productSubDivisionName'].errors }"
+                                                                placeholder="Enter Sub Division Name"
+                                                                [(ngModel)]="subCategory.productSubDivisionName" />
+                                                            <div *ngIf="submitted[3] && subDivisionCheck['productSubDivisionName'].errors"
+                                                                class="invalid-feedback">
+                                                                <div
+                                                                    *ngIf="subDivisionCheck['productSubDivisionName'].errors['required']">
+                                                                    Product Sub Division is required</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail"
+                                                            class="productLable col-md-4 col ">Product Sub Division Name Image </label>
+                                                        <div class="col">
+                                                            <div class="row">
+                                                                <div class="col-md col text-center "
+                                                                    *ngIf="!subCategory.productSubDivisionImageForMobile">
+                                                                    <div class="card py-5 my-2">
+                                                                        <div
+                                                                            (click)="myFileInputSubDivisionImage.click()">
+                                                                            <img src="assets/images/common/Icon material-image.webp"
+                                                                                width="50px" alt="">
+                                                                            <p>Click to add Category Image </p>
+                                                                            <input type="file" type="file"
+                                                                                class="form-control"
+                                                                                (change)="fileChangeEvent($event,'mobileImage','subdivision')"
+                                                                                #myFileInputSubDivisionImage hidden>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col text-center"
+                                                                    *ngIf="subCategory.productSubDivisionImageForMobile">
+                                                                    <div class="py-5 my-2">
+                                                                        <div class="position-relative" style="border: 0.5px solid #707070BF;
+                                                                border-radius: 3px;">
+                                                                            <img *ngIf="imgPreviewLocal(subCategory.productSubDivisionImageForMobile)"
+                                                                                [src]="subCategory.productSubDivisionImageForMobile"
+                                                                                alt="" class="img-fluid">
+
+                                                                            <img *ngIf="!imgPreviewLocal(subCategory.productSubDivisionImageForMobile )"
+                                                                                src="https://resource.rkpattarai.com/assets/images/uploads/{{subCategory.productSubDivisionImageForMobile}}"
+                                                                                alt="" class="img-fluid">
+
+                                                                            <img class="search-icon position-absolute top-0 start-100 translate-middle"
+                                                                                src="assets/images/common/Layer 2@2x.webp"
+                                                                                (click)="removeImage('mobileImage')"
+                                                                                width="16.87" alt=""
+                                                                                style="cursor: pointer;">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="offset-md-4 col-2">
+                                                    <button class="btn pe-0 addBtn productLable active  w-100"
+                                                        style="color: #fff;background-color: #28A745;font-size: 14px;"
+                                                        (click)="addSubDivison()">Add</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+
+                                                <div class="col-lg col-12 ">
+                                                    <div class="row">
+                                                        <label for="staticEmail" class="productLable col-md-4 col"
+                                                            *ngIf="subCatList.length">Added Subcategories</label>
+                                                        <div class="col">
+                                                     
+                                                            <!-- <div class="row mt-3">
+                                                                <div class="col-3"
+                                                                    *ngFor="let data of subCatList;let i =index">
+
+                                                                    <form class="search-container position-relative">
+                                                                        <input readonly type="text" id="search-bar"
+                                                                            value="{{data.productSubCategoryName}}">
+
+                                                                            <img *ngIf="imgPreviewLocal(data.productSubCategoryImageForMobile)"
+                                                                            [src]="data.productSubCategoryImageForMobile"
+                                                                            alt="" class="img-fluid">
+
+                                                                        <img *ngIf="!imgPreviewLocal(data.productSubCategoryImageForMobile )"
+                                                                            src="https://resource.rkpattarai.com/assets/images/uploads/{{data.productSubCategoryImageForMobile}}"
+                                                                            alt="" class="img-fluid">
+
+
+                                                                        <img class="search-icon position-absolute top-50 end-0 translate-middle-y me-2"
+                                                                            src="assets/images/common/Layer 2@2x.webp"
+                                                                            (click)="removePriceAndQuantity(i)"
+                                                                            width="16px" alt="">
+
+                                                                    </form>
+                                                                </div>
+                                                            </div> -->
+
+                                                            <!-- for sub dividon -->
+
+                                                            <div class="row mt-3" >
+                                                                <div class="col-3"
+                                                                    *ngFor="let data of subCatList;let i =index">
+                                                      
+                                                                    <form class="search-container position-relative">
+                                                                        <input readonly type="text" id="search-bar"
+                                                                            value="{{data.productSubDivisionName}}">
+
+                                                                            <img *ngIf="imgPreviewLocal(data.productSubDivisionImageForMobile)"
+                                                                            [src]="data.productSubDivisionImageForMobile"
+                                                                            alt="" class="img-fluid">
+
+                                                                        <img *ngIf="!imgPreviewLocal(data.productSubDivisionImageForMobile )"
+                                                                            src="https://resource.rkpattarai.com/assets/images/uploads/{{data.productSubDivisionImageForMobile}}"
+                                                                            alt="" class="img-fluid">
+
+
+                                                                        <img class="search-icon position-absolute top-50 end-0 translate-middle-y me-2"
+                                                                            src="assets/images/common/Layer 2@2x.webp"
+                                                                            (click)="removePriceAndQuantity(i)"
+                                                                            width="16px" alt="">
+
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-3">
+                    <div class="col offset-6">
+                        <div class="row mt-3">
+                            <div class="col ">
+                                <button class="btn cancel w-100 " (click)="save('remove')">Cancel</button>
+                            </div>
+                            <div class="col">
+                                <button class="btn w-100 saveBtn" (click)="save()">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

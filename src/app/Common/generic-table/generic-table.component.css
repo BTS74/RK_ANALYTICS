@@ -1,0 +1,117 @@
+.cursor{
+    cursor: pointer;
+}
+
+
+.table>:not(caption)>*>* {
+    border-bottom-width: 0;
+    background-color: transparent;
+    padding: 10px 1rem;
+}
+
+th {
+    font-family: Roboto-Bold;
+    font-size: 15px;
+    color: #1B1B1D;
+}
+
+td {
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    opacity: 1;
+    padding: 10px;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: #CAD1DE;
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#rowColor:nth-child(odd),
+.tableHeading {
+    /* background-color: #fff; */
+}
+
+
+table tbody tr:nth-child(even) td {
+   /* background-color: #F5F7F9; */
+}
+
+.table_border{
+    border: 0.5px solid #D0D0E0;
+    border-radius: 7px;
+}
+
+tbody, td, tfoot {
+  border: none !important;
+}
+
+
+.inStock {
+    background-color: #8AC92680;
+    border-radius: 3px;
+    height: 30px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+.outOfStock {
+    background-color: #E4E4E5;
+    border-radius: 3px;
+    height: 30px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+select {
+    box-shadow: none;
+}
+
+::ng-deep.ngx-pagination .current {
+    background: #26A541!important;
+}
+
+::ng-deep.ngx-pagination.disabled {
+    font-family: Roboto-Medium !important;
+    font-size: 14px !important;
+    color: #cacaca !important;
+    font-weight: 400 !important;
+    cursor: default;
+}
+
+::ng-deep.ngx-pagination a {
+    font-family: Roboto-Medium !important;
+    font-size: 14px !important;
+    color: #1B1B1D !important;
+    font-weight: 400 !important;
+}
+
+.table-overflow-scroll {
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+@media (max-width: 1440px) and (min-width:1025px) {
+    .table-overflow-scroll {
+        overflow: scroll;
+    }
+}
+
+@media (max-width: 1024px) and (min-width:768px) {
+    .table-overflow-scroll {
+        overflow: scroll;
+    }
+}

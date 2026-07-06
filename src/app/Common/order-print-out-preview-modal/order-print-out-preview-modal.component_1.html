@@ -1,0 +1,746 @@
+<div class="container-fluid">
+    <div class="row p-5" style="background-color: #fff;" id="print">
+        <div class="col-12 mx-auto ">
+            <div class="row">
+                <div class="col mx-auto ">
+
+                    <div class="row">
+                        <div class="col  text-start">
+                            <p class="addressHeading">To :</p>
+                            <p class="generalpolicy mb-0"> {{printList?.user?.name}}</p>
+                            <p class="generalpolicy mb-0"> {{printList?.orderId}}</p>
+
+                            <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                {{printList?.user?.address?.addressLine1 }},
+                                {{printList?.user?.address?.state}}</p>
+                            <p class="generalpolicy mb-0">{{printList?.user?.address?.state}}
+                                {{printList?.user?.address?.pinCode}}</p>
+                            <p class="generalpolicy mb-0" *ngIf="printList?.user?.address?.landMark">Land Mark :
+                                ({{printList?.user?.address?.landMark}})</p>
+                            <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                {{printList?.user?.phone}} <span *ngIf="printList?.user?.alternativePhone">,
+                                    {{printList?.user?.alternativePhone}}</span></p>
+                        </div>
+                        <div class="col">
+                            <div class="card  py-xl-4 py-lg-2 py-3 px-xl-4 px-lg-2 px-md-3 px-3"
+                                style="border: 1px solid #707070;border-radius: 0;">
+                                <div class="row">
+                                    <div class="col-xl col-lg col-md">
+                                        <div class="row">
+                                            <div class="col topic">Invoice No </div>
+                                            <div class="col text-left resultValues"> <b
+                                                    class="bgcolor">{{printList?.invoiceId}}</b></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col topic">Invoice Date </div>
+                                            <div class="col text-left resultValues"> <b
+                                                    class="bgcolor">{{printList?.invoiceDate |date:'d-MM-yyyy
+                                                    hh:mm'}}</b></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col topic">GSTIN </div>
+                                            <div class="col text-left resultValues"> <b class="bgcolor"><span
+                                                        *ngIf="printList?.user?.gstIn">{{printList?.user?.gstIn}}</span>
+                                                    <span *ngIf="!printList?.user?.gstIn">-</span></b></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col topic">Order Id </div>
+                                            <div class="col text-left resultValues"> <b
+                                                    class="bgcolor">#{{printList.orderId}}</b></div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col topic">Total Count </div>
+                                            <div class="col text-left resultValues">
+                                                <b *ngIf="printList?.cartModel else gardenCartModel">
+                                                    {{printList?.cartModel?.totalNoOfQuantity}}</b>
+
+                                                <ng-template #gardenCartModel>
+                                                    <b>{{printList?.gardenCartModel?.totalNoOfQuantity}}</b>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col topic">Order Received on </div>
+                                            <div class="col text-left resultValues">
+                                                <b>{{printList?.orderDate|date:'dd-MM-yyyy
+                                                    '}}</b>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col topic">Order Amount </div>
+                                            <div class="col text-left resultValues">
+
+                                                <b *ngIf="printList.cartModel else gardenCartModel">
+                                                    ₹{{(printList?.cartModel?.totalPrice)+(printList?.cartModel?.totalDeliveryCharge)
+                                                    | number :'1.2-2'}}</b>
+                                                <ng-template #gardenCartModel>
+                                                    <b>₹{{(printList?.gardenCartModel?.totalPrice)+(printList?.gardenCartModel?.totalDeliveryCharge)
+                                                        | number :'1.2-2'}}</b>
+                                                </ng-template>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col topic">Mode Of Delivery</div>
+                                            <div class="col text-left resultValues">
+                                                <b [innerHtml]="modeOfDel(printList?.modeOfDelivery)"></b>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-1" *ngIf="printList?.modeOfDelivery=='Parcel'">
+                                            <div class="col topic">Parcel Count</div>
+                                            <div class="col text-left resultValues text-wrap"> <b class="bgcolor">
+                                                    {{printList?.cartModel?.totalNoOfParcelBags}}</b></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="row my-2">
+                        <div class="col  text-start">
+                            <div class="row">
+
+                                <div class="col text-left" style="align-self: center;">
+                                    <p class="addressHeading">From :</p>
+                                    <p class="generalpolicy mb-0">RK PATTARAI</p>
+                                    <p class="generalpolicy mb-0"><span>
+                                            rkpattarai@gmail.com </span> <span>+91-9940465655</span>
+                                        <span>, +91-8122219595</span>
+                                    </p>
+                                    <p class="generalpolicy mb-0">
+                                    </p>
+                                    <p class="generalpolicyAddress mb-0">
+                                        <span>No -1, ISHWARYA NAGAR, 2nd street Extension, Chrompet,
+                                            ch-44</span>
+                                    </p>
+                                    <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">GSTIN :
+                                        33BAEPV8981N1ZR</p>
+
+                                </div>
+                                <div class="col-2">
+                                    <img src="assets/images/header/Layer 1@2x.png" alt="logo" class="logo">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="container-fluid px-0 py-2">
+                        <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">Tax Invoice</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="tableHeading py-2">
+                                    <th class="">S.No</th>
+                                    <th colspan="1">Product Name</th>
+                                    <th class="text-end">Unit</th>
+                                    <th class="text-end">Price</th>
+                                    <th class="text-end">Qty</th>
+                                    <th class="text-end">HSN</th>
+                                    <th class="text-end">Total Price</th>
+
+
+
+                                </tr>
+
+                            </thead>
+                            <!-- <tbody class="" *ngFor="let category of objectKeys(groupedProducts)"> -->
+                            <tbody class="">
+                                <!-- <tr class="align-middle" colspan="7">{{category}}</tr>
+                                <tr  *ngFor="let data of groupedProducts[category];let i=index" > -->
+
+                                <tr class="align-middle "
+                                    *ngFor="let data of printList?.cartModel?.products;let i=index">
+                                    <td class="text-end">{{i+1}}</td>
+
+                                    <td class="text-start" *ngIf="printList?.cartModel">
+                                        {{data?.productModel.productNameInEnglish}}
+                                        <span *ngIf="data.dimensionDetailsModel">
+                                            ( {{data.dimensionDetailsModel.width}}W X
+                                            {{data.dimensionDetailsModel.length}}L)
+                                        </span>
+                                    </td>
+                                    <td class="text-end">{{data.quantity}}</td>
+
+                                    <td class="text-end">{{data.productModel.productDetails[0].price | number:'1.2-2'}}
+                                    </td>
+
+                                    <td class="text-end">
+                                        <span *ngIf="data?.productModel.productCategory=='Seeds'">-</span>
+                                        <span *ngIf="data?.productModel.productCategory!='Seeds'">{{data.unit}}
+                                            {{data.mass}}</span>
+                                    </td>
+
+                                    <td class="text-end">{{data.productModel?.hsn}}</td>
+
+
+
+                                    <td class="text-end">{{data.price | number:'1.2-2'}}</td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row border">
+
+
+                <div class="col-3" *ngIf="printList.modeOfDelivery=='DoorDelivery'">
+                    <p class="addressHeading">Bank & Payment Details</p>
+                    <div class="row">
+                        <div class="col topic">Account Name: </div>
+                        <div class="col text-left resultValues"> <b class="bgcolor">RK PATTARAI</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col topic">Account Number: </div>
+                        <div class="col text-left resultValues"> <b class="bgcolor">188002000002122</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col topic">IFSC: </div>
+                        <div class="col text-left resultValues"> <b class="bgcolor">IOBA0001880</b></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col topic">GPay Number: </div>
+                        <div class="col text-left resultValues"> <b class="bgcolor">8122219595</b></div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-xl-3 col-lg-6 col-4 me-0 ms-auto">
+                    <div class="p-2">
+                        <div class="row">
+                            <div class="col-xl col-lg col-md ">
+                                <div class="row mt-1">
+                                    <div class="col subTotal">Total </div>
+                                    <div class="col text-end subTotal">
+
+                                        <b *ngIf="printList?.cartModel else gTotalPrice">
+                                            ₹{{(printList?.cartModel?.totalTaxable) | number
+                                            :'1.2-2'}}</b>
+                                        <ng-template #gTotalPrice>
+                                            <b>₹ {{printList?.gardenCartModel?.totalPrice | number
+                                                :'1.2-2'}}</b>
+                                        </ng-template>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1" *ngIf="printList?.user?.address?.state=='Tamil Nadu'">
+                                    <div class="col  subTotal">CGST</div>
+                                    <div class="col text-end  subTotal"> <b class="bgcolor">
+                                            {{calculateGSTSplit(printList?.cartModel?.totalGST).cgst | number
+                                            :'1.2-2'}}</b></div>
+                                </div>
+                                <div class="row mt-1" *ngIf="printList?.user?.address?.state=='Tamil Nadu'">
+                                    <div class="col  subTotal">SGST</div>
+                                    <div class="col text-end  subTotal"> <b class="bgcolor">
+                                            {{calculateGSTSplit(printList?.cartModel?.totalGST).sgst | number
+                                            :'1.2-2'}}</b></div>
+                                </div>
+
+                                <div class="row mt-1" *ngIf="printList?.user?.address?.state!='Tamil Nadu'">
+                                    <div class="col subTotal">IGST</div>
+                                    <div class="col text-end subTotal"> <b class="bgcolor">
+                                            {{(printList?.cartModel?.totalGST)| number
+                                            :'1.2-2'}}</b></div>
+                                </div>
+
+                                <!-- <div class="row">
+                                    <div class="col  subTotal" [innerHtml]="getModeOfDelivery(printList)"></div>
+                                    <div class="col text-end  subTotal">
+                                        <b><span [innerHtml]="showDeliveryCharge(printList)"></span>
+                                        </b>
+                                    </div>
+                                </div> -->
+
+                                <!-- <div class="row" *ngIf="printList.modeOfDelivery == 'DoorDelivery'">
+                                    <div class="col  subTotal">Lifting Charge </div>
+                                    <div class="col text-end  subTotal">
+                                        <b>₹{{(printList?.totalLiftingCost)| number :'1.2-2'}}
+                                        </b>
+                                    </div>
+                                </div> -->
+
+                                <!-- <div class="row">
+                                    <div class="col grandTotal">Grand Total </div>
+                                    <div class="col text-end grandTotal">
+
+                                        <p class="mb-0 text-left"
+                                            *ngIf="printList.modeOfDelivery == 'Parcel' || printList.modeOfDelivery == 'Courier'">
+                                            <b>₹{{printList?.totalAmount| number :'1.2-2'}}</b>
+                                        </p>
+                                        <p class="mb-0 text-left " *ngIf="printList.modeOfDelivery == 'DoorDelivery'">
+                                            <b>₹{{(printList?.totalAmount + printList?.totalTransportationCost +
+                                                (printList?.totalLiftingCost))| number :'1.2-2'}}</b>
+                                        </p>
+
+                                    </div>
+                                </div> -->
+
+                                <div class="row mt-1">
+                                    <div class="col  subTotal">
+                                        <span *ngIf="printList?.modeOfDelivery == 'Courier'">Courier Charge </span>
+                                    </div>
+                                    <div class="col text-end resultValues">
+                                        <b *ngIf="printList?.modeOfDelivery == 'Courier'">₹{{printList?.cartModel?.totalDeliveryCharge
+                                            | number :'1.2-2'}}</b>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1" *ngIf="printList.totalTransportationCost">
+                                    <div class="col  subTotal">Transportation Charge</div>
+                                    <div class="col text-end resultValues">
+                                        <b *ngIf="printList.totalTransportationCost">₹{{printList?.totalTransportationCost
+                                            | number
+                                            :'1.2-2'}} </b>
+                                        <b *ngIf="!printList.totalTransportationCost">-
+                                        </b>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1" *ngIf="printList.totalLiftingCost">
+                                    <div class="col  subTotal">
+                                        Lifting Charge
+                                    </div>
+                                    <div class="col text-end resultValues">
+
+                                        <b *ngIf="printList.totalLiftingCost">₹{{printList?.totalLiftingCost | number
+                                            :'1.2-2'}} </b>
+                                        <b *ngIf="!printList.totalLiftingCost">-
+                                        </b>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1" *ngIf="printList.totalLabourCost">
+                                    <div class="col  subTotal">
+                                        Labour Charge
+                                    </div>
+                                    <div class="col text-end resultValues">
+
+                                        <b *ngIf="printList.totalLabourCost">₹{{printList?.totalLabourCost | number
+                                            :'1.2-2'}} </b>
+                                        <b *ngIf="!printList.totalLabourCost">-
+                                        </b>
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row mt-1" *ngIf="printList?.cartModel?.totalPackingCharge">
+                                    <div class="col  subTotal">
+                                        Packing Charge
+                                    </div>
+                                    <div class="col text-end resultValues">
+
+                                        <b *ngIf="printList?.cartModel?.totalPackingCharge">₹{{printList?.cartModel?.totalPackingCharge
+                                            | number
+                                            :'1.2-2'}} </b>
+                                        <b *ngIf="!printList?.cartModel?.totalPackingCharge">-
+                                        </b>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row productName mt-2">
+                                    <div class="col">
+                                        <div class="container px-0"
+                                            style="border-top: 1px dashed #70707080;border-bottom: 1px dashed #70707080;">
+                                            <div class="row py-3">
+                                                <div class="col">
+                                                    <p class="mb-0 subTotal">Grand Total </p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="mb-0 text-end resultValues">
+                                                        <b>₹{{printList?.totalAmount| number :'1.2-2'}}</b>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6" *ngIf="printList.modeOfDelivery=='Parcel'">
+                    <p class="addressHeading">Parcel Service Address :</p>
+                    <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                        {{printList.parcelServiceProviderName}}</p>
+                    <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2"><span>
+                            {{printList.parcelServiceHubName}}</span></p>
+                    <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                        <span>{{printList.parcelServiceHubAddress}}</span>
+                    </p>
+
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col">
+                    <div class="container-fluid px-0">
+
+                        <table class="table ">
+                            <thead>
+                                <tr class="tableHeading py-2">
+                                    <th class="text-end">HSN</th>
+                                    <th class="text-end">Taxable Value</th>
+                                    <th class="text-end" colspan="2"
+                                        *ngIf="isTamilNadu(printList?.user?.address?.state)">CGST</th>
+                                    <th class="text-end" colspan="2"
+                                        *ngIf="isTamilNadu(printList?.user?.address?.state)">SGST</th>
+                                    <th class="text-end" colspan="2"
+                                        *ngIf="!isTamilNadu(printList?.user?.address?.state) ">IGST</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                                <tr class="tableHeading py-2" *ngIf="!isTamilNadu(printList?.user?.address?.state)">
+                                    <td colspan="2"></td>
+                                    <td class="text-end">Rate</td>
+                                    <td class="text-end">Value</td>
+                                </tr>
+                                <tr class="tableHeading py-2" *ngIf="isTamilNadu(printList?.user?.address?.state)">
+                                    <td colspan="2"></td>
+                                    <td class="text-end">Rate</td>
+                                    <td class="text-end">Amount</td>
+                                    <td class="text-end">Rate</td>
+                                    <td class="text-end">Amount</td>
+                                </tr>
+                            </thead>
+                            <tbody class="">
+                                <tr class="align-middle gstTable-bordered"
+                                    *ngFor="let data of printList?.gstCalculation;let i=index">
+                                    <td class="text-end">{{data.hsn}}</td>
+                                    <td class="text-end">{{data.taxableAmount}}</td>
+
+
+
+
+                                    <td class="text-end" *ngIf="!isTamilNadu(printList?.user?.address?.state)">
+                                        <span *ngIf="data?.totalGST !== 0">
+                                            {{ ((data?.totalGST)) | number:(data?.totalGST % 1 === 0 ? '1.0-0' :
+                                            '1.2-2') }}
+                                        </span>
+                                        <span *ngIf="data?.totalGST === 0">
+                                            {{ (data?.totalGST) | number:'1.0-0' }}
+                                        </span>
+                                    </td>
+
+                                    <td class="text-end" *ngIf="!isTamilNadu(printList?.user?.address?.state)">
+                                        {{((data.productGST) )| number:'1.2-2'}}
+                                    </td>
+
+                                    <td class="text-end" *ngIf="isTamilNadu(printList?.user?.address?.state)">
+                                        <span *ngIf="data?.totalGST !== 0">
+                                            {{ (data?.totalGST / 2) | number:((data?.totalGST / 2) % 1 === 0 ? '1.0-0' :
+                                            '1.2-2') }}
+                                        </span>
+                                        <span *ngIf="data?.totalGST === 0">
+                                            {{ data?.totalGST | number:'1.0-0' }}
+                                        </span>
+
+                                    </td>
+
+                                    <td class="text-end" *ngIf="isTamilNadu(printList?.user?.address?.state)">
+                                        {{ data.cgst | number:'1.2-2' }}
+                                    </td>
+
+                                    <td class="text-end" *ngIf="isTamilNadu(printList?.user?.address?.state)">
+                                        <span *ngIf="data?.totalGST !== 0">
+                                            {{ ((data?.totalGST) / 2) | number:((data?.totalGST/2) % 1 === 0 ? '1.0-0' :
+                                            '1.2-2') }}
+                                        </span>
+                                        <span *ngIf="data?.totalGST === 0">
+                                            {{ (data?.totalGST) | number:'1.0-0' }}
+                                        </span>
+                                    </td>
+
+                                    <td class="text-end" *ngIf="isTamilNadu(printList?.user?.address?.state)">
+                                        {{ data.sgst | number:'1.2-2' }}
+                                    </td>
+
+
+                                    <td class="text-end">{{data?.totalAmount |
+                                        number:'1.2-2'}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+<!-- <div class="container-fluid">  
+    <div class="row p-5" style="background-color: #fff;" id="print">
+        <div class="col-12 mx-auto ">
+            <div class="row">
+                <div class="col mx-auto ">
+                    <div class="row">
+                        <div class="col  text-start">
+                            <div class="row">
+                                <div class="col-7">
+                                    <p class="addressHeading">To :</p>
+                                    <p class="generalpolicy mb-0"> {{printList?.user?.name}}</p>
+                                    <p class="generalpolicy mb-0"> {{printList?.orderId}}</p>
+
+                                    <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                        {{printList?.user?.address?.addressLine1 }},
+                                        {{printList?.user?.address?.state}}</p>                                   
+                                   <p class="generalpolicy mb-0">{{printList?.user?.address?.state}} {{printList?.user?.address?.pinCode}}</p>
+                                    <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                        {{printList?.user?.phone}} <span *ngIf="printList?.user?.alternativePhone">, {{printList?.user?.alternativePhone}}</span></p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <hr>
+                    <div class="row my-2">
+                        <div class="col  text-start">
+                            <div class="row">
+
+                                <div class="col">
+                                    <p class="addressHeading">From :</p>
+                                    <p class="generalpolicy mb-0">RK PATTARAI</p>
+                                    <p class="generalpolicy mb-0"><span>
+                                            rkpattarai@gmail.com </span></p>
+                                    <p class="generalpolicy mb-0">
+                                        <span>+91-9940465655</span></p>
+                                    <p class="generalpolicyAddress mb-0">
+                                        <span>No -1, ISHWARYA NAGAR, 2nd street Extension, Chrompet,
+                                            ch-44</span>
+                                    </p>
+                                </div>
+
+                                <div class="col-3" style="text-align: center;
+                                align-self: center;">
+                                    <img src="assets/images/header/Layer 1@2x.png" alt="logo"
+                                        class="logo">
+                                </div>
+
+                                <div class="col">
+                                    <div class="card  py-xl-4 py-lg-2 py-3 px-xl-4 px-lg-2 px-md-3 px-3"
+                                        style="border: 1px solid #707070;border-radius: 0;">
+                                        <div class="row">
+                                            <div class="col-xl col-lg col-md">
+                                                <div class="row mt-1">
+                                                    <div class="col topic">Order Id </div>
+                                                    <div class="col text-left resultValues"> <b
+                                                            class="bgcolor">#{{printList.orderId}}</b></div>
+                                                </div>
+
+                                                <div class="row mt-1">
+                                                    <div class="col topic">Total Count </div>
+                                                    <div class="col text-left resultValues">
+                                                        <b *ngIf="printList?.cartModel else gardenCartModel">
+                                                            {{printList?.cartModel?.totalNoOfQuantity}}</b>
+                                                       
+                                                        <ng-template #gardenCartModel>
+                                                            <b>{{printList?.gardenCartModel?.totalNoOfQuantity}}</b>
+                                                          </ng-template>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row mt-1">
+                                                    <div class="col topic">Order Received on </div>
+                                                    <div class="col text-left resultValues">
+                                                        <b>{{printList?.orderDate|date:'dd-MM-yyyy
+                                                            '}}</b></div>
+                                                </div>
+
+                                                <div class="row mt-1">
+                                                    <div class="col topic">Order Amount </div>
+                                                    <div class="col text-left resultValues">
+                                                       
+                                                        <b *ngIf="printList.cartModel else gardenCartModel">
+                                                            ₹{{(printList?.cartModel?.totalPrice)+(printList?.cartModel?.totalDeliveryCharge)
+                                                            | number :'1.2-2'}}</b>                                                                                                                                   
+                                                            <ng-template #gardenCartModel>
+                                                                <b>₹{{(printList?.gardenCartModel?.totalPrice)+(printList?.gardenCartModel?.totalDeliveryCharge)
+                                                                    | number :'1.2-2'}}</b>
+                                                              </ng-template>
+
+                                                        </div>
+                                                </div>
+                                                <div class="row mt-1">
+                                                    <div class="col topic">Mode Of Delivery</div>
+                                                    <div class="col text-left resultValues">
+                                                        <b [innerHtml]="modeOfDel(printList?.modeOfDelivery)"></b>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="container-fluid px-0">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="tableHeading py-2">
+                                    <th class="">S.No</th>
+                                    <th colspan="1">Product Name</th>
+                                    <th class="text-end">Unit</th>
+                                    <th class="text-end">Qty</th>                                            
+                                    <th class="text-end">Price</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="" *ngIf="printList?.cartModel">
+                                <tr class="align-middle " id="rowColor" *ngFor="let data of printList?.cartModel?.products;let i=index">
+                                    <td class="text-end">{{i+1}}</td>
+                                    <td class="text-start product_name">{{data?.productModel.productNameInEnglish}}</td>
+                                    <td class="text-end">{{data.quantity}}</td>
+                                    <td class="text-end">{{data.unit}} {{data.mass}}</td>
+                                    <td class="text-end">{{data?.productModel?.productDetails[0].price |
+                                        number:'1.2-2'}}</td>                                         
+                                    <td class="text-end">{{data.price | number:'1.2-2'}}</td>
+                                </tr>
+                            </tbody>
+
+                            <tbody *ngIf="printList?.gardenCartModel">
+                                <tr class="align-middle " id="rowColor"
+                                    *ngFor="let data of printList?.gardenCartModel?.products;let i=index">
+                                    <td class="text-end">{{i+1}}</td>
+                                    
+                                    <td class="text-start" *ngIf="printList?.gardenCartModel">
+                                      {{data?.productModel.productNameInEnglish}}  ,
+                                      <span *ngIf="data.growBagName">{{data.growBagName}}</span>
+                                      <span *ngIf="data.potName">{{data.potName}}</span>
+                                       , {{data.soilMixName}}   
+                                    </td>
+                                    <td class="text-end">{{data.quantity}}</td>
+
+                                    <td class="text-end">{{data.soilMixQtyUnit}} {{data.soilMixQtyMass}}</td>
+                                    <td class="text-end" [innerHtml]="findSingleUnitPrice(data)?.price ?? '' "></td>
+                                    <td class="text-end">{{data.price | number:'1.2-2'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-6 col-4 me-0 ms-auto">
+                    <div class=" py-xl-4 py-lg-2 px-xl-4 px-lg-2">
+                        <div class="row">
+                            <div class="col-xl col-lg col-md ">
+                                <div class="row mt-1">
+                                    <div class="col  subTotal">Total </div>
+                                    <div class="col text-end  subTotal">                                                     
+                                        
+                                            <b *ngIf="printList?.cartModel else gTotalPrice">
+                                                ₹ {{printList?.cartModel?.totalPrice | number
+                                                    :'1.2-2'}}</b>                                                                                                                                   
+                                                <ng-template #gTotalPrice>
+                                                    <b>₹ {{printList?.gardenCartModel?.totalPrice | number
+                                                        :'1.2-2'}}</b>
+                                                  </ng-template>
+
+                                        </div>
+                                </div>
+
+                                <div class="row mt-1">
+                                    <div class="col  subTotal" [innerHtml]="getModeOfDelivery(printList)"></div>
+                                    <div class="col text-end  subTotal">
+
+                                        <b>
+                                            <span [innerHtml]="showDeliveryCharge(printList)"></span>
+                                        
+                                        </b>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1" *ngIf="printList.modeOfDelivery == 'DoorDelivery'">
+                                    <div class="col  subTotal">Lifting Charge </div>
+                                    <div class="col text-end  subTotal">
+
+                                        <b>
+                                            ₹{{(printList?.totalLiftingCost)| number :'1.2-2'}}   
+                                        
+                                        </b>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row mt-1">
+                                    <div class="col grandTotal">Grand Total </div>
+                                    <div class="col text-end grandTotal">                                     
+                                            <p class="mb-0 text-left " *ngIf="printList.modeOfDelivery == 'Parcel' || printList.modeOfDelivery == 'Courier'"><b>₹{{printList?.totalAmount| number :'1.2-2'}}</b>
+                                            </p>
+                                            <p class="mb-0 text-left " *ngIf="printList.modeOfDelivery == 'DoorDelivery'">
+                                                <b>₹{{(printList?.totalAmount + printList?.totalTransportationCost + (printList?.totalLiftingCost))| number :'1.2-2'}}</b>
+                                            </p>                                                  
+                                    
+                                        </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                
+                <div class="col-6" *ngIf="printList.modeOfDelivery=='Parcel'">
+
+                    <p class="addressHeading">Parcel Service Address :</p>
+                    <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                        {{printList.parcelServiceProviderName}}</p>
+                    <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2"><span>
+                            {{printList.parcelServiceHubName}}</span></p>
+                    <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                        <span>{{printList.parcelServiceHubAddress}}</span></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div> -->

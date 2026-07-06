@@ -1,0 +1,118 @@
+<!-- <div class="overlay d-lg-none d-md-block d-block" id="myNav">
+
+    <a href="/all-products" class="logoName"><img class="img-fluid" src="assets/images/header/Layer 1@2x.png"
+            width="51px" alt="logo">
+    </a>
+
+    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">
+        <div class="close-container">
+            <div class="leftright"></div>
+            <div class="rightleft"></div>
+        </div>
+    </a>
+
+    <div class="overlay-content container px-2" id="addAnimate">
+
+        <a class="nav-link py-3 " aria-current="page" (click)="navigator('home')">
+            <img src="assets/images/sideBar/Icon feather-home@2x.webp" alt="mdo" width="15" *ngIf='!siderActiveIcon[0]'>
+            <img src="assets/images/sideBar/Icon feather-home-1@2x.webp" alt="mdo" width="15"
+                *ngIf='siderActiveIcon[0]'><br>
+            <br> <span class="routeName">Home</span>
+        </a>
+        <a class="nav-link py-3" (click)="navigator('order-overview')">
+            <img src="assets/images/sideBar/Icon feather-shopping-bag@2x.webp" alt="mdo" width="15"
+                *ngIf='!siderActiveIcon[1]'>
+            <img src="assets/images/sideBar/Icon feather-shopping-bag-1@2x.webp" alt="mdo" width="15"
+                *ngIf='siderActiveIcon[1]'><br>
+            <br> <span class="routeName" [ngClass]="{'active':siderActiveIcon[1]}">Orders</span>
+        </a>
+        <a class="nav-link py-3 " (click)="navigator('all-products')">
+            <img src="assets/images/sideBar/blac-Layer 2@2x.webp" alt="mdo" width="15" *ngIf='!siderActiveIcon[2]'>
+            <img src="assets/images/sideBar/Layer 2@2x.webp" alt="mdo" width="15" *ngIf='siderActiveIcon[2]'>
+            <br> <span class="routeName" [ngClass]="{'active':siderActiveIcon[2]}">Products</span>
+        </a>
+        <a class="nav-link py-3" (click)="navigator('payments')">
+            <img src="assets/images/sideBar/Icon material-payment@2x.webp" alt="mdo" width="15"
+                *ngIf='!siderActiveIcon[3]'>
+            <img src="assets/images/sideBar/Icon material-payment-1@2x.webp" alt="mdo" width="15"
+                *ngIf='siderActiveIcon[3]'>
+            <br> <span class="routeName">Payments</span>
+        </a>
+        <a class="nav-link py-3" (click)="navigator('all-categories')">
+            <img src="assets/images/sideBar/category-3@2x.webp" alt="mdo" width="25" *ngIf='!siderActiveIcon[4]'>
+            <img src="assets/images/sideBar/category-1@2x.webp" alt="mdo" width="25" *ngIf='siderActiveIcon[4]'>
+            <br> <span class="routeName">Categories</span>
+        </a>
+        <a class="nav-link py-3" (click)="navigator('area')">          
+            <img src="assets/images/sideBar/Icon feather-help-circle.webp" alt="mdo" width="25" *ngIf='siderActiveIcon[5]'>
+            <br> <span class="routeName">Area</span>
+        </a>
+        <a class="nav-link py-3" (click)="navigator('parcel-service')">          
+            <img src="assets/images/sideBar/parcel.webp" alt="mdo" width="25" *ngIf='siderActiveIcon[6]'>
+            <br> <span class="routeName">Area</span>
+        </a>
+    </div>
+</div> -->
+
+<div class="sidebar d-md-block d-none">
+    <!-- Logo -->
+    <div class="logo Soligant text-center">
+        RK Pattarai
+    </div>
+
+    <!-- Navigation items -->
+    <nav class="sidebar-nav">
+        <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+            class="sidebar-item active" [ngClass]="{'active':getCurrentRoute() === '/home'}">
+            <div class="icon-container">
+                <img [src]="'assets/images/sideBar/' + (getCurrentRoute() === '/home' ? 'Icon feather-home@2x-white.webp' : 'Icon feather-home@2x.webp')"
+                    alt="mdo" width="25">
+            </div>
+            <span class="label">Dashboard</span>
+        </a>
+
+        <a routerLink="/charges" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+            class="sidebar-item" [ngClass]="{'active':getCurrentRoute() === '/charges'}">
+            <div class="icon-container">
+                <img [src]="'assets/images/sideBar/' + (getCurrentRoute() === '/charges' ? 'payment-white.webp' : 'payment.webp')"
+                    alt="mdo" width="25">
+            </div>
+            <span class="label">Charges</span>
+        </a>
+
+        <a routerLink="/order" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }"
+            class="sidebar-item" [ngClass]="{'active':isOrderRoute('/order')}">
+            <div class="icon-container">
+                <img [src]="isOrderRoute('/order') ? 
+        'assets/images/sideBar/payment-white.webp' : 
+        'assets/images/sideBar/payment.webp'" width="25" />
+            </div>
+            <span class="label">Orders</span>
+        </a>
+
+        <a routerLink="/manual-payments" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }"
+            class="sidebar-item" [ngClass]="{'active':isOrderRoute('/manual-payments')}">
+            <div class="icon-container">
+                <img [src]="isOrderRoute('/manual-payments') ? 
+        'assets/images/sideBar/payment-white.webp' : 
+        'assets/images/sideBar/payment.webp'" width="25" />
+            </div>
+            <span class="label">Manual Payments</span>
+        </a>
+
+        
+        <a routerLink="/invoice-manager" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }"
+            class="sidebar-item" [ngClass]="{'active':isOrderRoute('/invoice-manager')}">
+            <div class="icon-container">
+                <img [src]="isOrderRoute('/invoice-manager') ? 
+        'assets/images/sideBar/payment-white.webp' : 
+        'assets/images/sideBar/payment.webp'" width="25" />
+            </div>
+            <span class="label">Invoice</span>
+        </a>
+
+
+        <!-- More sidebar items -->
+    </nav>
+
+</div>

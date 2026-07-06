@@ -1,0 +1,61 @@
+.search-container {
+    display: block;
+    margin: 0 auto;
+}
+
+input#search-bar {
+    margin: 0 auto;
+    width: 100%;
+    height: 44px;
+    padding: 0 20px;
+    font-size: 1rem;
+    border: 1px solid #DFDFDF;
+    border-radius: 5px;
+    opacity: 1;
+    outline: none;
+}
+
+input#search-bar:focus {
+    border: 1px solid #008ABF;
+    transition: 0.35s ease;
+    color: #008ABF;
+}
+
+::-webkit-input-placeholder {
+    font-family: Roboto-Light;
+    font-size: 14px;
+    color: #686868;
+    opacity: 0.9;
+}
+
+ :-ms-placeholder {
+    font-family: Roboto-Light;
+    font-size: 14px;
+    color: #686868;
+    opacity: 0.9;
+}
+
+ ::-moz-placeholder {
+    font-family: Roboto-Light;
+    font-size: 14px;
+    color: #686868;
+    opacity: 0.9;
+}
+
+@media (max-width: 425px) and (min-width: 200px) {
+    .productName {
+        font-size: 12px;
+    }
+    input#search-bar {
+        height: 35px;
+    }
+     ::-moz-placeholder {
+        font-size: 12px;
+    }
+     :-ms-placeholder {
+        font-size: 12px;
+    }
+    .naviIcons {
+        width: 14.5px;
+    }
+}

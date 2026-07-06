@@ -1,0 +1,110 @@
+<div class="container-fluid p-xl-4 p-lg-4 p-md-2 p-2" style="background-color: #F1F3F6;">
+    <div class="row">
+        <div class="col">
+
+            <div class="row">
+                <div class="col mx-auto">
+                    <p class="welcome nunito-sans mb-0">{{ greeting }}, Rajesh!</p>
+                </div>
+            </div>
+
+            <div class="row mt-3" *ngIf="analytics.totalCourier">
+
+                <div class="col-lg col-md-6 col-12 mb-lg-0 mb-md-0 mb-2">
+                    <div class="card _card">
+                        <div class="card-content">
+                            <div class="text">
+                                <p class="title nunito-sans">Total Courier</p>
+                                <p class="count nunito-sans">{{analytics.totalCourier.total}}</p>
+                                <p class="growth mb-0 nunito-sans"><span>
+                                        <img [src]="'assets/images/common/' + (analytics.totalCourier.up ? 'up' : 'down') + '.webp'"
+                                            alt="User Icon" width="24" />
+                                    </span> {{analytics.totalCourier.percentageChange}}% {{analytics.totalCourier.up ?
+                                    'Up' : 'Down'}}
+                                    from yesterday</p>
+                            </div>
+                            <div class="icon _8280FF">
+                                <img src="assets/images/common/courier.webp" alt="User Icon" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg col-md-6 col-12 mb-lg-0 mb-md-0 mb-2">
+                    <div class="card _card">
+                        <div class="card-content">
+                            <div class="text">
+                                <p class="title nunito-sans">Total Parcel</p>
+                                <p class="count nunito-sans">{{analytics.totalParcel.total}}</p>
+                                <p class="growth mb-0 nunito-sans"><span>
+                                        <img [src]="'assets/images/common/' + (analytics.totalParcel.up ? 'up' : 'down') + '.webp'"
+                                            alt="User Icon" width="24" />
+                                    </span> {{analytics.totalParcel.percentageChange}}% {{analytics.totalParcel.up ?
+                                    'Up' : 'Down'}} from yesterday</p>
+                            </div>
+                            <div class="icon _DCF5EA">
+                                <img src="assets/images/common/parcel_icon.webp" alt="User Icon" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg col-md-6 col-12 mb-lg-0 mb-md-0 mb-2">
+                    <div class="card _card">
+                        <div class="card-content">
+                            <div class="text">
+                                <p class="title nunito-sans">Total Door Delivery</p>
+                                <p class="count nunito-sans">{{analytics.totalDoorDelivery.total}}</p>
+                                <p class="growth mb-0 nunito-sans"><span>
+                                        <img [src]="'assets/images/common/' + (analytics.totalDoorDelivery.up ? 'up' : 'down') + '.webp'"
+                                            alt="User Icon" width="24" />
+                                    </span> {{analytics.totalDoorDelivery.percentageChange}}%
+                                    {{analytics.totalDoorDelivery.up ? 'Up' : 'Down'}} from yesterday</p>
+                            </div>
+                            <div class="icon _FFF1F1">
+                                <img src="assets/images/common/door_delivery.webp" alt="User Icon" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-lg col-md-6 col-12 mb-lg-0 mb-md-0 mb-2">
+                    <div class="card _card">
+                        <div class="card-content">
+                            <div class="text">
+                                <p class="title nunito-sans">Total Order's</p>
+                                <p class="count nunito-sans">{{analytics.totalOrders.total}}</p>
+                                <p class="growth mb-0 nunito-sans"><span>
+                                        <img [src]="'assets/images/common/' + (analytics.totalOrders.up ? 'up' : 'down') + '.webp'"
+                                            alt="User Icon" width="24" />
+                                    </span> {{analytics.totalOrders.percentageChange}}% {{analytics.totalOrders.up ?
+                                    'Up' : 'Down'}} from yesterday</p>
+                            </div>
+                            <div class="icon _FEC53D">
+                                <img src="assets/images/common/total_orders.webp" alt="User Icon" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-lg-8 col-md-12 col">
+                    <app-chart [type]="'bar'" [data]="chartData" [options]="chartOptions"></app-chart>
+                </div>
+                <div class="col-lg-4 col">
+                    <app-chart [type]="'doughnut'" [data]="barChartData" [options]="barChartOptions"></app-chart>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col">
+                    <app-table [productsList]="products" [showPagination]="false" [tHeader]="tHeaderList"></app-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

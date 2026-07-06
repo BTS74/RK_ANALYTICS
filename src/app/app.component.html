@@ -1,0 +1,29 @@
+
+<app-toast></app-toast>
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+
+<!-- Show different layouts based on route -->
+
+
+
+<ng-container *ngIf="!isLoginRoute">
+    <div class="app-layout">
+        <app-sidebar></app-sidebar>
+
+        <div class="right-section">
+            <app-header></app-header>
+            <main class="main-content">
+                <router-outlet></router-outlet>
+            </main>
+        </div>
+    </div>
+
+
+</ng-container>
+
+<!-- Login layout -->
+<ng-container *ngIf="isLoginRoute">
+    <router-outlet></router-outlet>
+</ng-container>

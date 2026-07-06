@@ -1,0 +1,43 @@
+<div class="wrapper">
+    <div class="background"></div>
+
+    <div class="login-container">
+
+        <h2>Welcome, let's login.</h2>
+
+        <form autocomplete="off" [formGroup]="loginForm" class="my-4" (ngSubmit)="validateForm()">
+            <label for="memberId">Email ID</label>
+
+            <div class="form-group">
+
+                <input id="memberId" type="email" formControlName="userName" aria-describedby="emailHelp"
+                    class="form-control" [ngClass]="{ 'is-invalid': submitted  && loginFormCheck['userName'].errors }"
+                    placeholder="Enter your username or Email" [(ngModel)]="loginDetails.userName">
+                <div *ngIf="submitted && loginFormCheck['userName'].errors" class="invalid-feedback">
+                    <div *ngIf="loginFormCheck['userName'].errors['required']">Email is
+                        required</div>
+                </div>
+            </div>
+            <label for="password">Password</label>
+            <div class="form-group">
+
+                <input id="password" type="password" formControlName="password" aria-describedby="emailHelp"
+                    class="form-control" minlength="8"
+                    [ngClass]="{ 'is-invalid': submitted  && loginFormCheck['password'].errors }"
+                    placeholder="Enter your Password" [(ngModel)]="loginDetails.password"
+                    (keyup.enter)="validateForm()">
+
+                <div *ngIf="submitted && loginFormCheck['password'].errors" class="invalid-feedback">
+                    <div *ngIf="loginFormCheck['password'].errors['required']">Password is
+                        required</div>
+                    <div *ngIf="loginFormCheck['password'].errors['minlength']">Minimum 8
+                        characters is required</div>
+                </div>
+
+
+            </div>
+            <button type="submit" class="login-button" (click)="validateForm()"
+                (keyup.enter)="validateForm()">Login</button>
+        </form>
+    </div>
+</div>

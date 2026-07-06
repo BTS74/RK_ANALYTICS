@@ -1,0 +1,653 @@
+<app-header>
+</app-header>
+<div>
+    <app-sidebar>
+    </app-sidebar>
+</div>
+<div class="container-fluid content" style="background-color: #FFF;">
+    <div class="row">
+        <div class="col-11 px-xl-0 px-lg-0 px-md-0 px-2 ms-5">
+            <div class="container-fluid">
+
+                <!-- Cart Empty illustration-->
+                <!-- <div class="row" *ngIf="showCartCountForHeader() <= 0">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-10 col-12 mx-auto mt-5">
+                                <div class="row mt-5">
+                                    <div class="col-md-8 col-10 mx-auto">
+                                        <img src="https://resource.rkpattarai.com/sitesAssets/assets/images/common/cart-empty.webp"
+                                            alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="text-center heading mt-3">Your Cart is Empty!</p>
+                                                <p class="text-center greyText mt-3">Looks like you haven't added <br>
+                                                    anything to you cart yet!</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-8 mx-auto">
+                                                <button type="button" routerLink="/home"
+                                                    class="btn btn-success placeOrderBtn mt-3 mb-4 w-100">Back to
+                                                    Home</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- -->
+
+                <div class="row mt-xl-5 mt-lg-4 mt-md-3 mt-3">
+                    <div class="col-lg-7 col-12">
+                        <p class="cart_count mb-xl-4 mb-lg-4 mb-md-3 mb-2">
+                            <span [ngClass]="!showCartType[0] ? 'inactive' :''"
+                                (click)="showCart(localstorageEnum.PRODUCTS)" style="cursor: pointer;">My Cart
+                                ({{getCartCount(localstorageEnum.PRODUCTS)}}) </span>
+
+                            <!--<span class="mx-3" style="border:1px solid #70707080"></span>
+
+                             <span [ngClass]="!showCartType[1] ? 'inactive' :''"
+                                (click)="showCart(localstorageEnum.GARDENSETUP)" style="cursor: pointer;">Garden Setup
+                                ({{getCartCount(localstorageEnum.GARDENSETUP)}})</span> -->
+                        </p>
+                    </div>
+                    <div class="col">
+                        <button class="add_btn btn float-end px-3" (click)="sidebarVisible1 = true">Add
+                            Products</button>
+                    </div>
+
+                </div>
+
+                <div *ngIf="showCartType[0] && showCartCountForHeader() > 0">
+
+                    <div class="row d-md-block d-none" style="border-bottom:0.75px solid #EBEBEB;"
+                        *ngIf="cart && cart.length>0">
+                        <div class="col">
+                            <div class="row ">
+                                <div class="col-lg-4 col-md-4 col-4 ">
+                                    <p class="heading">Products</p>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+
+                                        <div class="col ">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-5 col">
+                                                    <p class="heading">Price</p>
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4 col-md-4 col-8">
+                                                    <p class="heading">Quantity</p>
+                                                </div>
+                                                <div class="col-lg-4 col-md-3 col">
+                                                    <p class="heading">Total</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row " *ngFor="let productInfos of cart;let i=index">
+                        <div class="col" *ngIf="productInfos.cartModel">
+
+                            <div class="row pt-xl-3 pt-lg-3 pt-md-3 pt-1 position-relative"
+                                *ngFor="let productInfo of productInfos.cartModel.products;let i=index"
+                                style="border-bottom:0.75px solid #EBEBEB;">
+                                <div class="col">
+
+                                    <div class="row ">
+                                        <div class="col-lg-4 col-md-4 col-4 mx-auto px-3 ">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-12 my-3"
+                                                    (click)="routeToProduct(productInfo.productModel.productId)">
+                                                    <img [src]="imageSrc+ productInfo?.productModel?.productImages[0]"
+                                                        class="img-fluid" alt="">
+
+                                                </div>
+                                                <div class="col align-self-center">
+                                                    <div class="row d-md-block d-none">
+                                                        <div class="col-md-12 col-12">
+                                                            <p class="mb-0 product_Name text-Capitalize">
+                                                                {{productInfo.productModel.productNameInEnglish}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col align-self-center">
+                                            <div class="row  my-xl-5 my-lg-0 my-md-0 my-2"
+                                                style="white-space: noWrap;align-items: baseline;">
+
+                                                <div class="col ">
+                                                    <div class="row my-xl-4 my-lg-0 my-md-0 my-0"
+                                                        style="align-items: baseline;">
+                                                        <div class="col-lg col-md-3 col d-md-none d-block">
+                                                            <p class="mb-2 product_Name">
+                                                                <span
+                                                                    class="">{{productInfo.productModel.productNameInEnglish}}</span>
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="col-lg-4 col-md-5 col-12">
+                                                            <div class="row mb-2">
+                                                                <div class="col">
+                                                                    <p class="mb-0" *ngIf="productInfo.price>0">
+                                                                        <span class="price">₹{{productInfo.price |
+                                                                            number :
+                                                                            '1.2-2'}}</span>
+                                                                        <span class="discountprice mx-2"><del>₹{{productInfo.mrp
+                                                                                | number : '1.2-2'}}</del></span>
+                                                                        <span *ngIf="productInfo.offer>0"
+                                                                            class="discountprice"
+                                                                            style=" color: #02010A;">{{productInfo.offer
+                                                                            |
+                                                                            number : '1.0'}}% off</span>
+                                                                    </p>
+                                                                    <p class="mb-0" *ngIf="productInfo.price<=0">-</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-4 col-8">
+                                                            <div class="row">
+                                                                <div class="col-xl-6 col-lg-8 col-md-10 col">
+                                                                    <div class="input-group"
+                                                                        *ngIf="productInfo.productModel.productDetails?.length">
+                                                                        <button class="input-group-text" [disabled]="productInfo.productModel.productCategory
+                                                                        =='Give Away'"
+                                                                            (click)="addRemoveProducts(productInfo,'remove')">
+                                                                            <i class="fa-solid fa-minus"></i></button>
+                                                                        <input type="text" id="quantity" name="quantity"
+                                                                        (blur)="onBlurHandler($event, productInfo)"
+                                                                            class="form-control quantity text-center inputBox"
+                                                                            [value]="showCartBtton(productInfo)" min="1"
+                                                                            max="100">
+                                                                        <button class="input-group-text" [disabled]="productInfo.productModel.productCategory
+                                                                        =='Give Away'"
+                                                                            (click)="addRemoveProducts(productInfo,'add')"><i
+                                                                                class="fa-solid fa-plus"></i></button>
+                                                                    </div>
+                                                                    <p
+                                                                        *ngIf="productInfo.productModel.productDetails?.length == 0">
+                                                                        <span class="price"
+                                                                            style="color: #dc3545;white-space: normal">
+                                                                            Currently Unavailable</span>
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-3 col d-md-block d-none ">
+                                                            <div class="row mb-2">
+                                                                <div class="col">
+                                                                    <p class="mb-0" *ngIf="productInfo.price > 0">
+                                                                        <span class="price"
+                                                                            style="color: #008000;">₹{{productInfo.price
+                                                                            |
+                                                                            number : '1.2-2'}}</span>
+                                                                    </p>
+                                                                    <p class="mb-0" *ngIf="productInfo.price<=0">-</p>
+                                                                </div>
+                                                                <div class="col d-lg-block d-none"
+                                                                    style="cursor: pointer;">
+                                                                    <p class="mb-0"
+                                                                        (click)="addRemoveProducts(productInfo,'delete')">
+                                                                        <img src="assets/images/common/Icon ionic-ios-close-circle-outline@2x.webp"
+                                                                            class="delete_icon img-fluid">
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="d-md-none d-block col-12">
+                            <div class="row" *ngIf="productInfos?.cartModel">
+                                <div class="col">
+
+                                    <div class="row mt-xl-5 mt-lg-4 mt-md-3 mt-3">
+                                        <div class="col mx-auto">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p class="priceDetails mb-4">PRICE DETAILS</p>
+                                                </div>
+                                            </div>
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <p>MRP ({{productInfos?.cartModel.totalNoOfQuantity}} item)</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="mb-0 text-end discount">
+                                                        ₹{{productInfos?.cartModel.totalMrp
+                                                        | number: '1.2-2'}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <p>Product Discount</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="mb-0 text-end discount"
+                                                        *ngIf="productInfos?.cartModel.totalYouSave>0">
+                                                        -₹{{productInfos?.cartModel.totalYouSave| number: '1.2-2'}}
+                                                    </p>
+                                                    <p class="mb-0 text-end discount"
+                                                        *ngIf="productInfos?.cartModel.totalYouSave==0">--</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <div class="container px-0"
+                                                        style="border-top: 1px dashed #70707080;border-bottom: 1px dashed #70707080;">
+                                                        <div class="row py-3">
+                                                            <div class="col">
+                                                                <p class="mb-0">Total Amount</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p class="mb-0 text-end discount">
+                                                                    ₹{{productInfos.totalAmount | number: '1.2-2'}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row my-3">
+                                                <div class="col">
+                                                    <div class=" discount"
+                                                        *ngIf="productInfos?.cartModel.totalYouSave > 0">
+                                                        You will save ₹{{productInfos?.cartModel.totalYouSave |
+                                                        number:
+                                                        '1.2-2'}} on this order</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row mb-5">                                   
+                                        <div class="col-12 mx-auto mt-2">
+                                            <button class="btn w-100 placeOrderBtn"
+                                                (click)="removeProductsFromLocalStorage()">Proceed
+                                                to
+                                                Checkout</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="row d-md-block d-none my-3" *ngIf="cart && cart.length>  0">
+                        <div class="col">
+                            <div class="row ">
+                                <div class="col-lg-4 col-md-4 col-4 ">
+
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+
+                                        <div class="col ">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-5 col">
+
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4 col-md-4 col-8">
+                                                    <p class="float-xl-end me-xl-5 sub_total">Subtotal</p>
+                                                </div>
+                                                <div class="col-lg-4 col-md-3 col">
+                                                    <p class="price" style="color: #008000;">₹{{cart[0].totalAmount
+                                                        |
+                                                        number: '1.2-2'}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5 d-md-block d-none" *ngIf="cart && cart.length>  0">
+                        <div class="col-lg-6 col-md-8 offset-xl-6 offset-lg-6 offset-md-4">
+                            <div class="row mb-5">                           
+                                <div class="col-6 offset-6 mx-auto">
+                                    <button class="btn w-100 placeOrderBtn"
+                                        (click)="removeProductsFromLocalStorage()">Proceed to
+                                        Checkout</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="showCartType[1] && showCartCountForHeader() > 0">
+
+                    <div class="row " *ngFor="let productInfos of cart;let i=index">
+                        <div class="col">
+                            <div class="row pt-xl-3 pt-lg-3 pt-md-3 pt-1 position-relative"
+                                *ngFor="let productInfo of productInfos.gardenCartModel.products;let i=index"
+                                style="border-bottom:0.75px solid #EBEBEB;">
+                                <div class="col">
+                                    <div class="row ">
+                                        <div class="col-lg-4 col-md-4 col-4 mx-auto px-3 ">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md col my-3"
+                                                    (click)="routeToProduct(productInfo.productModel.productId)">
+                                                    <!-- if garden setup  are available
+                                                        
+                                                        <img [src]="imageSrc + productInfo?.productImage" class="img-fluid"
+                                                        alt=""> -->
+
+                                                    <img [src]="imageSrc + productInfo?.productModel.productImages[0]"
+                                                        class="img-fluid" alt="">
+                                                </div>
+                                                <!-- <div class="col-lg-4 col-md col my-3"
+                                                    (click)="routeToProduct(productInfo.productModel.productId)">
+                                                    <div class="position-relative">
+                                                        <div
+                                                            class="position-absolute top-50 start-0 translate-middle pe-4">
+                                                            <i class="fa-regular fa-plus"></i>
+                                                        </div>
+
+
+                                                        <img [src]="productInfo.growBagImage ? imageSrc + productInfo.growBagImage : imageSrc + productInfo.potImage"
+                                                            class="img-fluid" alt="Image">
+
+                                                        <div
+                                                            class="position-absolute top-50 start-100 translate-middle ps-4">
+                                                            <i class="fa-regular fa-plus"></i>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg col-md col align-self-center">
+                                                    <div class="row ">
+                                                        <div class="col-md-12 col-12">
+                                                            <img [src]="imageSrc +productInfo?.soilMixImage"
+                                                                class="img-fluid" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-lg col-md-8 col align-self-center">
+                                            <div class="row  my-xl-5 my-lg-0 my-md-0 my-2"
+                                                style="white-space: noWrap;align-items: baseline;">
+
+                                                <div class="col ">
+                                                    <div class="row my-xl-4 my-lg-0 my-md-0 my-0"
+                                                        style="align-items: baseline;">
+                                                        <div class="col-lg col-md-3 col d-md-none d-block">
+                                                            <p class="mb-2 text-wrap">
+                                                                <span
+                                                                    class="">{{productInfo.productModel.productNameInEnglish}}</span>
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="col-lg-4 col-md-5 col-12">
+                                                            <div class="row mb-2">
+                                                                <div class="col">
+                                                                    <p class="mb-2">
+                                                                        <span
+                                                                            class="price text-wrap">{{productInfo.productModel.productNameInEnglish}}</span>
+                                                                    </p>
+                                                                    <!-- <p class="mb-2 discountprice">
+
+                                                                        <ng-container
+                                                                            *ngIf="productInfo.potName; else growBagName">
+                                                                            <span>{{productInfo?.potName}}</span>
+                                                                        </ng-container>
+                                                                        <ng-template #growBagName>
+                                                                            <span>{{productInfo?.growBagName}}</span>
+                                                                        </ng-template>
+                                                                    </p> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xl-4 col-lg-4 col-md-4 col-8">
+
+                                                            <div class="row">
+                                                                <div class="col-xl-6 col-lg-8 col-md-10 col">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-text"
+                                                                            (click)="addRemoveProducts(productInfo,'remove',localstorageEnum.GARDENSETUP)">
+                                                                            <i class="fa-solid fa-minus"></i></span>
+                                                                        <input type="text" id="quantity" readonly
+                                                                            name="quantity"
+                                                                            class="form-control quantity text-center inputBox"
+                                                                            [value]="showCartBtton(productInfo, localstorageEnum.GARDENSETUP)"
+                                                                            min="1" max="100">
+                                                                        <span class="input-group-text"
+                                                                            (click)="addRemoveProducts(productInfo,'add',localstorageEnum.GARDENSETUP)">
+                                                                            <i class="fa-solid fa-plus"></i>
+                                                                        </span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-3 col d-md-block d-none ">
+                                                            <div class="row mb-2">
+                                                                <div class="col">
+                                                                    <p class="mb-0">
+                                                                        <span class="price">
+                                                                            {{productInfo.soilMixQtyUnit}}
+                                                                            {{productInfo.soilMixQtyMass}}</span>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col d-lg-block d-none"
+                                                                    style="cursor: pointer;">
+                                                                    <p class="mb-0"
+                                                                        (click)="addRemoveProducts(productInfo,'remove',localstorageEnum.GARDENSETUP)">
+                                                                        <img src="assets/images/common/Icon ionic-ios-close-circle-outline@2x.webp"
+                                                                            class="delete_icon img-fluid">
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="d-md-none d-block col-12">
+                            <div class="row">
+                                <div class="col">
+
+                                    <div class="row mt-xl-5 mt-lg-4 mt-md-3 mt-3">
+                                        <div class="col mx-auto">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p class="priceDetails mb-4">PRICE DETAILS</p>
+                                                </div>
+                                            </div>
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <p>Total item(s) :
+                                                    </p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="mb-0 text-end discount">
+                                                        ({{productInfos.gardenCartModel.totalNoOfQuantity}} item)</p>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row productName">
+                                                <div class="col">
+                                                    <p>Product Discount</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="mb-0 text-end discount"
+                                                        *ngIf="productInfos.gardenCartModel.totalYouSave>0">
+                                                        -₹{{productInfos.gardenCartModel.totalYouSave| number:
+                                                        '1.2-2'}}
+                                                    </p>
+                                                    <p class="mb-0 text-end discount"
+                                                        *ngIf="productInfos.gardenCartModel.totalYouSave==0">--</p>
+                                                </div>
+                                            </div> 
+
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <div class="container px-0"
+                                                        style="border-top: 1px dashed #70707080;border-bottom: 1px dashed #70707080;">
+                                                        <div class="row py-3">
+                                                            <div class="col">
+                                                                <p class="mb-0">Total Amount</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p class="mb-0 text-end discount">
+                                                                    ₹{{productInfos.totalAmount | number: '1.2-2'}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row my-3">
+                                                <div class="col">
+                                                    <div class=" discount"
+                                                        *ngIf="productInfos.gardenCartModel.totalYouSave > 0">
+                                                        You will save ₹{{productInfos.gardenCartModel.totalYouSave |
+                                                        number:
+                                                        '1.2-2'}} on this order</div>
+                                                </div>
+                                            </div> -->
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row mb-5">                                  
+                                        <div class="col-12 mx-auto mt-2">
+                                            <button class="btn w-100 placeOrderBtn"
+                                                routerLink="/check-out/garden-setup">Proceed
+                                                to
+                                                Checkout</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row  d-none my-3" *ngIf="cart.length>  0">
+                        <div class="col">
+                            <div class="row ">
+                                <div class="col-lg-4 col-md-4 col-4 ">
+
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+
+                                        <div class="col ">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-5 col">
+
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4 col-md-4 col-8">
+                                                    <p class="float-xl-end me-xl-5 sub_total">Subtotal</p>
+                                                </div>
+                                                <div class="col-lg-4 col-md-3 col">
+                                                    <p class="price" style="color: #008000;">₹{{cart[0].totalAmount
+                                                        |
+                                                        number: '1.2-2'}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row my-5 d-md-block d-none" *ngIf="cart.length>  0">
+                        <div class="col-lg-6 col-md-8 offset-xl-6 offset-lg-6 offset-md-4">
+                            <div class="row mb-5">
+
+                                <div class="col-6 offset-6 mx-auto">
+                                    <button class="btn w-100 placeOrderBtn" routerLink="/check-out/garden-setup">Proceed
+                                        to
+                                        Checkout</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--  -->
+
+                <p-confirmDialog [acceptLabel]="'OK'"
+                    [breakpoints]="{'960px': '75vw', '640px': '75vw', '320px' : '95vw'}" [style]="{width: '60vw'}"> >
+                </p-confirmDialog>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-sidebar [(visible)]="sidebarVisible1" position="right">
+    <h3>Search</h3>
+    <div class="row">
+        <app-search-box [placeHolder]="'Search Products'" (onSearchValue)="search($event)">
+        </app-search-box>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="row" *ngFor="let data of products">
+                <app-single-product [productsList]="data" [newlyAdded]="newlyAdded"
+                    (AddProductsToCart)="refreshProductList($event)">
+                </app-single-product>
+            </div>
+        </div>
+
+    </div>
+
+</p-sidebar>

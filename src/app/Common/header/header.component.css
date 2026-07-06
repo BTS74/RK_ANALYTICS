@@ -1,0 +1,38 @@
+.link-dark {
+    color: #FFF !important;
+}
+.dropdown-item{
+    font-family: Roboto-Regular;
+    font-size: 14px;
+}
+.dropdown-menu{
+    border-radius: 0 !important;
+}
+
+
+.adminName {
+    font-family: Roboto-Regular;
+    font-size: 15px;
+    color: #000;
+}
+
+.signOutBtn {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    color: #000;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    transition-delay: 0.4s;
+    /* display: inline-block; */
+}
+
+.naviIcons {
+    width: 21.2px;
+}

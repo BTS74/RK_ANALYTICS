@@ -1,0 +1,231 @@
+<div class="container-fluid p-4" style="background-color: #F1F3F6;">
+    <div class="row">
+        <div class="col">
+            <div class="container-fluid">
+
+                <div class="">
+                    <p class="mb-0 montserrat breadCrumbTopic">Invoice Summary</p>
+                    <p class="mb-0 montserrat breadCrumbSubTopic">View invoice summary</p>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <form class="py-3" autocomplete="off" [formGroup]="form1">
+
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-3 col-4">
+                                    <input type="date" class="form-control date my-3" placeholder="Choose Date"
+                                        formControlName="invoiceStartDate"
+                                        [ngClass]="{ 'is-invalid': submitted && checkFilter['invoiceStartDate'].errors }">
+                                    <div *ngIf="submitted && checkFilter['invoiceStartDate'].errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="checkFilter['invoiceStartDate'].errors['required']">
+                                            From Date is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-3 col-4">
+                                    <input type="date" class="form-control date my-3" placeholder="Choose Date"
+                                        formControlName="invoiceEndDate"
+                                        [ngClass]="{ 'is-invalid': submitted && checkFilter['invoiceEndDate'].errors }">
+                                    <div *ngIf="submitted && checkFilter['invoiceEndDate'].errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="checkFilter['invoiceEndDate'].errors['required']">
+                                            To Date is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <select class="form-select my-3" formControlName="userGstIn"  name="userGstIn">
+                                        <option class="dropdown-item" disabled selected value="undefined">
+                                            -- Select GST type --</option>
+                                        <option [value]="'YES'">With GST</option>
+                                        <option [value]="'NO'">Without GST</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <select class="form-select my-3" formControlName="orderStatus" name="orderstatusText">
+                                        <option class="dropdown-item" disabled selected value="undefined">
+                                            -- Select Order Staus --</option>
+                                        <option [value]="'cancelledManually'">Cancelled</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-xl-2 col-lg-6 col-8 align-self-center">
+                                    <button class="btn show_Results reset_filter" (click)="showFilters('reset')"
+                                        *ngIf="filtre.orderStatus || filtre.userGstIn">
+                                        <span>
+                                            <img src="assets/images/common/reset.webp" alt="reset filter"
+                                                class="me-2 reset_filter_img">
+                                        </span>Reset Filter</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-6 col-8 align-self-center">
+                                    <button type="button" class="form-control border-none  my-3 show_Results"
+                                        (click)="showFilters()"><span class="px-3">Show
+                                            Results</span></button>
+                                </div>
+                                <div class="col-xl-2 col-lg-6 col-8 align-self-center">
+                                    <button type="button" class="form-control my-3 show_Results"
+                                        style="background-color: #ff595e" (click)="getGSTOrderReport()"><span
+                                            class="px-3">Download Report</span></button>
+                                </div>
+                                <!--                                 
+                                <div class="col border-start align-self-center">
+
+                                    <div class="row">
+                                        
+                                        <div class="col align-self-center">
+                                            <button type="button" class="form-control my-3 show_Results"
+                                                style="background-color: #ff595e;border:none"
+                                                (click)="getGSTOrderReport()"><span class="px-3">Download
+                                                    GST Report</span></button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+
+                <!-- 
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card p-2" style="background-color: #ff595e;border:none">
+                                    <app-heading [heading]="'Courier'" [style]="{ 'font-family': 'Roboto-Medium',
+                                    'font-size': '22px',
+                                    'color': '#fff' }"></app-heading>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-3">
+                            <div class="col">
+                                <div class="card p-2" style="border:none">
+                                    <div class="row my-2">
+                                        <div class="col">Total No.of Courier :</div>
+                                        <div class="col text-end pe-5"> <b>{{stats.totalNoOfCourier}}</b></div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div class="col">Total No.of Pending :</div>
+                                        <div class="col text-end pe-5"> <b>{{stats.totalNoOfCourierPending}}</b></div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div class="col">Total No.of Dispatched :</div>
+                                        <div class="col text-end pe-5"> <b>{{stats.totalNoOfCourierDispatched}}</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+          
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card p-2" style="background-color: #ffca3a;border:none">
+                                    <app-heading [heading]="'Parcel'" [style]="{ 'font-family': 'Roboto-Medium',
+                                    'font-size': '22px',
+                                    'color': '#fff' }"></app-heading>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-3">
+                            <div class="col">
+                                <div class="card p-2" style="border:none">
+                                    <div class="row my-2">
+                                        <div class="col">Total No.of Parcel :</div>
+                                        <div class="col text-end pe-5"> <b>{{stats.totalNoOfParcel}}</b></div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div class="col">Total No.of Pending :</div>
+                                        <div class="col text-end pe-5"> <b>{{stats.totalNoOfParcelPending}}</b></div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div class="col">Total No.of Dispatched :</div>
+                                        <div class="col text-end pe-5"> <b>{{stats.totalNoOfParcelDispatched}}</b></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card p-2" style="background-color: #8ac926;border:none">
+                                    <app-heading [heading]="'Door Delivery'" [style]="{ 'font-family': 'Roboto-Medium',
+                                    'font-size': '22px',
+                                    'color': '#fff' }"></app-heading>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-3">
+                            <div class="col">
+                                <div class="card p-2" style="border:none">
+                                    <div class="row my-2">
+                                        <div class="col">Total No.of Door Delivery :</div>
+                                        <div class="col text-end pe-5"> <b>{{stats.totalNoOfDoorDelivery}}</b></div>
+                                    </div>
+                                    <div class="row my-2">
+                                        <div class="col">Total No.of Dispatched :</div>
+                                        <div class="col text-end pe-5"> <b>{{stats.totalNoOfDoorDeliveryDispatched}}</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+             
+                </div> -->
+
+                <!-- <div class="row mt-4">
+                    <div class="col">
+                
+                        <button class="btn addBtn  me-2" [ngClass]="{'active':show[1]}"
+                            (click)="getOrdersByModeOfDelivey('Courier')">
+                            <span> COURIER ({{stats.totalNoOfCourierDispatchedTdy}})</span>
+                        </button>
+                        <button class="btn addBtn me-2" [ngClass]="{'active':show[2]}"
+                            (click)="getOrdersByModeOfDelivey('Parcel')">
+                            <span>PARCEL ({{stats.totalNoOfParcelDispatchedTdy}})</span>
+                        </button>
+                        <button class="btn addBtn me-2" [ngClass]="{'active':show[3]}"
+                            (click)="getOrdersByModeOfDelivey('DoorDelivery')">
+                            <span>DOOR DELIVERY ({{stats.totalNoOfDoorDeliveryDispatchedTdy}})</span>
+                        </button>
+                        <button class="btn addBtn  me-2" [ngClass]="{'active':show[4]}"
+                            (click)="getOrdersByModeOfDelivey('Plants')">
+                            <span> PLANTS ({{stats.totalNoOfPlantsDispatchedTdy}})</span>
+                        </button>
+                        <button class="btn addBtn me-2" [ngClass]="{'active':show[5]}"
+                            (click)="getOrdersByModeOfDelivey('ABS Stand')">
+                            <span>STANDS ({{stats.totalNoOfABSDispatchedTdy}})</span>
+                        </button>
+                    </div>
+                </div> -->
+
+                <div class="row" *ngIf="allOrders.length>=1 ">
+                    <div class="col" style="white-space: nowrap;">
+                        <app-order-over-view-table [orderList]="allOrders" [pageDetails]="pageDetails"
+                            [events]="refreshTable.asObservable()" (updatePageEmitter)="nextPage($event)"
+                            [tHeader]="tHeaderList">
+                        </app-order-over-view-table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

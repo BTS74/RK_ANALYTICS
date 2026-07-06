@@ -1,0 +1,646 @@
+
+<app-header [showHeader]="!orderUpdatePage">
+</app-header>
+
+<div>
+    <app-sidebar [showSideBar]="!orderUpdatePage">
+    </app-sidebar>
+    <div class="container-fluid content" style="background-color: #ffffff">
+        <div class="row">
+            <div class="col-11 px-xl-0 px-lg-0 px-md-0 px-2 ms-5">
+                <div class="container-fluid">
+
+                    <div class="row mt-xl-5 mt-lg-5 mt-md-5 mt-2 mb-xl-4 mb-lg-4 mb-md-4 mb-2" *ngIf="!orderUpdatePage">
+                        <div class="col-lg-7 col-12 me-xl-5 me-lg-2 me-0">
+                            <p class="mb-2"><span class="heading">Checkout</span></p>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-7 col-12">
+                            <div class="row " [ngClass]="{'borderRight' : !orderUpdatePage}">
+                                <div class="col-lg-11 col-12">
+
+                                    <div class="row mt-xl-5 mt-lg-4 mt-md-3 mt-3" >
+                                        <div class="col">
+                                            <p class="mb-2"><span class="subHeading">SHIPPING DETAILS</span></p>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row" *ngIf="orderUpdatePage || !showParcelServiceOption">
+                                        <div class="col">
+                                            <form class=" mt-3 mb-2 needs-validation" autocomplete="off"
+                                                [formGroup]="form1">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-12 mb-3 position-relative">
+                                                        <label for="validationCustom05" class="form-label">Phone No (10
+                                                            digits only)</label>
+                                                        <input type="tel" inputmode="numeric" formControlName="phone"
+                                                            class="form-control input_box robotoText phoneNoInput"
+                                                            id="phoneNoInput"
+                                                            [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['phone'].errors }"
+                                                            placeholder="Enter Whatsapp Number"
+                                                            [(ngModel)]="finalCheckOut.phone"
+                                                            (input)="mobileNumber($event)">
+
+
+                                                        <div *ngIf="submitted[1] && addressCheck['phone'].errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="addressCheck['phone'].errors['required']">Phone
+                                                                No
+                                                                is required</div>
+                                                            <div *ngIf="addressCheck['phone'].errors?.['minlength']">
+                                                                Phone No must be at least 10 digits.
+                                                            </div>
+                                                            <div *ngIf="addressCheck['phone'].errors?.['maxlength']">
+                                                                Phone No should not be greater than 10 digits.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-12 mb-3">
+                                                        <label for="validationCustom03" class="form-label">Full
+                                                            Name</label>
+                                                        <input type="text" formControlName="name"
+                                                            class="form-control input_box"
+                                                            [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['name'].errors }"
+                                                            placeholder="Enter name" [(ngModel)]="finalCheckOut.name">
+                                                        <div *ngIf="submitted[1] && addressCheck['name'].errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="addressCheck['name'].errors['required']">Name is
+                                                                required</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-12 mb-3">
+                                                        <label for="validationCustom01" class="form-label">Pin
+                                                            Code</label>
+                                                        <input type="text" formControlName="pinCode"
+                                                            class="form-control input_box robotoText"
+                                                            [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['pinCode'].errors }"
+                                                            placeholder="Enter PinCode" [(ngModel)]="address.pinCode"
+                                                            (change)="getAreaDetailKeyUp()">
+                                                        <div *ngIf="submitted[1] && addressCheck['pinCode'].errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="addressCheck['pinCode'].errors['required']">
+                                                                Pincode
+                                                                is required</div>
+                                                            <div *ngIf="addressCheck['pinCode'].errors?.['minlength']">
+                                                                Pincode must be at least 6 digits.
+                                                            </div>
+                                                            <div *ngIf="addressCheck['pinCode'].errors?.['maxlength']">
+                                                                Pincode must not be greater than least 6 digits.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-md-6 col-12 mb-3">
+                                                    <label for="validationCustom02" class="form-label">Country</label>
+                                                    <input formControlName="country" class="form-control input_box"
+                                                        [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['country'].errors }"
+                                                        placeholder="Enter country" [(ngModel)]="address.country"
+                                                        readonly>                                                 
+                                                </div> -->
+
+                                                    <div class="col-md-6 col-12 mb-3">
+                                                        <label for="validationCustom01" class="form-label">State</label>
+                                                        <input type="text" formControlName="state"
+                                                            class="form-control input_box"
+                                                            [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['state'].errors }"
+                                                            placeholder="Enter state" [(ngModel)]="address!.state">
+                                                        <div *ngIf="submitted[1] && addressCheck['state'].errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="addressCheck['state'].errors['required']">State
+                                                                is
+                                                                required</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-12 mb-3">
+                                                        <label for="validationCustom03" class="form-label">City</label>
+                                                        <input type="text" formControlName="city"
+                                                            class="form-control input_box"
+                                                            [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['city'].errors }"
+                                                            placeholder="Enter city" [(ngModel)]="address!.city">
+                                                        <div *ngIf="submitted[1] && addressCheck['city'].errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="addressCheck['city'].errors['required']">City is
+                                                                required</div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-6 col-12 mb-3 mt-xl-0 mt-lg-0 mt-md-0 mt-3">
+                                                        <label for="validationCustom05" class="form-label">Alternative
+                                                            Phone
+                                                            No (10
+                                                            digits only)</label>
+                                                        <input type="tel" inputmode="numeric"
+                                                            formControlName="alternativePhone"
+                                                            class="form-control input_box robotoText"
+                                                            [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['alternativePhone'].errors }"
+                                                            placeholder="Enter Alternate phone"
+                                                            [(ngModel)]="finalCheckOut.alternativePhone"
+                                                            (keypress)="alterMobileNumber($event)">
+                                                    </div>
+
+                                                    <div class="col-md-12 col-12 mb-3 mt-xl-3 mt-lg-3 mt-md-3 mt-0">
+                                                        <label for="validationCustom05" class="form-label">Enter Full
+                                                            Address with Pincode
+                                                        </label>
+                                                        <textarea formControlName="addressLine1" cols="20" rows="3"
+                                                            class="form-control"
+                                                            [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['addressLine1'].errors }"
+                                                            placeholder="Enter address"
+                                                            [(ngModel)]="address.addressLine1">
+                                                    </textarea>
+                                                        <!-- <input type="text" formControlName="addressLine1"
+                                                        class="form-control input_box"
+                                                        [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['addressLine1'].errors }"
+                                                        placeholder="Enter address Line 1 "
+                                                        [(ngModel)]="address.addressLine1"> -->
+                                                        <div *ngIf="submitted[1] && addressCheck['addressLine1'].errors"
+                                                            class="invalid-feedback">
+                                                            <div
+                                                                *ngIf="addressCheck['addressLine1'].errors['required']">
+                                                                Address is required</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 col-12">
+                                                        <label for="validationCustom03" class="form-label">GSTIN
+                                                            (Optional)</label>
+                                                        <input type="text" formControlName="gstIn"
+                                                            class="form-control input_box robotoText"
+                                                            [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['gstIn'].errors }"
+                                                            placeholder="Enter gstIn  (Optional)"
+                                                            [(ngModel)]="finalCheckOut.gstIn">
+                                                        <div *ngIf="submitted[1] && addressCheck['gstIn'].errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="addressCheck['gstIn'].errors['pattern']">
+                                                                <span style="color: red;">Invalid GST no</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="col-md-6 col-12 mb-3">
+                                                    <label for="validationCustom05" class="form-label">Address </label>
+                                                    <input type="text" formControlName="addressLine2"
+                                                        class="form-control input_box"
+                                                        [ngClass]="{ 'is-invalid': submitted[1]  && addressCheck['addressLine2'].errors }"
+                                                        placeholder="Enter address Line 2"
+                                                        [(ngModel)]="address.addressLine2">
+                                                    <div *ngIf="submitted[1] && addressCheck['addressLine2'].errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="addressCheck['addressLine2'].errors['required']">
+                                                            Address Line 2 is required</div>
+                                                    </div>
+                                                </div> -->
+
+
+                                                </div>
+                                                <div class="row" *ngIf="!orderUpdatePage && proceedBtn">
+                                                    <div
+                                                        class="col-xl-4 col-lg-5 col-md-4 offset-xl-8 offset-lg-7 offset-md-8 col my-3">
+                                                        <button class="btn w-100 float-end checkOut"
+                                                            (click)="proceedOrder()">Proceed</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="row" *ngIf="orderUpdatePage && showParcelServiceOption">
+                                        <div class="col">
+
+                                            <div class="row">
+                                                <div class="col-md-6 col-12 mb-3" *ngIf="orderUpdatePage || showParcelServiceOption">
+                                                    <label for="validationCustom05" class="form-label">
+                                                        Parcel Service
+                                                    </label>
+
+                                                    <div class="row" style="align-items: center;"
+                                                        *ngFor="let data of providersList">
+                                                        <div class="col-1 mt-1 ">
+                                                            <input type="radio" id="parcelService" name="parcelService"
+                                                                [value]="data.parcelServiceProvider" [(ngModel)]="selectedService"
+                                                                (change)="whichServiceProvider(data.parcelServiceProvider)">
+                                                        </div>
+                                                        <label for="staticEmail"
+                                                            class="productLable col-md col ">{{data.parcelServiceProvider}}</label>
+                                                    </div>
+
+                                                    <div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg col-12" *ngIf="!orderUpdatePage" >
+                            <div class="row" *ngFor="let productInfos of cart;let i=index">
+                                <div class="col">
+
+                                    <div class="row mt-xl-5 mt-lg-4 mt-md-3 mt-3" *ngIf="!isNewGardenSetup">
+                                        <div class="col-lg-11 col-12 mx-auto">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p class="subHeading mb-4">PRICE DETAILS</p>
+                                                </div>
+                                            </div>
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <p class="subTopic">MRP <span
+                                                            class="values">({{productInfos.cartModel.totalNoOfQuantity}}</span>
+                                                        item)</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="mb-0 text-end values">₹{{productInfos.cartModel.totalMrp |
+                                                        number: '1.2-2'}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <p class="subTopic">Product Discount</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="mb-0 text-end values discount"
+                                                        *ngIf="productInfos.cartModel.totalYouSave>0">
+                                                        -₹{{productInfos.cartModel.totalYouSave| number: '1.2-2'}}</p>
+                                                    <p class="mb-0 text-end values discount"
+                                                        *ngIf="productInfos.cartModel.totalYouSave==0">--</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <div class="container px-0"
+                                                        style="border-top: 1px dashed #70707080;border-bottom: 1px dashed #70707080;">
+                                                        <div class="row py-3">
+                                                            <div class="col">
+                                                                <p class="mb-0 totalAmt">Total Amount</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p class="mb-0 text-end totalAmtValues">₹
+                                                                    {{productInfos.totalAmount | number: '1.2-2'}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row my-3">
+                                                <div class="col">
+                                                    <div class=" discount"
+                                                        *ngIf="productInfos.cartModel.totalYouSave > 0">
+                                                        You will save ₹{{productInfos.cartModel.totalYouSave | number:
+                                                        '1.2-2'}} on this order</div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row mt-xl-5 mt-lg-4 mt-md-3 mt-3" *ngIf="isNewGardenSetup"> -->
+                                    <div class="row mt-xl-5 mt-lg-4 mt-md-3 mt-3"
+                                        *ngIf="isNewGardenSetup && !proceedBtn">
+                                        <div class="col-lg-11 col-12 mx-auto">
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <div class="border container_box">
+                                                        <p-orderList [value]="productInfos.gardenCartModel.products"
+                                                            [listStyle]="{ 'max-height': '30rem' }" header="Products"
+                                                            [dragdrop]="false">
+                                                            <ng-template let-product pTemplate="item">
+                                                                <div class="row">
+                                                                    <div class="col-lg-4 col-md col my-3">
+
+                                                                        <!-- if garden setup  are available
+                                                        
+                                                      <img [src]="imageSrc + product?.productImage"
+                                                                        class="img-fluid" alt="">
+-->
+
+                                                                        <img [src]="imageSrc + product?.productModel.productImages[0]"
+                                                                            class="img-fluid" alt="">
+                                                                    </div>
+                                                                    <!-- <div class="col-lg-4 col-md col my-3">
+                                                                    <div class="position-relative">
+                                                                        <div
+                                                                            class="position-absolute top-50 start-0 translate-middle pe-4">
+                                                                            <i class="fa-regular fa-plus"></i>
+                                                                        </div>
+                                                                        <img [src]="product.growBagImage ? imageSrc + product.growBagImage : imageSrc + product.potImage"
+                                                                            class="img-fluid" alt="Image">
+                                                                        <div
+                                                                            class="position-absolute top-50 start-100 translate-middle ps-4">
+                                                                            <i class="fa-regular fa-plus"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg col-md col align-self-center">
+                                                                    <div class="row ">
+                                                                        <div class="col-md-12 col-12">
+                                                                            <img [src]="imageSrc +product?.soilMixImage"
+                                                                                class="img-fluid" alt="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <p class="mb-0 totalAmt">
+                                                                            {{product?.productModel.productNameInEnglish}}
+                                                                        </p>
+                                                                        <p class="mb-0 subTopic"
+                                                                            *ngIf="product.growBagName">
+                                                                            {{product.growBagName}}</p>
+                                                                        <p class="mb-0 subTopic"
+                                                                            *ngIf="product.potName">
+                                                                            {{product.potName}}</p>
+
+                                                                        <p class="mb-0 subTopic">Qty :
+                                                                            {{product.quantity}}
+                                                                        </p>
+
+                                                                        <p class="mb-0 subTopic">{{product.soilMixName}}
+                                                                            {{product.soilMixQtyUnit}}
+                                                                            {{product.soilMixQtyMass}}</p>
+                                                                        <!-- <p class="mb-0 totalAmt">{{product.price |
+                                                                        number:'1.2-2'}}</p> -->
+                                                                    </div>
+                                                                </div>
+                                                            </ng-template>
+                                                        </p-orderList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p class="subHeading mb-4">PRICE DETAILS</p>
+                                                </div>
+                                            </div>
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <p class="subTopic">Total Items</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="mb-0 text-end values"> <span
+                                                            class="values">({{productInfos.gardenCartModel.totalNoOfQuantity}}</span>
+                                                        item)</p>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row productName">
+                                            <div class="col">
+                                                <p class="subTopic">Product Discount</p>
+                                            </div>
+                                            <div class="col">
+                                                <p class="mb-0 text-end values discount"
+                                                    *ngIf="productInfos.gardenCartModel.totalYouSave>0">
+                                                    -₹{{productInfos.gardenCartModel.totalYouSave| number: '1.2-2'}}</p>
+                                                <p class="mb-0 text-end values discount"
+                                                    *ngIf="productInfos.gardenCartModel.totalYouSave==0">--</p>
+                                            </div>
+                                        </div> -->
+                                            <div class="row productName">
+                                                <div class="col">
+                                                    <p class="subTopic">
+                                                        <span *ngIf="productInfos.modeOfDelivery == 'Courier'">
+                                                            Shipping Charge
+                                                        </span>
+                                                        <span *ngIf="productInfos.modeOfDelivery == 'Parcel'">
+                                                            Packing Charge
+                                                        </span>
+                                                        <span *ngIf="productInfos.modeOfDelivery == 'DoorDelivery'">
+                                                            Delivery Charge
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div class="col">
+
+
+                                                    <p class="mb-0 text-end values"
+                                                        *ngIf="productInfos.gardenCartModel.totalDeliveryCharge > 0 && productInfos.modeOfDelivery == 'Courier'">
+                                                        ₹
+                                                        {{productInfos.gardenCartModel.totalDeliveryCharge | number:
+                                                        '1.2-2'}}</p>
+
+                                                    <p class="mb-0 text-end values"
+                                                        *ngIf="productInfos.gardenCartModel.totalPackingCharge > 0 && productInfos.modeOfDelivery == 'Parcel'">
+                                                        ₹
+                                                        {{productInfos.gardenCartModel.totalPackingCharge | number:
+                                                        '1.2-2'}}</p>
+
+                                                    <!-- <p class="mb-0 text-end values discount"
+                                                    *ngIf="productInfos.gardenCartModel.totalDeliveryCharge == 0 && !productInfos.isChennaiDelivery"> FREE </p> -->
+
+                                                    <p class="mb-0 text-end values discount"
+                                                        *ngIf="productInfos.modeOfDelivery == 'DoorDelivery'">
+                                                        Our
+                                                        Executive will connect with you for <b>Transport Charges</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="row productName" *ngIf="productInfos.totalAmount > 0">
+                                                <div class="col">
+                                                    <div class="container px-0"
+                                                        style="border-top: 1px dashed #70707080;border-bottom: 1px dashed #70707080;">
+                                                        <div class="row py-3">
+                                                            <div class="col">
+                                                                <p class="mb-0 totalAmt">Total Amount</p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p class="mb-0 text-end totalAmtValues">₹
+                                                                    {{productInfos.totalAmount | number: '1.2-2'}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row my-3">
+                                                <div class="col">
+                                                    <div class=" discount"
+                                                        *ngIf="productInfos.gardenCartModel.totalYouSave > 0">
+                                                        You will save ₹{{productInfos.gardenCartModel.totalYouSave |
+                                                        number:
+                                                        '1.2-2'}} on this order</div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mb-5" *ngIf="!proceedBtn && productInfos.modeOfDelivery!=null">
+                                        <div class="col-11 mx-auto">
+                                            <button [disabled]="!submitted" class="btn w-100 placeOrder_btn"
+                                                (click)="placeOrder()">Place order</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <p-confirmDialog [acceptLabel]="'OK'" [breakpoints]="{'960px': '75vw', '640px': '75vw', '320px' : '95vw'}"
+        [style]="{width: '60vw'}"> ></p-confirmDialog> -->
+
+    <!-- Order Confirmation -->
+    <p-dialog header="Order Confirmation" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }"
+        [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [modal]="true"
+        (onHide)="closeTransportationModal()">
+
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto text-center">
+                Order Placed Successfully
+
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-arrow-left" (click)="closeConfirmation('order')" label="Back to Order"
+                styleClass="p-button-text"></p-button>
+            <p-button icon="pi pi-shopping-cart" (click)="closeConfirmation('cart')" label="Go to Cart"
+                styleClass="p-button-text"></p-button>
+        </ng-template>
+
+
+    </p-dialog>
+    <!-- Order Confirmation -->
+
+    <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#parcelHub"
+        id="parcelHubPopUpBtn">
+        <span><img src="assets/images/header/Icon feather-help-circle.webp"></span>
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="parcelHub" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class=" modal-body">
+
+                    <div class="position-absolute top-0 end-0">
+                        <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-lg-4 col-md-8 col-10 mx-auto text-center">
+                            <img src="assets/images/common/weight.webp" class="img-fluid" alt="chennai@2x"
+                                *ngIf="!checkDrainCells() && !checkForABS()">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-10 col-12 mx-auto text-center">
+                            <div class="row">
+                                <div class="col-12 mx-auto text-center">
+                                    <ng-template [ngIf]="!checkDrainCells() && !checkForABS()">
+                                        <p class="text pt-2">
+                                            ஒரு பார்சல் பேக்கேஜுக்கு நீங்கள் 50 கிலோ வரை சேர்க்கலாம்.
+                                            மேலும் பார்சலுக்கான பேக்கிங் கட்டணம் மற்றும் எங்கள் அருகில் உள்ள பார்சல்
+                                            சேவை
+                                            மையத்திற்கு நாங்கள் பொருட்களை கொண்டு செல்ல பொருட்களின் எடைக்கேற்ப ஒரு
+                                            பார்சலுக்கு 60
+                                            - 120 ரூபாய் வரை பில்லில் குறிப்பிடப்பட்டுள்ளது
+                                        </p>
+                                        <p class="text pt-xl-5 pt-lg-5 pt-md-3 pt-3 mb-0">
+                                            You can add up to 50 kg to a parcel package. Additionally, the packing
+                                            charges
+                                            for the parcel and the cost of transporting the items to our nearest parcel
+                                            service center are mentioned in the bill, ranging from ₹60 to ₹120 per
+                                            parcel
+                                            depending on the weight of the items.</p>
+                                    </ng-template>
+
+                                    <ng-template [ngIf]="checkDrainCells()">
+                                        <div>
+                                            <p class="text pt-2">
+                                                ஒரு பார்சல் பேக்கேஜுக்கு நீங்கள் 32 Drain cell வரை சேர்க்கலாம். மேலும்
+                                                பார்சலுக்கான பேக்கிங் கட்டணம் மற்றும் எங்கள் அருகில் உள்ள பார்சல் சேவை
+                                                மையத்திற்கு நாங்கள் பொருட்களை கொண்டு செல்ல ஒரு பார்சலுக்கு 60 - 120
+                                                ரூபாய்
+                                                வரை பில்லில் குறிப்பிடப்பட்டுள்ளது
+                                            </p>
+                                            <p class="text pt-xl-5 pt-lg-5 pt-md-3 pt-3 mb-0">
+                                                You can add up to 32 drain cells to a parcel package. Additionally, the
+                                                packing charges for the parcel and the cost of transporting the items to
+                                                our
+                                                nearest parcel service center are mentioned in the bill, ranging from
+                                                ₹60 to
+                                                ₹120 per parcel.</p>
+                                        </div>
+                                    </ng-template>
+
+                                    <ng-template [ngIf]="checkForABS()">
+                                        <div>
+                                            <p class="text pt-2">
+                                                நீங்கள் ஆர்டர் செய்த பொருட்கள் பார்சல் சேவை மூலம்
+                                                டெலிவரி செய்யப்படும்.
+                                                தயவுசெய்து உங்கள் இருப்பிடத்திற்கு அருகில் உள்ள பார்சல்
+                                                சேவையை
+                                                தேர்ந்தெடுக்கவும்
+                                            </p>
+                                            <p class="text pt-xl-5 pt-lg-5 pt-md-3 pt-3 mb-0">
+                                                The items you ordered will be delivered via parcel
+                                                service.
+                                                Please select a parcel service near your location</p>
+                                        </div>
+                                    </ng-template>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-6 col-md-8 col mx-auto mt-3">
+                                    <button class="btn w-100 placeOrder_btn" type="button" data-bs-dismiss="modal"
+                                        aria-label="Close">OK, Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="position-absolute top-50 w-100">
+                    <div class="row mb-5">
+                        <div class="col-md-10 col-12 mx-auto text-center">
+                            <div class="row mb-5">
+                                <div class="col-12 mx-auto text-center">
+                                    <p class="text pt-xl-5 pt-lg-5 pt-md-3 pt-3 mb-2 mb-md-2 mb-lg-3">Are you a Chennai customer?
+                                    </p>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-5 mx-auto">
+                                    <button class="btn w-100 continue_shopping_Btn" (click)="chennaiCust(true)">Click
+                                        here</button>
+                                </div>
+                                <div class="col-12 mx-auto mt-2 d-md-block d-none">
+                                    <button class="btn w-100 close" type="button" data-bs-dismiss="modal" aria-label="Close" (click)="chennaiCust(false)">No,Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <app-parcel-service-provider-modal [openModal]="openModalParcelService.asObservable()"
+        [uniqueDistricts]="uniqueDistricts" (onChangeDistrictEmitter)="onChange($event)" [parcelServiceProvider]="parcelServiceProvider"
+        (onHubselectedConfirmation)="isHubselected()" (onHubSelectedCheckBox)="isHubSelected($event)"
+        [hubDetails]="hubDetails"></app-parcel-service-provider-modal>

@@ -1,0 +1,351 @@
+<button type="button" class="d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="prodList">
+
+</button>
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="border: none;">
+                <p class="resultValues">
+                    <b *ngIf="printList?.cartModel">Order Details</b>
+                    <b *ngIf="printList?.gardenCartModel">New Garden Setup</b>
+                </p>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="row">
+                    <div class="col">
+                        <div class="container-fluid px-0">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="tableHeading py-2">
+                                        <th class="">S.No</th>
+                                        <th colspan="1">Product Name</th>
+                                        <th class="text-end">Price</th>
+                                        <th class="text-end">Qty</th>
+                                        <th class="text-end">Unit</th>
+                                        <th class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="printList?.cartModel">
+                                    <tr class="align-middle " id="rowColor"
+                                        *ngFor="let data of printList?.cartModel?.products;let i=index">
+                                        <td class="text-end">{{i+1}}</td>
+
+                                        <td class="text-start" *ngIf="printList?.cartModel">
+                                            {{data?.productModel.productNameInEnglish}}
+                                            <span *ngIf="data.dimensionDetailsModel">
+                                                ( {{data.dimensionDetailsModel.width}}W X
+                                                {{data.dimensionDetailsModel.length}}L)
+                                            </span>
+                                        </td>
+                                        <td class="text-end">{{data?.productModel?.productDetails[0].price |
+                                            number:'1.2-2'}}</td>
+
+                                        <td class="text-end">{{data.unit}} {{data.mass}} </td>
+                                        <td class="text-end">{{data.quantity}}</td>
+                                        <td class="text-end">{{data.price | number:'1.2-2'}}</td>
+                                    </tr>
+                                </tbody>
+
+                                <tbody *ngIf="printList?.gardenCartModel">
+                                    <tr class="align-middle " id="rowColor"
+                                        *ngFor="let data of printList?.gardenCartModel?.products;let i=index">
+                                        <td class="text-end">{{i+1}}</td>
+
+                                        <td class="text-start" *ngIf="printList?.gardenCartModel">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md col-4">
+                                                    <img [src]="imgSrc + data.productModel.productImages[0]"
+                                                        class="img-fluid p-image" alt="Image" width="120">
+
+
+                                                </div>
+                                                <div class="col-lg-4 col-md col-4">
+                                                    <div class="position-relative">
+                                                        <span *ngIf="data.growBagName">Grow Bag :
+                                                            {{data.growBagName}}</span>
+                                                        <span *ngIf="data.potName">Pot : {{data.potName}} </span>
+                                                        <!-- <img [src]="data.growBagImage ? imgSrc + data.growBagImage : imgSrc + data.potImage"
+                                                            class="img-fluid" alt="Image" width="120"> -->
+                                                    </div>
+
+                                                </div>
+                                                <!--<div class="col-lg col-md col-4 align-self-center">
+                                                    <img [src]="imgSrc +data.soilMixImage" class="img-fluid" alt="Image"
+                                                        width="120">
+                                                </div> -->
+                                            </div>
+                                        </td>
+                                        <td class="text-end">{{data?.productModel?.productDetails[0].price |
+                                            number:'1.2-2'}}</td>
+
+                                        <td class="text-end">{{data.soilMixQtyUnit}} {{data.soilMixQtyMass}}</td>
+                                        <td class="text-end">{{data.quantity}}</td>
+                                        <td class="text-end">{{data.price | number:'1.2-2'}}</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+
+                <div class="row mt-2">
+                    <div class="col-xl-6 col-lg col-md">
+                        <p class="resultValues"><b>Delivery Details</b></p>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Name</div>
+                            <div class="col text-left resultValues"> <b class="bgcolor"> {{printList?.user?.name}}</b>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col topic">GST</div>
+                            <div class="col text-left resultValues">
+                                <b class="bgcolor" *ngIf="printList?.user?.gstIn else gardenCartModel">
+                                    {{printList?.user?.gstIn}}</b>
+
+                                <ng-template #gardenCartModel>
+                                    <b class="bgcolor">-</b>
+                                </ng-template>
+                            </div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Address</div>
+                            <div class="col text-left resultValues text-wrap"> <b
+                                    class="bgcolor">{{printList?.user?.address?.addressLine1}},
+                                    {{printList?.user?.address?.city}},
+                                    {{printList?.user?.address?.pinCode}},
+                                    {{printList?.user?.address?.state}}
+                                </b></div>
+                        </div>
+
+                        <div class="row mt-1" *ngIf="printList?.user?.address?.landMark">
+                            <div class="col topic">Land Mark</div>
+                            <div class="col text-left resultValues text-wrap"> <b
+                                    class="bgcolor">{{printList?.user?.address?.landMark}}
+                                </b></div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Contact No</div>
+                            <div class="col text-left resultValues"> <b class="bgcolor"> {{printList?.user?.phone}}
+                                    <span *ngIf="printList?.user?.alternativePhone">
+                                        , {{printList?.user?.alternativePhone}}</span></b>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row mt-1">
+                            <div class="col topic">Order Id </div>
+                            <div class="col text-left resultValues"> <b class="bgcolor">#{{printList.orderId}}</b></div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Total Count </div>
+                            <div class="col text-left resultValues">
+                                <b>{{printList?.cartModel?.totalNoOfQuantity}}</b>
+                                <b>{{printList?.gardenCartModel?.totalNoOfQuantity}}</b>
+                            </div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Payment Status </div>
+                            <div class="col text-left resultValues">
+                                <b *ngIf="printList.paymentStatusText">
+                                    <span *ngIf="printList.paymentStatusText=='captured'">Success</span>
+                                    <span *ngIf="printList.paymentStatusText=='failure'">Failed</span>
+                                    <span *ngIf="printList.paymentStatusText=='cancelled'">Cancelled</span>
+                                    <span *ngIf="printList.paymentStatusText=='initiated'">Initiated</span>
+                                    <span *ngIf="printList.paymentStatusText=='processing'">Processing</span>
+                                    <span *ngIf="printList.paymentStatusText=='timeOut'">Time Out</span>
+                                </b>
+                                <b *ngIf="!printList.paymentStatusText">---</b>
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Order Received on </div>
+                            <div class="col text-left resultValues"> <b>{{printList?.orderDate|date:'dd-MM-yyyy hh:mm
+                                    a'}}</b></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col topic">Total Weight (Kgs) </div>
+                            <div class="col text-left resultValues">
+                                <b>{{printList?.cartModel?.totalKgs ? printList.cartModel.totalKgs : 'N/A'}} Kg(s)</b>
+                            </div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Order Amount </div>
+                            <div class="col text-left resultValues">
+                                <b *ngIf="printList?.cartModel">₹{{(printList?.cartModel?.totalPrice) | number
+                                    :'1.2-2'}}</b>
+                                <b *ngIf="printList?.gardenCartModel">₹{{(printList?.gardenCartModel?.totalPrice) |
+                                    number :'1.2-2'}}</b>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-1">
+                            <div class="col  subTotal">
+
+                                <span *ngIf="printList?.modeOfDelivery == 'Courier'">Delivery Charge </span>
+                                <!-- <span *ngIf="printList.modeOfDelivery == 'Parcel'">Packing Charge </span> -->
+                            </div>
+                            <div class="col text-left  resultValues">
+                                <b *ngIf="printList?.modeOfDelivery == 'Courier'">₹{{printList?.cartModel?.totalDeliveryCharge
+                                    | number :'1.2-2'}}</b>
+                                <!-- <b *ngIf="printList.modeOfDelivery == 'Parcel'">₹{{printList?.cartModel?.totalPackingCharge
+                                    | number :'1.2-2'}}</b>                               -->
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-1" *ngIf="printList.totalTransportationCost">
+                            <div class="col  subTotal">
+                                Transportation Charge
+                            </div>
+                            <div class="col text-left  resultValues">
+
+                                <b *ngIf="printList.totalTransportationCost">₹{{printList?.totalTransportationCost |
+                                    number
+                                    :'1.2-2'}} </b>
+                                <b *ngIf="!printList.totalTransportationCost">-
+                                </b>
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-1" *ngIf="printList.totalLiftingCost">
+                            <div class="col  subTotal">
+                                Lifting Charge
+                            </div>
+                            <div class="col text-left  resultValues">
+
+                                <b *ngIf="printList.totalLiftingCost">₹{{printList?.totalLiftingCost | number
+                                    :'1.2-2'}} </b>
+                                <b *ngIf="!printList.totalLiftingCost">-
+                                </b>
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-1" *ngIf="printList.totalLabourCost">
+                            <div class="col  subTotal">
+                                Labour Charge
+                            </div>
+                            <div class="col text-left  resultValues">
+
+                                <b *ngIf="printList.totalLabourCost">₹{{printList?.totalLabourCost | number
+                                    :'1.2-2'}} </b>
+                                <b *ngIf="!printList.totalLabourCost">-
+                                </b>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="row mt-1" *ngIf="printList?.cartModel?.totalPackingCharge">
+                            <div class="col  subTotal">
+                                Packing Charge
+                            </div>
+                            <div class="col text-left  resultValues">
+
+                                <b *ngIf="printList?.cartModel?.totalPackingCharge">₹{{printList?.cartModel?.totalPackingCharge
+                                    | number
+                                    :'1.2-2'}} </b>
+                                <b *ngIf="!printList?.cartModel?.totalPackingCharge">-
+                                </b>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row productName mt-2">
+                            <div class="col">
+                                <div class="container px-0"
+                                    style="border-top: 1px dashed #70707080;border-bottom: 1px dashed #70707080;">
+                                    <div class="row py-3">
+                                        <div class="col">
+                                            <p class="mb-0 grandTotal">Grand Total </p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0 text-left resultValues">
+                                                <b>₹{{printList?.totalAmount| number :'1.2-2'}}</b>
+                                            </p>
+                                            <!-- <p class="mb-0 text-left resultValues"
+                                                *ngIf="printList.modeOfDelivery === 'DoorDelivery'">
+                                                <b>₹{{ (printList?.totalAmount + printList?.totalTransportationCost +
+                                                    printList?.totalLiftingCost) | number :'1.2-2' }}</b>
+                                            </p> -->
+
+                                            <!-- <p class="mb-0 text-left resultValues"
+                                                *ngIf="printList.modeOfDelivery == 'DoorDelivery' && printList.totalTransportationCost>0 && !printList.gardenCartModel">
+                                                <b>₹{{(printList?.totalAmount + printList?.totalTransportationCost +
+                                                    printList?.totalLiftingCost)| number :'1.2-2'}}</b>
+                                            </p> -->
+
+                                            <!-- <p class="mb-0 text-left resultValues"
+                                                *ngIf="printList.modeOfDelivery == 'DoorDelivery' && printList.gardenCartModel">
+                                                <b>₹{{(printList?.totalAmount + printList?.totalTransportationCost +
+                                                    printList?.totalLiftingCost)| number :'1.2-2'}}</b>
+                                            </p> -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6" *ngIf="printList.modeOfDelivery=='Parcel'">
+                        <p class="resultValues"><b>Parcel Service Details</b></p>
+                        <div class="row mt-1">
+                            <div class="col topic">Provider Name </div>
+                            <div class="col text-left resultValues"> <b class="bgcolor">
+                                    {{printList.parcelServiceProviderName}}</b></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col topic">TrackingId</div>
+                            <div class="col text-left resultValues"> <b class="bgcolor">
+                                    {{printList.parcelTrackingId}}</b></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col topic">Hub Name</div>
+                            <div class="col text-left resultValues text-wrap"> <b class="bgcolor">
+                                    {{printList.parcelServiceHubName}}</b></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col topic">Hub Address</div>
+                            <div class="col text-left resultValues text-wrap"> <b class="bgcolor">
+                                    {{printList.parcelServiceHubAddress}}</b></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col topic">Parcel Count</div>
+                            <div class="col text-left resultValues text-wrap"> <b class="bgcolor">
+                                    {{printList?.cartModel?.totalNoOfParcelBags}}</b></div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

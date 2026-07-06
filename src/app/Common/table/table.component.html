@@ -1,0 +1,149 @@
+<div class="content_border mt-3">
+
+    <div class="row pt-1">
+        <div class="col">
+            <div class="container-fluid px-0 table-overflow-scroll">
+
+                <table class="table">
+                    <thead *ngIf="productsList">
+                        <tr class="tableHeading py-2">
+                            <th *ngIf="toHideTableContent('S.No')">S.No</th>
+                            <th *ngIf="toHideTableContent('Product ID')">Product ID</th>
+                            <th *ngIf="toHideTableContent('Name')"> Name</th>
+                            <th *ngIf="toHideTableContent('Category')">Category</th>
+                            <th *ngIf="toHideTableContent('Sub category')">Sub category</th>
+                            <th *ngIf="toHideTableContent('Created on')">Created on</th>
+                            <th *ngIf="toHideTableContent('Updated on')">Updated on</th>
+                            <!-- <th>Garden category</th> -->
+                            <th *ngIf="toHideTableContent('Stock Avaliable')">Stock Avaliable</th>
+                            <th *ngIf="toHideTableContent('MRP - Price')">MRP - Price</th>
+                            <th *ngIf="toHideTableContent('Sort - Group')">Sort - Group</th>
+                            <th *ngIf="toHideTableContent('GST')">GST</th>
+                            <th *ngIf="toHideTableContent('HSN')">HSN</th>
+                            <th *ngIf="toHideTableContent('Product status')">Product status</th>
+                            <th *ngIf="toHideTableContent('Action')">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="align-middle " id="rowColor"
+                            *ngFor="let data of productsList | paginate: config;let i=index">
+                            <td *ngIf="toHideTableContent('S.No')">{{i+1}}</td>
+                            <td style="color: #28A745;cursor: pointer;" (click)="routeToUpdateProduct(data.productId)"
+                                *ngIf="toHideTableContent('Product ID')">
+                                <u>#{{data.productId}}</u>
+                            </td>
+                            <td *ngIf="toHideTableContent('Name')">
+                                <p class="mb-0">{{data.productNameInEnglish}}</p>
+
+                            </td>
+                            <td class="text-capitalize" *ngIf="toHideTableContent('Category')">{{data.productCategory}}
+                            </td>
+                            <td class="text-capitalize" *ngIf="toHideTableContent('Sub category')">
+                                <span *ngIf="data.productSubCategory">
+                                    {{data.productSubCategory}}
+                                </span>
+                                <span *ngIf="!data.productSubCategory">
+                                    -
+                                </span>
+                            </td>
+                            <td class="text-capitalize" *ngIf="toHideTableContent('Created on')">{{data.productCreatedOn
+                                |
+                                date:'dd-MM-YYY'}}</td>
+                            <td class="text-capitalize" *ngIf="toHideTableContent('Updated on')">
+                                <span *ngIf="data.productUpdatedOn">{{data.productUpdatedOn |
+                                    date:'dd-MM-YYY'}}</span><span *ngIf="!data.productUpdatedOn">-</span>
+                            </td>
+                            <!-- <td class="text-capitalize">
+                            <span *ngIf="data.productNewGardenCategory; else noNewGardenCategory">
+                                {{data.productNewGardenCategory}}
+                            </span>
+                            <ng-template #noNewGardenCategory>
+                                -
+                            </ng-template>
+                        </td> -->
+                            <td class="text-capitalize" *ngIf="toHideTableContent('Stock Avaliable')">
+                                <div>
+                                    <input type="number" placeholder="Enter Count" id="item.productIdt"
+                                        [(ngModel)]="data.availableNoOfProducts" class="me-2" />
+                                    <button style="
+                                    background: #008000;
+                                    color: #fff;
+                                    border: 1px solid transparent;
+                                     border-radius: 5px;
+                                    margin: 2px;" (click)="updateSortAndGroup(data)">Save</button>
+                                </div>
+                            </td>
+                            <td class="text-capitalize" *ngIf="toHideTableContent('MRP - Price')">
+                                <div *ngIf="data.productCategory == 'Plants'; else notAplicable">
+                                    <input type="number" placeholder="Enter Product Sort" id="item.productIdt"
+                                        [(ngModel)]="data.productDetails[0].mrp" class="me-2" />
+                                    <input type="number" placeholder="Enter Product Group" id="item.productId-group"
+                                        [(ngModel)]="data.productDetails[0].price" class="me-2" />
+                                    <button class="saveBtn" (click)="updateSortAndGroup(data)">Save</button>
+                                </div>
+                                <ng-template #notAplicable>
+                                    -
+                                </ng-template>
+                            </td>
+
+
+                            <td class="text-capitalize" *ngIf="toHideTableContent('Sort - Group')">
+                                <div>
+                                    <input type="number" placeholder="Enter Product Sort" id="item.productIdt"
+                                        [(ngModel)]="data.productSort" class="me-2" />
+                                    <input type="number" placeholder="Enter Product Group" id="item.productId-group"
+                                        [(ngModel)]="data.productGroup" class="me-2" />
+                                    <button class="saveBtn" (click)="updateSortAndGroup(data)">Save</button>
+                                </div>
+
+                            </td>
+                            <td class="text-capitalize" *ngIf="toHideTableContent('GST')">{{data.gst }}</td>
+                            <td class="text-capitalize" *ngIf="toHideTableContent('HSN')">{{data.hsn }}</td>
+                            <td class="text-capitalize" *ngIf="toHideTableContent('Product status')">
+                                <div class="">
+                                    <select class="form-select dropDownValue " aria-label="Default select example"
+                                        [ngClass]="{'inStock':data.productDetails[0]?.availability=='IN_STOCK','outOfStock':data.productDetails[0]?.availability!='IN_STOCK'}"
+                                        (change)="optionsChange($event.target)">
+                                        <option [value]="i">
+                                            <span *ngIf="data.productDetails[0]?.availability=='IN_STOCK'">In
+                                                Stock</span>
+                                            <span *ngIf="data.productDetails[0]?.availability!='IN_STOCK'">Out Of
+                                                Stock</span>
+                                        </option>
+                                        <option [value]="i">
+                                            <span *ngIf="data.productDetails[0]?.availability=='IN_STOCK'">Out Of
+                                                Stock</span>
+                                            <span *ngIf="data.productDetails[0]?.availability=='OUT_OF_STOCK'">In
+                                                Stock</span>
+                                        </option>
+                                    </select>
+                                </div>
+                            </td>
+
+                            <td *ngIf="toHideTableContent('Action')">
+                                <div class="row">
+                                    <!-- <div class="col-sm-6 text-center">
+                                    <img src="assets/images/common/Icon ionic-md-create@2x.webp" width="12px">
+                                </div> -->
+                                    <div class="col-sm-6 text-center" style="cursor: pointer;"
+                                        (click)="deleteProduct(data.productId)">
+                                        <img src="assets/images/common/Icon material-delete@2x.webp" width="9.33px">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-2" *ngIf="showPagination">
+        <div class="col">
+            <span class="total_items ms-3">Total Item(s) {{pageDetails}}</span>
+            <pagination-controls class="float-end" (pageChange)="pageChangeEvent($event)" [responsive]="true"
+                [directionLinks]="true"></pagination-controls>
+        </div>
+    </div>
+</div>

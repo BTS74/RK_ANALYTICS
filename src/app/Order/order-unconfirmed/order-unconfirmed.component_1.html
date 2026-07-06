@@ -1,0 +1,478 @@
+<app-header>
+</app-header>
+<div>
+    <app-sidebar>
+    </app-sidebar>
+</div>
+<div class="container-fluid content" style="background-color: #F1F3F6;">
+    <div class="row py-1 ">
+        <div class="col-12">
+            <div class="container-fluid">
+                <div class="row mt-3 py-2 ">
+                    <div class="col-xl-10 col-lg-8">
+                        <p class="mb-0 breadCrumbTopic">Order Overview</p>
+                        <p class="mb-0">
+                            <span>
+                                <img src="assets/images/common/Icon ionic-md-home@2x.webp" width="11.2px"
+                                    class="me-2 mb-1">
+                            </span>
+                            <span class="breadCrumbSubTopic">Unconfirmed </span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <p class="mb-0 textInBoxes" style="color: #1B1B1D;">Manage Orders</p>
+                    </div>
+                    <!-- <div class="col-lg col-12">
+                        <div class="row">
+                            <div class="col">
+                                <app-search-box [placeHolder]="'Search using Phone No / order Id'" (onSearchValue)="search($event)"></app-search-box>
+                            </div>                           
+                        </div>
+
+                    </div> -->
+
+                </div>
+                <!-- 
+                <div class="row mt-4">
+                    <div class="col"> 
+                        <button class="btn addBtn  me-2" [ngClass]="{'active':show[0]}" (click)="getOrdersByModeOfDelivey('All')">
+                            <span> ALL </span>                          
+                    </button>
+                        <button class="btn addBtn  me-2" [ngClass]="{'active':show[1]}" (click)="getOrdersByModeOfDelivey('Courier')">
+                            <span> COURIER</span>                          
+                    </button>
+                        <button class="btn addBtn me-2" [ngClass]="{'active':show[2]}" (click)="getOrdersByModeOfDelivey('Parcel')">
+                            <span>PARCEL</span>                           
+                    </button>
+                        <button class="btn addBtn me-2" [ngClass]="{'active':show[3]}" (click)="getOrdersByModeOfDelivey('DoorDelivery')">                           
+                        <span>DOOR DELIVERY</span>                  
+                    </button>
+
+                    </div>
+                </div> -->
+
+
+                <div class="row mt-4 d-none">
+                    <div class="col">
+                        <div class="container-fluid" style="background-color: #29f15826;">
+                            <form class="" autocomplete="off" [formGroup]="form1">
+                                <div class="row">
+                                    <div class="col-lg-1 align-self-center">
+                                        <span class="filtertext ">Filter By</span>
+                                    </div>
+
+                                    <!-- <div class="col-lg-2 col-8 ">
+                                        <select class="form-select my-3" formControlName="status" (change)="optionsChange($event.target)" [(ngModel)]="filtre.orderStatus">
+                                            <option class="dropdown-item" disabled selected value="undefined">Select your Order status</option>                                      
+                                            <option [value]="'newOrder'" >New Order</option>
+                                            <option [value]="'dispatched'">Dispatched</option>  
+                                            <option [value]="'cancelled'">Cancelled</option>  
+                                                                                      
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-2 col-8 ">
+                                        <select class="form-select my-3" formControlName="status" (change)="optionsPaymentChange($event.target)" [(ngModel)]="filtre.paymentStatus">                                
+                                            <option class="dropdown-item" disabled selected value="undefined">Select your Paymeny status</option>                                    
+                                            <option [value]="'captured'" >Success</option>
+                                            <option [value]="'failure'" >Failed</option>
+                                            <option [value]="'processing'">Processing</option>
+                                            <option [value]="'timeOut'">Cancelled</option>                                                 
+                                       
+                                        </select>
+                                    </div> -->
+
+                                    <div class="col-lg-2 col-8">
+                                        <input type="date" class="form-control date w-100 my-3"
+                                            placeholder="Choose Date" formControlName="date"
+                                            [(ngModel)]="filtre.orderDate">
+                                    </div>
+
+                                    <div class="col-lg-2 col-8 align-self-center">
+                                        <button type="button" class="form-control my-3 show_Results"
+                                            (click)="getFilterValue('apply')"><span class="px-3">Show
+                                                Results</span></button>
+                                    </div>
+                                    <div class="col-lg-2 col-8 align-self-center"
+                                        *ngIf="filtre.orderDate!=null || filtre.orderStatus!=null || filtre.paymentStatus!=null">
+                                        <u class="" (click)="getFilterValue('clear')"><span class="px-3">Clear Filter
+                                            </span></u>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col" style="white-space: nowrap;">
+
+
+                        <div class="row">
+                            <div class="col" style="overflow-x: auto;">
+                                <div class="container-fluid px-0 mt-3 table-overflow-scroll">
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="tableHeading py-2">
+                                                <th class="">S.No</th>
+                                                <th class="">Order ID</th>
+                                                <th class="">Name</th>
+                                                <th class="">Phone No</th>
+                                                <!-- <th class="">Mode Of Delivery</th> -->
+                                                <th colspan="1">Order Received on</th>
+                                                <th>Total No Of Products</th>
+                                                <th>Total Quantity</th>
+                                                <th>Order Amount</th>
+                                                <th>Order Status</th>
+                                                <th>Payment Status</th>
+                                                <!-- <th>Call Connected</th> -->
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-capitalize">
+                                            <tr class="align-middle " id="rowColor"
+                                                *ngFor="let data of allOrders | paginate: config ;let i = index"
+                                                [ngStyle]="{'background-color': data?.orderCompleted &&
+                                                data?.purchasedCompleted ? '#B4F8C8' : '#fff' }">
+                                                <td class="text-end">{{i+1}}</td>
+                                                <td style="color: #28A745;cursor: pointer;" class="text-start"
+                                                    (click)="previewOrderListOut(data)"><u>#{{data.orderId}}</u></td>
+                                                <td>
+                                                    <p class="mb-0">{{data.user.name}}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="mb-0">{{data.user.phone}}</p>
+                                                </td>
+                                                <!-- <td>
+                                                    <p class="mb-0" *ngIf="data.modeOfDelivery">
+                                                        <span [innerHtml]="modeOfDel(data.modeOfDelivery)"></span>
+                                                        <span *ngIf="!data.modeOfDelivery">-</span>
+                                                    </p>
+                                                </td> -->
+                                                <td>
+                                                    <p class="mb-0">{{data.orderDate |date:'d/MM/yyyy hh:mm a'}}</p>
+                                                </td>
+                                                <td class=" text-start">
+                                                    <span *ngIf="data?.cartModel else gTotalNoOfProducts">
+                                                        {{data?.cartModel?.totalNoOfProducts | number
+                                                        :'1.2-2'}}</span>
+                                                    <ng-template #gTotalNoOfProducts>
+                                                        <span>{{data?.gardenCartModel?.totalNoOfProducts | number
+                                                            :'1.2-2'}}</span>
+                                                    </ng-template>
+                                                </td>
+                                                <td class=" text-start">
+                                                    <span *ngIf="data?.cartModel else gTotalNoOfQuantity">
+                                                        {{data?.cartModel?.totalNoOfQuantity | number
+                                                        :'1.2-2'}}</span>
+                                                    <ng-template #gTotalNoOfQuantity>
+                                                        <span> {{data?.gardenCartModel?.totalNoOfQuantity | number
+                                                            :'1.2-2'}}</span>
+                                                    </ng-template>
+                                                </td>
+
+                                                <td class=" text-start">{{data.totalAmount | number : '1.2-2'}}</td>
+
+                                                <td class="">
+                                                    <p class="mb-0" [ngClass]="{'orderSuccess':data?.orderCompleted,
+                                                    'orderDispatched':!data?.orderCompleted}">
+
+                                                        <span class="ms-2" *ngIf="data?.orderCompleted">Success</span>
+                                                        <span class="ms-2" *ngIf="!data?.orderCompleted">In
+                                                            Progress</span>
+                                                    </p>
+                                                </td>
+
+                                                <td class="">
+                                                    <p class="mb-0" [ngClass]="{'orderSuccess':data?.purchasedCompleted,
+                                                    'orderDispatched':!data?.purchasedCompleted}">
+                                                        <span class="ms-2"
+                                                            *ngIf="data?.purchasedCompleted">Success</span>
+                                                        <span class="ms-2" *ngIf="!data?.purchasedCompleted">In
+                                                            Progress</span>
+                                                    </p>
+                                                </td>
+
+                                                <!-- <td>
+                                                    <p class="mb-0" >
+                                                        <span >
+                                                            <input type="checkbox"
+                                                            (change)="callConnected(data)" 
+                                                            [checked]="data.isCallConnected == true"
+                                                            [disabled]="data.isCallConnected == true" />
+                                                        </span>
+                                           
+                                                    </p>
+                                                </td> -->
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <pagination-controls class="float-end" (pageChange)="pageChangeEvent($event)"
+                                    [responsive]="true" [directionLinks]="true"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5" *ngIf="allOrders.length<=0 ">
+                    <div class="col-lg-8 col-md-10 col-12 mx-auto ">
+                        <div class="row ">
+                            <div class="col-md-4 col-6 mx-auto ">
+                                <img src="assets/images/common/Group 182@2x.webp " alt=" " class="img-fluid ">
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col ">
+                                <div class="row ">
+                                    <div class="col ">
+                                        <p class="text-center empty mt-3 ">No order's Found...</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<button type="button" class="d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="previewProdList">
+
+</button>
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="border: none;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-2">
+                    <div class="col">
+                        <p class="resultValues"><b>Order Details</b></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="container-fluid px-0">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="tableHeading py-2">
+                                        <th class="">S.No</th>
+                                        <th colspan="1">Product Name</th>
+                                        <th class="text-end">Price</th>
+                                        <th class="text-end">Qty</th>
+                                        <th class="text-end">Unit</th>
+                                        <th class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="" *ngFor="let data of printList?.cartModel?.products;let i=index">
+                                    <tr class="align-middle " id="rowColor">
+                                        <td class="text-end">{{i+1}}</td>
+                                        <td class="text-start">{{data?.productModel.productNameInEnglish}}</td>
+                                        <td class="text-end">{{data?.productModel?.productDetails[0].price |
+                                            number:'1.2-2'}}</td>
+
+                                        <td class="text-end">{{data.unit}} {{data.mass}}</td>
+                                        <td class="text-end">{{data.quantity}}</td>
+                                        <td class="text-end">{{data.price | number:'1.2-2'}}</td>
+                                    </tr>
+                                </tbody>
+
+                                <tbody *ngIf="printList?.gardenCartModel">
+                                    <tr class="align-middle " id="rowColor"
+                                        *ngFor="let data of printList?.gardenCartModel?.products;let i=index">
+                                        <td class="text-end">{{i+1}}</td>
+
+                                        <td class="text-start" *ngIf="printList?.gardenCartModel">
+                                            {{data?.productModel.productNameInEnglish}} ,
+                                            <span *ngIf="data.growBagName">{{data.growBagName}}</span>
+                                            <span *ngIf="data.potName">{{data.potName}}</span>
+                                            , {{data.soilMixName}}
+                                        </td>
+                                        <td class="text-end">{{data.price | number:'1.2-2'}}</td>
+                                        <td class="text-end">{{data.quantity}}</td>
+
+                                        <td class="text-end">{{data.soilMixQtyUnit}} {{data.soilMixQtyMass}}</td>
+
+
+                                        <td class="text-end" [innerHtml]="findSingleUnitPrice(data)?.price ?? '' "></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-2 d-none">
+                    <div class="col">
+                        <p class="resultValues"><b>Delivery Details</b></p>
+                    </div>
+                </div>
+
+                <div class="row mt-2 d-none">
+                    <div class="col-xl-5 col-lg-5 col-md">
+                        <div class="row mt-1">
+                            <div class="col topic">Order Id </div>
+                            <div class="col text-left resultValues"> <b class="bgcolor">#{{printList.orderId}}</b></div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Total Count </div>
+                            <div class="col text-left resultValues"><b>{{printList?.cartModel?.totalNoOfQuantity}}</b>
+                            </div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Payment Status </div>
+                            <div class="col text-left resultValues">
+                                <b *ngIf="printList.paymentStatusText">
+                                    <span *ngIf="printList.paymentStatusText=='captured'">Success</span>
+                                    <span *ngIf="printList.paymentStatusText=='failure'">Failed</span>
+                                    <span *ngIf="printList.paymentStatusText=='cancelled'">Cancelled</span>
+                                    <span *ngIf="printList.paymentStatusText=='initiated'">Initiated</span>
+                                    <span *ngIf="printList.paymentStatusText=='processing'">Processing</span>
+                                    <span *ngIf="printList.paymentStatusText=='timeOut'">Time Out</span>
+                                </b>
+                                <b *ngIf="!printList.paymentStatusText">---</b>
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Order Received on </div>
+                            <div class="col text-left resultValues"> <b>{{printList?.orderDate|date:'dd-MM-yyyy hh:mm
+                                    a'}}</b></div>
+                        </div>
+
+                        <div class="row mt-1">
+                            <div class="col topic">Order Amount </div>
+                            <div class="col text-left resultValues"> <b>₹{{(printList?.cartModel?.totalPrice) | number
+                                    :'1.2-2'}}</b></div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col  subTotal">
+
+                                <span *ngIf="printList.modeOfDelivery == 'Courier'">Delivery Charge </span>
+                                <span *ngIf="printList.modeOfDelivery == 'Parcel'">Packing Charge </span>
+                                <span *ngIf="printList.modeOfDelivery == 'DoorDelivery'">Door Delivery</span>
+                            </div>
+                            <div class="col text-left  resultValues">
+                                <b *ngIf="printList.modeOfDelivery == 'Courier'">₹{{printList?.cartModel?.totalDeliveryCharge
+                                    | number :'1.2-2'}}</b>
+                                <b *ngIf="printList.modeOfDelivery == 'Parcel'">₹{{printList?.cartModel?.totalPackingCharge
+                                    | number :'1.2-2'}}</b>
+                                <b *ngIf="printList.modeOfDelivery == 'DoorDelivery'">-</b>
+
+                            </div>
+
+
+
+
+                            <!-- <div class="row productName mt-2">
+                                <div class="col">
+                                    <div class="container px-0"
+                                        style="border-top: 1px dashed #70707080;border-bottom: 1px dashed #70707080;">
+                                        <div class="row py-3">
+                                            <div class="col">
+                                                <p class="mb-0 grandTotal">Grand Total </p>
+                                            </div>
+                                            <div class="col">
+                                                <p class="mb-0 text-left resultValues"><b>₹{{printList?.totalAmount |
+                                                        number :'1.2-2'}}</b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+
+
+                        <div class="col-lg col-md-12 pt-xl-0 pt-lg-0 pt-md-5">
+                            <div class="">
+                                <div class="row">
+                                    <div class="col  text-start">
+                                        <div class="row">
+                                            <div class="col ">
+                                                <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                                    {{printList?.user?.name}}</p>
+                                                <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                                    {{printList?.user?.address?.addressLine1}}</p>
+                                                <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                                    {{printList?.user?.address?.city}}
+                                                    {{printList?.user?.address?.pinCode}}
+                                                    {{printList?.user?.address?.state}}</p>
+
+                                                <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                                    {{printList?.user?.phone}}</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col-lg col-md-12 pt-xl-0 pt-lg-0 pt-md-5">
+                                            <div class="">
+                                                <div class="row">
+                                                    <div class="col  text-start">
+                                                        <div class="row">
+                                                            <div class="col ">
+                                                                <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                                                    {{printList?.user?.name}}</p>
+                                                                <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                                                    {{printList?.user?.address?.addressLine1}}</p>
+                                                                <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                                                    {{printList?.user?.address?.city}}
+                                                                    {{printList?.user?.address?.pinCode}}
+                                                                    {{printList?.user?.address?.state}}</p>
+                
+                                                                <p class="generalpolicy mb-xl-0 mb-lg-0 mb-md-0 mb-2">
+                                                                    {{printList?.user?.phone}}</p>
+                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                    </div>
+            </div>
+        </div>
+    </div>

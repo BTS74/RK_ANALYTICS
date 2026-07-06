@@ -1,0 +1,151 @@
+th, .filterTopic {
+    font-family: Roboto-Medium;
+    font-size: 16px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+td {
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    opacity: 1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CAD1DE;
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.content {
+    padding-left: 4.5rem;
+}
+
+select:focus,
+input:focus,
+button:focus {
+    box-shadow: none;
+}
+
+select,
+input,
+button {
+    cursor: pointer;
+}
+
+
+.breadCrumbSubTopic {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.checkOut {
+    background-color: #28A745;
+    height: 37px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #FFFFFF;
+    font-weight: 500;
+    border: 0.5px solid #70707080;
+    border-radius: 0;
+}
+
+input {
+    border-radius: 0;
+}
+
+.btn_update {
+    height: 32px;
+    color: #1B1B1D;
+    font-size: 14px;
+    border-radius: 0;
+    background-color: #8AC926CC;
+}
+
+.success {
+   color: #28a745;
+}
+
+select,
+.input_lr_no {
+    height: 32px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+}
+
+.show_Results {
+    height: 42px;
+    background-color: #0063D1CC;
+    color: #FFFFFF;
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 3px;
+}
+
+#rowColor:nth-child(odd) {
+    background-color: #F5F7F9;
+}
+
+#rowColor:nth-child(even),
+.tableHeading {
+    background-color: #fff;
+}
+
+.table> :not(:first-child) {
+    border-top: 0;
+}
+
+.table>:not(caption)>*>* {
+    border-bottom-width: 0;
+}
+
+::ng-deep.ngx-pagination .current {
+    background: #26A541 !important;
+}
+
+::ng-deep.ngx-pagination.disabled {
+    font-family: Roboto-Medium !important;
+    font-size: 14px !important;
+    color: #cacaca !important;
+    font-weight: 400 !important;
+    cursor: default;
+}
+
+::ng-deep.ngx-pagination a {
+    font-family: Roboto-Medium !important;
+    font-size: 14px !important;
+    color: #1B1B1D !important;
+    font-weight: 400 !important;
+}
+
+.breadCrumbTopic {
+    font-family: Roboto-Regular;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.textInBoxes {
+    font-family: Roboto-Medium;
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.date {
+    height: 42px;
+    border-radius: 3px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    font-weight: 400;
+}

@@ -1,0 +1,321 @@
+.table>:not(caption)>*>* {
+    border-bottom-width: 0;
+    background-color: transparent;
+}
+
+.table-overflow-scroll {
+    overflow: scroll;
+}
+
+#rowColor:nth-child(odd) {
+    background-color: #F5F7F9;
+}
+
+#rowColor:nth-child(even),
+.tableHeading {
+    background-color: #fff;
+}
+
+
+th {
+    font-family: Roboto-Medium;
+    font-size: 16px;
+    color: #1B1B1D;
+    font-weight: 400;
+}
+
+td {
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+}
+
+.txt_color {
+    font-size: 14px;
+    color: #1B1B1D;
+    font-family: Roboto-Medium;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    opacity: 1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CAD1DE;
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.inStock {
+    background-color: #8AC92680;
+    border-radius: 3px;
+    height: 30px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+}
+
+.outOfStock {
+    background-color: #E4E4E5;
+    border-radius: 3px;
+    height: 30px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+
+}
+
+
+::ng-deep .p-dialog-title {
+    font-family: Roboto-Medium;
+    font-size: 22px;
+}
+
+::ng-deep .p-confirm-dialog-message {
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+
+}
+
+::ng-deep .p-timeline-event-content {
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+}
+
+::ng-deep .p-menuitem-text {
+    font-family: Roboto-Regular !important;
+    font-size: 14px;
+    color: #1B1B1D !important;
+}
+
+::ng-deep .p-submenu-header {
+    font-family: Roboto-Medium !important;
+    font-size: 14px;
+    color: #1B1B1D !important;
+}
+
+select:focus,
+input:focus,
+button:focus {
+    box-shadow: none;
+}
+
+.comment_class {
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+
+.productLable,
+.form-control,
+.form-label,
+.p_box-text-secondary {
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+    border-radius: 0px;
+    align-self: center;
+}
+
+.saveChanges {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    height: 44px;
+    border-radius: 0;
+    background-color: #008000;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.btn_update {
+    height: 32px;
+    color: #1B1B1D;
+    font-size: 14px;
+    border-radius: 0;
+    background-color: #8AC926CC;
+}
+
+.cancel_btn {
+    font-family: Roboto-Regular;
+    font-size: 14px;
+    color: #475569;
+    height: 44px;
+    border-radius: 0;
+    background-color: #f1f5f9;
+}
+
+.modal-title {
+    font-family: Roboto-Bold;
+    font-size: 18px;
+    color: #1B1B1D;
+}
+
+.form-control {
+    height: 44px;
+}
+
+select {
+    box-shadow: none;
+}
+
+.dropDownValue {
+    border-radius: 3px;
+    font-family: Roboto-Medium;
+    font-size: 14px;
+    color: #1B1B1D;
+    white-space: pre;
+    text-overflow: ellipsis;
+}
+
+.newOrder {
+    background-color: #0063D180;
+}
+
+.dispatched {
+    background-color: #8AC926CC;
+}
+
+::ng-deep .p-timeline-event-content {
+    padding-bottom: 15px !important;
+}
+
+::ng-deep .p-timeline-event-opposite {
+    display: none !important;
+}
+
+::ng-deep .p-dialog-title {
+    font-family: Roboto-Medium;
+    font-size: 22px;
+}
+.cancelled {
+    background-color: #FF686BCC;
+}
+
+.onHold {
+    background-color: #F7D060;
+}
+
+.refundInitiatedManually {
+    color: #0e4789;
+    font-family: Roboto-Bold !important;
+}
+
+
+::ng-deep.ngx-pagination .current {
+    background: #26A541 !important;
+}
+
+::ng-deep.ngx-pagination.disabled {
+    font-family: Roboto-Medium !important;
+    font-size: 14px !important;
+    color: #cacaca !important;
+    font-weight: 400 !important;
+    cursor: default;
+}
+
+::ng-deep.ngx-pagination a {
+    font-family: Roboto-Medium !important;
+    font-size: 14px !important;
+    color: #1B1B1D !important;
+    font-weight: 400 !important;
+}
+
+select {
+    cursor: pointer;
+}
+
+.orderSuccess {
+    color: #28A745;
+    font-family: Roboto-Bold !important;
+}
+
+.orderCancelled {
+    color: #EF476F;
+    font-family: Roboto-Bold !important;
+}
+
+.scale-out {
+    filter: grayscale(100%);
+}
+
+
+@media (max-width: 1440px) and (min-width:1025px) {
+    th {
+        font-size: 20px;
+    }
+
+    .subTotal {
+        font-size: 12px;
+    }
+
+    .grandTotal {
+        font-size: 16px;
+    }
+
+    td,
+    .addressHeading {
+        font-size: 18px;
+    }
+
+    .generalpolicy {
+        font-size: 14px;
+    }
+
+    .topic,
+    .resultValues {
+        font-size: 12px;
+    }
+
+    .logo {
+        width: 120px
+    }
+
+    .table-overflow-scroll {
+        overflow: scroll;
+    }
+}
+
+@media (max-width: 1024px) and (min-width:768px) {
+    th {
+        font-size: 14px;
+    }
+
+    .subTotal {
+        font-size: 10px;
+    }
+
+    .grandTotal {
+        font-size: 14px;
+    }
+
+    td,
+    .addressHeading {
+        font-size: 12px;
+    }
+
+    .generalpolicy {
+        font-size: 12px;
+    }
+
+    .topic,
+    .resultValues {
+        font-size: 10px;
+    }
+
+    .logo {
+        width: 120px
+    }
+
+    .table-overflow-scroll {
+        overflow: scroll;
+    }
+}
