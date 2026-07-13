@@ -33,11 +33,12 @@ export class JsonHttpService {
   public static websiteLink: string = "http://rkpattarai.com/";
   // public UiURL = "http://localhost:50"
 
-  private host: string = "http://localhost:8080";
+  // private host: string = "http://localhost:8080";
   // public host = "https://api.2.rkpattarai.com/rkpattarai-analytics-5.1.4-SNAPSHOT"
 
   // public host = "https://api.2.rkpattarai.com/rkpattarai-5.1.2-SNAPSHOT"
-  // public host = "https://api.rkpattarai.com/rkpattarai-0.0.3-SNAPSHOT"
+  
+  public host = "https://api.2.rkpattarai.com/rkpattarai-4.1-payment-SNAPSHOT"
 
 
   get globalImgURL(): string {

@@ -8,9 +8,7 @@ import { LoaderService } from '../../services/Loader-Service/loader.service';
 })
 export class PageLoaderComponent implements OnInit {
 
-  constructor(private loaderService: LoaderService) {
-    
-  }
+  constructor(private loaderService: LoaderService) {}
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   ngOnInit(): void {

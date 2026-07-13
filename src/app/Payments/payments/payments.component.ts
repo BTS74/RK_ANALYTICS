@@ -80,14 +80,14 @@ export class PaymentsComponent implements OnInit {
 
   getPlantsSummary() {
     this.submitted = true;
-    // if (this.form1.invalid) {
-    //   return;
-    // }
+    if (this.form1.invalid) {
+      return;
+    }
 
-    // this.analyticsFilter.startDate = `${this.analyticsFilter.startDate}T00:00:00`;
-    // this.analyticsFilter.endDate = `${this.analyticsFilter.endDate}T23:59:59`;
-        this.analyticsFilter.startDate = '2025-03-31T00:00:00.000Z';
-    this.analyticsFilter.endDate = '2026-12-01T23:59:59.000Z';
+    this.analyticsFilter.startDate = `${this.analyticsFilter.startDate}T00:00:00`;
+    this.analyticsFilter.endDate = `${this.analyticsFilter.endDate}T23:59:59`;
+    //     this.analyticsFilter.startDate = '2026-07-11T00:00:00.000Z';
+    // this.analyticsFilter.endDate = '2026-07-11T23:59:59.000Z';
 
     this.jsonHttpService.FetchDashBoardSalesCharges(this.analyticsFilter).subscribe({
       next: (data: any) => {

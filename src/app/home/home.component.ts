@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getDashboardAnalytics();
 
-    this.getDataForChart();
+    // this.getDataForChart();
     this.getDataFor_out_of_stock_Chart();
     this.getGreetings();
     this.getHeaderValues();

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col">
+    <div class="col" style="overflow-x: auto;">
         <div class="container-fluid px-0 mt-3 table-overflow-scroll">
 
             <table class="table">
@@ -7,8 +7,7 @@
                     <tr class="tableHeading py-2">
                         <th class="">S.No</th>
                         <th *ngIf="toHideTbaleContent('Actions')">Actions</th>
-                        <th *ngIf="toHideTbaleContent('Invoice Id')">Invoice Id</th>
-                          <th *ngIf="toHideTbaleContent('Invoice Date')">Invoice Date</th>
+                        <th *ngIf="toHideTbaleContent('Bill Print Status')">Bill Printed</th>
                         <th *ngIf="toHideTbaleContent('Order ID')" class="">Order ID</th>
                         <th *ngIf="toHideTbaleContent('Name')" class="">Name</th>
                         <th *ngIf="toHideTbaleContent('Phone No')" class="">Phone No</th>
@@ -20,7 +19,7 @@
                         <th *ngIf="toHideTbaleContent('Total Weight')">Total Weight</th>
                         <th *ngIf="toHideTbaleContent('Edited On')">Edited On</th>
                         <th *ngIf="toHideTbaleContent('Order Status')">Order Status / Update</th>
-                        <th *ngIf="toHideTbaleContent('Bill Print Status')">Bill Print Status</th>
+                        <th *ngIf="toHideTbaleContent('Bill Print Status')">Invoice Status</th>
                         <th *ngIf="toHideTbaleContent('Dispatched date')">Dispatched date</th>
                         <th *ngIf="toHideTbaleContent('Call Connected')">Call Connected</th>
                         <th *ngIf="toHideTbaleContent('Comments')">Comments</th>
@@ -42,8 +41,8 @@
                     </tr>
                 </thead>
                 <tbody class="text-capitalize">
-                    <tr class="align-middle" id="rowColor"
-                        [ngStyle]="{ 'background-color': data.isOrderCompleted ? '#CCE6CC' : '' }"
+                    <tr class="align-middle" id="rowColor" [ngStyle]="{ 'background-color': data.isOrderCompleted ? '#CCE6CC' : 
+                    data.billPrinted ? '#fce98d':'' }"
                         *ngFor="let data of orderList | paginate: config ;let i = index">
                         <td class="text-center">
                             <span class="badge rounded-pill py-2 txt_color"
@@ -52,7 +51,7 @@
                             </span>
                         </td>
 
-                        <td class="px-4" *ngIf="toHideTbaleContent('Actions')">
+                        <td class="p-0" *ngIf="toHideTbaleContent('Actions')">
 
                             <button class="btn text-capitalize" aria-expanded="false">
                                 <img src="assets/images/common/printer.webp" alt="" width="16" (click)="printBill(data)"
@@ -85,18 +84,27 @@
                                     <a class="dropdown-item" (click)="onItemClick(data,'View Details')"><i
                                             class="pi pi-folder-open me-2"></i>View Details</a>
                                 </li> -->
+
                                 <li>
                                     <a class="dropdown-item" (click)="onItemClick(data,'Enter DDANDNGS Details')"><i
-                                            class="pi pi-file me-2"></i>View Amount Details </a>
+                                            class="pi pi-file me-2"></i>Enter Amount Details </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" (click)="onItemClick(data,'View Product Count')"><i
+                                            class="pi pi-folder-open me-2"></i>View Product Count</a>
                                 </li>
                             </ul>
 
                         </td>
-                        <td style="color: #28A745" class="text-start" *ngIf="toHideTbaleContent('Invoice Id')">
-                            <u>{{data.invoiceId}} </u>
-                        </td>
-                        <td *ngIf="toHideTbaleContent('Invoice Date')">
-                            <p class="mb-0">{{data.invoiceDate |date:'dd/MM/yy hh:mm a'}}</p>
+                        <td *ngIf="toHideTbaleContent('Bill Print Status')">
+                            <p class="mb-0 text-center">
+                                <span>
+                                    <input type="checkbox"
+                                        
+                                        [checked]="data.billPrinted == true" [disabled]="data.billPrinted == true" />
+                                </span>
+
+                            </p>
                         </td>
                         <td style="color: #28A745;cursor: pointer;" class="text-start"
                             *ngIf="toHideTbaleContent('Order ID')" (click)="previewOrderListOut(data)">
@@ -248,20 +256,19 @@
                         </td>
                         <td *ngIf="toHideTbaleContent('Bill Print Status')">
                             <select data-width="100%" class="form-select dropDownValue"
-                                aria-label="Default select example" (change)="billPrintedChange($event.target,data)"
-                                *ngIf="data.billPrinted==false" [ngClass]="{'newOrder':data.billPrinted==false}">
-                                <option [value]="i">Not Printed</option>
-                                <option [value]="i">Bill Printed
+                                aria-label="Default select example"                    
+                                *ngIf="data.invoiceId==null" [ngClass]="{'newOrder':data.invoiceId==null}">
+                                <option [value]="i">Invoice Not Generated</option>
+                                <option [value]="i">Invoice Generated
                                 </option>
                             </select>
 
 
 
 
-                            <select *ngIf="data.billPrinted==true" class="form-select dropDownValue dispatched"
+                            <select *ngIf="data.invoiceId!=null" class="form-select dropDownValue dispatched"
                                 [disabled]="true" aria-label="Default ">
-
-                                <option>Bill Printed</option>
+                                <option>Invoice Generated</option>
                             </select>
                         </td>
                         <td *ngIf="toHideTbaleContent('Dispatched date')">
@@ -520,6 +527,7 @@
         </div>
     </div>
 </div>
+
 
 
 
