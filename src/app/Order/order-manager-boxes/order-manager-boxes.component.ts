@@ -99,7 +99,12 @@ export class OrderManagerBoxesComponent implements OnInit, OnDestroy {
   routePathChangeDetects() {
 
     if (this.filtre.invoiceStartDate && this.filtre.invoiceEndDate) {
-      this.getAllOrders();
+
+      if (this.filtre.orderStatus === 'refundInitiatedManually') {
+        this.getAllRefunds();
+      } else {
+        this.getAllOrders();
+      }
     }
   }
 
@@ -194,6 +199,19 @@ export class OrderManagerBoxesComponent implements OnInit, OnDestroy {
     })
   }
 
+  getAllRefunds() {
+    this.jsonHttpService.FetchAllRefundOrderWithFilters(this.config.currentPage, {
+      orderStartDate: this.filtre.invoiceStartDate, orderEndDate: this.filtre.invoiceEndDate,
+    }).subscribe(
+      {
+        next: (data: any) => {
+          this.allOrders = data.data[0].content;
+          this.pageDetails = data.data[0]?.totalElements;
+        }, error: () => {
+          this.allOrders = [];
+        }
+      })
+  }
   nextPage(data: any) {
 
     this.router.navigate([], {

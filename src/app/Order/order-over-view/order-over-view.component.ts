@@ -67,6 +67,7 @@ export class OrderOverViewComponent implements OnInit, OnDestroy {
   private actRoute_subscription: Subscription;
   interNALState: boolean = false;
   screenWizardCapturedPayment: boolean = true;
+  grouped = {} as any;
 
   constructor(private jsonHttpService: JsonHttpService,
     private formBuilder: FormBuilder,
@@ -231,20 +232,6 @@ export class OrderOverViewComponent implements OnInit, OnDestroy {
     return this.form1.controls;
   }
 
-  /* when status changes page need to update stats and table value*/
-
-  // refreshPage() {
-  // this.getOverAllStats();
-  // this.getAllOrders(0)
-  // }
-
-  // checkFilterEnabled() {
-  //   if (this.cookieService.check('filterValue')) {
-  //     this.filtre = JSON.parse(this.cookieService.get('filterValue'))
-  //     this.filterGetCall(0);
-  //     document.getElementById("orderFilterBar")!.style.display = "block";
-  //   }
-  // }
 
   getAllCourierProviders() {
     this.jsonHttpService.FetchAllCourierWithouPagination().subscribe({
@@ -279,7 +266,8 @@ export class OrderOverViewComponent implements OnInit, OnDestroy {
             this.pageDetails = data.data[0]?.totalElements;
           }
         }, error: () => {
-
+          this.allOrders = [];
+          this.pageDetails = 0;
         }
       })
   }
@@ -328,14 +316,6 @@ export class OrderOverViewComponent implements OnInit, OnDestroy {
 
   }
 
-  // enableOrDisableFilter() {
-  //   let styleCheck = document.getElementById("orderFilterBar")!.style.display
-  //   if (styleCheck == '' || styleCheck == 'block') {
-  //     document.getElementById("orderFilterBar")!.style.display = "none";
-  //   } else {
-  //     document.getElementById("orderFilterBar")!.style.display = "block";
-  //   }
-  // }
 
   getOrderById(orderId: string, pageNo?: number) {
     this.searchValue = orderId;
@@ -400,50 +380,6 @@ export class OrderOverViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  // enableCallConnected() {
-  //   this.filtre.enableCallConnected = !this.filtre.enableCallConnected;
-  //   if (!this.filtre.enableCallConnected) {
-  //     delete this.filtre.isCallConnected
-  //   } else {
-  //     this.filtre.isCallConnected = true;
-  //   }
-  // }
-
-  getOrdersByFilters(pageNo: number) {
-    this.cookieService.set('filterValue', JSON.stringify(this.filtre))
-    this.filterGetCall()
-  }
-
-  optionsChange(data: any) {
-    this.filtre['orderStatus'] = data.value;
-  }
-
-  ordertypeFilter() {
-    // delete this.filtre.maxTotalAmount;
-    // delete this.filtre.minTotalAmount;
-  }
-
-  filterGetCall() {
-    // let route = !this.orderType ? '/order/' : '/order/' + this.orderType + '/';
-    // 
-
-    // if (this.order_type)
-    // this.ordertypeFilter();
-
-    this.router.navigate([this.constructRoute()], { queryParams: { page: 0 } })
-    this.jsonHttpService.FetchAllOrderWithFilters(0, this.filtre).subscribe({
-      next: (data: any) => {
-        this.allOrders = data.data[0].content;
-        this.pageDetails = data.data[0].totalElements;
-        this.refreshTable.next();
-      }, error: error => {
-
-      }
-    });
-  }
-
-
-
 
   refreshPageForUpdates(data: any) {
 
@@ -495,12 +431,6 @@ export class OrderOverViewComponent implements OnInit, OnDestroy {
 
   optionsPaymentChange(data: any) {
     this.filtre['paymentStatus'] = data.value;
-  }
-
-  getOverAllStats() {
-    this.jsonHttpService.FetchOrderStats(this.filtre.modeOfDelivery ? this.filtre.modeOfDelivery : "All").subscribe((data: any) => {
-      this.stats = data.data[0]
-    })
   }
 
   getOrdersByModeOfDeliveyAndPaymentCaptured(status: string | null) {
@@ -672,5 +602,52 @@ export class OrderOverViewComponent implements OnInit, OnDestroy {
         this.salesData = data;
       }, error: () => { this.salesData = {} as SalesDataResponse; }
     });
+  }
+
+  getStats() {
+
+
+    this.grouped = {
+      Courier: this.salesData.analytics.filter(x => x.chargeType?.startsWith('Courier')),
+      Parcel: this.salesData.analytics.filter(x => x.chargeType?.startsWith('Parcel')),
+      Plants: this.salesData.analytics.filter(x => x.chargeType?.startsWith('Plants')),
+      Stands: this.salesData.analytics.filter(x => x.chargeType?.startsWith('Stands')),
+      'Door Delivery': this.salesData.analytics.filter(x =>
+        [
+          'Door Delivery Count',
+          'Door Delivery',
+          'Transport Charges',
+          'Lifting Charges',
+          'Labour Charges'
+        ].includes(x.chargeType)
+      ),
+      'New Garden Setup': this.salesData.analytics.filter(x =>
+        x.chargeType?.startsWith('New Garden Setup') ||
+        x.chargeType?.startsWith('NGS')
+      )
+    };
+  }
+
+  getStatsByChargeType() {
+    switch (this.show.findIndex(value => value === true)) {
+      case 0:
+        return this.salesData.analytics;
+      case 1:
+        return this.grouped.Courier;
+      case 2:
+        return this.grouped.Parcel;
+      case 3:
+        return this.grouped['Door Delivery'];
+
+      case 4:
+        return this.grouped.Plants;
+      case 5:
+        return this.grouped.Stands;
+
+      case 6:
+        return this.grouped['New Garden Setup'];
+      default:
+        return [];
+    }
   }
 }

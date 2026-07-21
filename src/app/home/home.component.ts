@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     this.getDataFor_out_of_stock_Chart();
     this.getGreetings();
     this.getHeaderValues();
-    this.getTop10StockLesser();
+    // this.getTop10StockLesser();
   }
 
   getGreetings() {

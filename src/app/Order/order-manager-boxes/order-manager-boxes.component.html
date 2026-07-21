@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <select class="form-select my-3" formControlName="userGstIn"  name="userGstIn">
+                                    <select class="form-select my-3" formControlName="userGstIn" name="userGstIn" >
                                         <option class="dropdown-item" disabled selected value="undefined">
                                             -- Select GST type --</option>
                                         <option [value]="'YES'">With GST</option>
@@ -43,10 +43,12 @@
                                     </select>
                                 </div>
                                 <div class="col-2">
-                                    <select class="form-select my-3" formControlName="orderStatus" name="orderstatusText">
+                                    <select class="form-select my-3" formControlName="orderStatus"
+                                        name="orderstatusText">
                                         <option class="dropdown-item" disabled selected value="undefined">
                                             -- Select Order Staus --</option>
                                         <option [value]="'cancelledManually'">Cancelled</option>
+                                        <option [value]="'refundInitiatedManually'">Refund Initiated</option>
 
                                     </select>
                                 </div>
@@ -66,8 +68,8 @@
                                             Results</span></button>
                                 </div>
                                 <div class="col-xl-2 col-lg-6 col-8 align-self-center">
-                                    <button type="button" class="form-control my-3 show_Results"
-                                        style="background-color: #ff595e" (click)="getGSTOrderReport()"><span
+                                    <button type="button" class="form-control my-3 show_Results downLoad_report" [disabled]="filtre.orderStatus === 'refundInitiatedManually'"
+                                         (click)="getGSTOrderReport()"><span
                                             class="px-3">Download Report</span></button>
                                 </div>
                                 <!--                                 

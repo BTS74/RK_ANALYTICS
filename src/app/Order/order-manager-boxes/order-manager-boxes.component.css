@@ -92,6 +92,10 @@ u {
     border-radius: 3px;
 }
 
+.downLoad_report{
+    background-color: #ff595e ;
+}
+
 select,
 .date {
     height: 42px;

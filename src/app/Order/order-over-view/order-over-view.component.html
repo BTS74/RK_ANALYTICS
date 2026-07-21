@@ -30,10 +30,10 @@
                 <div class="col">
 
                     <div *ngIf="screenWizardCapturedPayment" class="float-end">
-                        <button class="btn addBtn  me-2" [ngClass]="{'active':show[0]}"
+                        <!-- <button class="btn addBtn  me-2" [ngClass]="{'active':show[0]}"
                             (click)="getOrdersByModeOfDeliveyAndPaymentCaptured('All')">
                             <span> ALL </span>
-                        </button>
+                        </button> -->
                         <button class="btn addBtn  me-2" [ngClass]="{'active':show[1]}"
                             (click)="getOrdersByModeOfDeliveyAndPaymentCaptured('Courier')">
                             <span> COURIER</span>
@@ -67,63 +67,6 @@
                             <span>NEW GARDEN SETUP</span>
                         </button>
                     </div>
-
-                    <div class="float-end d-none">
-
-
-
-                        <!-- <button class="btn addBtn me-3"
-                                (click)="getOrdersByModeOfDelivey('order-preview-unconfirm')">
-                                <span>Unconfirmed Orders</span>
-                            </button> -->
-
-                        <!-- <button class="btn addBtn me-3" (click)="getOrdersByModeOfDelivey('order-manager')">
-                                <span>Order Manager</span>
-                            </button>
-
-                            <button class="btn addBtn" (click)="getOrdersByModeOfDelivey('order-update-courier')">
-                                <span>Update Courier</span>
-                            </button> -->
-
-
-
-
-
-                        <button class="btn addBtn text-capitalize" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <span>ORDER UPDATES</span>
-
-                        </button>
-                        <ul class="dropdown-menu p-3">
-                            <li>
-                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('order-manager')"><i
-                                        class="pi pi-chart-line  me-2"></i>Order Manager</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('order-update-courier')"><i
-                                        class="pi pi-envelope me-2"></i>Update Courier</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('pending')"><i
-                                        class="pi pi-exclamation-triangle me-2"></i>Pending Order</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('tracking')"><i
-                                        class="pi pi-credit-card me-2"></i>Tracking Order Details</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('plants-summary')"><i
-                                        class="pi pi-chart-bar me-2"></i>Plants Summary </a>
-                            </li>
-                            <!--<li>
-                                    <a class="dropdown-item" (click)="getOrdersByModeOfDelivey('back')"><i
-                                            class="pi pi-arrow-left me-2"></i>Back to Order</a>
-                                </li> -->
-                        </ul>
-
-
-                    </div>
-
 
                 </div>
             </div>

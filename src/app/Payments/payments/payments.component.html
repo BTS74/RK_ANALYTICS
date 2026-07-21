@@ -13,7 +13,7 @@
                     <div class="row">
 
                         <div class="col-lg-2 col-6">
-                            <label for="forFromDate" class="productLable montserrat">From</label>
+                            <label for="forFromDate" class="productLable montserrat">Invoice From</label>
                             <input type="date" id="forFromDate" class="form-control date w-100 mt-2"
                                 placeholder="Choose Date" formControlName="startDate"
                                 [(ngModel)]="analyticsFilter.startDate"
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="col-lg-2 col-6">
-                            <label for="forToDate" class="productLable">To</label>
+                            <label for="forToDate" class="productLable">Invoice To</label>
                             <input type="date" id="forToDate" class="form-control date w-100 mt-2"
                                 placeholder="Choose Date" formControlName="endDate"
                                 [(ngModel)]="analyticsFilter.endDate"
@@ -85,8 +85,8 @@
     </div>
     <div class="row">
         <div class="col-lg-4 col-6 mb-4" *ngFor="let data of salesData.analytics">
-      
-             <div class="card _card py-4 px-xl-3 px-lg-3 px-3" [ngStyle]="{'background-color': data.backGroundColor}"
+
+            <div class="card _card py-4 px-xl-3 px-lg-3 px-3" [ngStyle]="{'background-color': data.backGroundColor}"
                 *ngIf="data && (data.chargeType || data.amount || data.backGroundColor)">
                 <p class="charge_type montserrat mb-0">{{data.chargeType}}</p>
                 <div class="">
@@ -94,10 +94,10 @@
                         *ngIf="data.chargeType && !data.chargeType.includes('Count')">
                     <span class="amount montserrat"> {{data.amount}} </span>
                 </div>
-            </div> 
-              <div class="card _card py-4 px-xl-3 px-lg-3 px-3" [ngStyle]="{'background-color': 'transparent'}"
+            </div>
+            <div class="card _card py-4 px-xl-3 px-lg-3 px-3" [ngStyle]="{'background-color': 'transparent'}"
                 *ngIf="!data">
-    </div> 
+            </div>
 
         </div>
     </div>
