@@ -8,6 +8,7 @@
                         <th class="">S.No</th>
                         <th *ngIf="toHideTbaleContent('Actions')">Actions</th>
                         <th *ngIf="toHideTbaleContent('Bill Print Status')">Bill Printed</th>
+                        <th *ngIf="toHideTbaleContent('Invoice Id')">Invoice ID</th>
                         <th *ngIf="toHideTbaleContent('Order ID')" class="">Order ID</th>
                         <th *ngIf="toHideTbaleContent('Name')" class="">Name</th>
                         <th *ngIf="toHideTbaleContent('Phone No')" class="">Phone No</th>
@@ -99,12 +100,14 @@
                         <td *ngIf="toHideTbaleContent('Bill Print Status')">
                             <p class="mb-0 text-center">
                                 <span>
-                                    <input type="checkbox"
-                                        
-                                        [checked]="data.billPrinted == true" [disabled]="data.billPrinted == true" />
+                                    <input type="checkbox" [checked]="data.billPrinted == true"
+                                        [disabled]="data.billPrinted == true" />
                                 </span>
-
                             </p>
+                        </td>
+                              <td style="color: #28A745;cursor: pointer;" class="text-start"
+                            *ngIf="toHideTbaleContent('Invoice Id')" (click)="previewOrderListOut(data)">
+                            <u>{{data.invoiceId}} </u>
                         </td>
                         <td style="color: #28A745;cursor: pointer;" class="text-start"
                             *ngIf="toHideTbaleContent('Order ID')" (click)="previewOrderListOut(data)">
@@ -256,8 +259,8 @@
                         </td>
                         <td *ngIf="toHideTbaleContent('Bill Print Status')">
                             <select data-width="100%" class="form-select dropDownValue"
-                                aria-label="Default select example"                    
-                                *ngIf="data.invoiceId==null" [ngClass]="{'newOrder':data.invoiceId==null}">
+                                aria-label="Default select example" *ngIf="data.invoiceId==null"
+                                [ngClass]="{'newOrder':data.invoiceId==null}">
                                 <option [value]="i">Invoice Not Generated</option>
                                 <option [value]="i">Invoice Generated
                                 </option>
